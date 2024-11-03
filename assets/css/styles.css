@@ -1,371 +1,135 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Custom styles */
+/* Background image and general styling */
 body {
-    @apply bg-gray-100 text-gray-800 transition-colors duration-400;
-}
-
-body.dark-mode {
-    @apply bg-gray-800 text-gray-200;
-}
-
-.label {
-    @apply inline-flex items-center cursor-pointer text-gray-700;
-}
-
-.toggle {
-    @apply relative h-8 w-16 rounded-full overflow-hidden shadow-lg;
-}
-
-.toggle-state {
-    @apply hidden;
-}
-
-.indicator {
-    @apply h-full w-[200%] bg-gray-300 rounded-full transform transition-transform duration-400 ease-in-out;
-}
-
-.toggle-state:checked ~ .indicator {
-    @apply translate-x-[25%] bg-gray-800;
-}
-
-.header {
-    @apply bg-white shadow-md;
-}
-
-.navbar {
-    @apply container mx-auto flex justify-between items-center p-4;
-}
-
-.menu-inner {
-    @apply flex space-x-4;
-}
-
-.menu-item {
-    @apply text-gray-600;
-}
-
-.menu-link {
-    @apply hover:text-blue-500;
-}
-
-.banner {
-    @apply flex flex-col items-center justify-center bg-cover bg-center h-[450px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative;
-}
-
-.banner-image {
-    @apply w-full h-auto rounded-lg;
-}
-
-.banner-inner {
-    @apply absolute bottom-0 left-0 right-0 p-6 bg-white bg-opacity-80 text-center rounded-lg;
-}
-
-.heading-xl {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold;
-}
-
-.paragraph {
-    @apply mt-2 mb-4 text-lg sm:text-base md:text-lg lg:text-xl;
-}
-
-.btn {
-    @apply inline-flex items-center justify-center px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700;
-}
-
-.container {
-    @apply max-w-7xl mx-auto px-4;
-}
-
-.section-title {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-bold my-4;
-}
-
-.service-item {
-    @apply border p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105;
-}
-
-.portfolio-container {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4;
-}
-
-.testimonial-item {
-    @apply border p-4 rounded-lg shadow-lg my-4;
-}
-
-.contact-form {
-    @apply max-w-md mx-auto p-6 bg-white border border-gray-300 rounded-lg;
-}
-
-.form-group {
-    @apply mb-4;
-}
-
-.form-group label {
-    @apply block text-gray-600 mb-2;
-}
-
-.form-group input,
-.form-group textarea {
-    @apply w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500;
-}
-
-.contact-button {
-    @apply w-full py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700;
-}
-
-.footer {
-    @apply text-center bg-gray-300 py-8;
-}
-
-.footer-copy {
-    @apply text-gray-600;
-}
-
-.fa {
-    @apply p-4 text-2xl rounded-full inline-block;
-}
-
-.fa-facebook { @apply bg-blue-600 text-white; }
-.fa-twitter { @apply bg-blue-400 text-white; }
-.fa-instagram { @apply bg-pink-600 text-white; }
-
-.fa:hover {
-    @apply opacity-70; 
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
-    color: #212121;
-    transition: background-color 0.4s, color 0.4s;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.header {
-    background-color: #394a56;
-    padding: 10px 0;
+    font-family: Arial, sans-serif;
+    background-image: url('your-background.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
     color: #fff;
+}
+
+/* Navbar styling */
+.navbar {
     display: flex;
-    justify-between;
+    justify-content: space-between;
     align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
 }
 
 .logo img {
-    max-width: 150px;
+    width: 100px; /* Adjust size as needed */
+    height: auto;
 }
 
-.navbar .menu-inner {
+.nav-links {
+    list-style: none;
     display: flex;
-    gap: 20px;
 }
 
-.menu-link {
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
 }
 
-.menu-link:hover {
-    color: #ffd700;
-}
-
-/* Banner Section */
-.banner {
-    position: relative;
-    text-align: center;
-    background: url('IMG-20241015-WA0023.png') no-repeat center center/cover;
-    color: #fff;
-    padding: 100px 20px;
-}
-
-.banner .heading-xl {
-    font-size: 3em;
-    color: #ffd700;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.banner .paragraph {
-    font-size: 1.2em;
-    margin-top: 10px;
-}
-
-.banner .btn {
-    margin-top: 20px;
-    background-color: #ffd700;
-    color: #212121;
+.quote-btn {
     padding: 10px 20px;
+    background-color: #1a73e8;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.banner .btn:hover {
-    background-color: #e6ac00;
-}
-
-.section-title {
-    font-size: 2em;
-    color: #394a56;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.services-container {
+.hero {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-center;
-    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.4);
 }
 
-.service-item {
-    flex: 1 1 calc(50% - 40px);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-center;
-}
-
-.portfolio-container {
+.hero-content {
     display: flex;
+    max-width: 1200px;
+    flex-direction: row;
     gap: 20px;
-    flex-wrap: wrap;
 }
 
-.portfolio-item {
-    width: calc(33.33% - 20px);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s;
+.hero-text {
+    flex: 1;
 }
 
-.portfolio-item img {
+.hero-image {
+    flex: 1;
+}
+
+.hero-image img {
     width: 100%;
-    filter: grayscale(100%);
-    transition: filter 0.3s;
+    height: auto;
+    border-radius: 10px;
 }
 
-.portfolio-item:hover img {
-    filter: grayscale(0);
+.hero-text h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #1a73e8;
 }
 
-body.dark-mode {
-    background-color: #212121;
-    color: #e8e8e8;
+.hero-text span {
+    color: #fff;
 }
 
-body.dark-mode .header {
-    background-color: #333;
+.hero-text p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
-body.dark-mode .banner .heading-xl,
-body.dark-mode .section-title,
-body.dark-mode .service-item h3,
-body.dark-mode .portfolio-item .button {
-    color: #ffd700;@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Apply the gradient background to the whole website */
-body {
-    @apply text-gray-100;
-    background: linear-gradient(135deg, #3ba4e8, #6a4cf7);
-    font-family: 'Roboto', sans-serif;
-    transition: background-color 0.4s, color 0.4s;
+.social-icons a {
+    color: #fff;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 1.5em;
 }
 
-/* Header Styling */
-.header {
-    @apply bg-transparent shadow-md text-center py-4;
+.hero-buttons {
+    margin-top: 20px;
 }
 
-.navbar {
-    @apply container mx-auto flex justify-between items-center p-4 text-white;
+.cta-btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.menu-link {
-    @apply text-gray-100 font-semibold hover:text-yellow-400 transition duration-300 ease-in-out;
-}
-
-/* Banner Section */
-.banner {
-    @apply flex flex-col items-center justify-center h-[500px] md:h-[600px] bg-cover bg-center relative;
-    background-image: linear-gradient(135deg, #3ba4e8, #6a4cf7);
-}
-
-.banner .heading-xl {
-    @apply text-4xl md:text-5xl font-extrabold text-white shadow-lg;
-}
-
-.banner .paragraph {
-    @apply text-lg md:text-xl mt-4 text-gray-200;
-}
-
-.banner .btn {
-    @apply mt-6 px-6 py-3 bg-yellow-400 text-gray-800 font-semibold rounded-lg shadow-lg hover:bg-yellow-500 transition duration-300;
-}
-
-/* Section Titles */
-.section-title {
-    @apply text-3xl md:text-4xl font-bold text-white text-center mt-10 mb-6;
-}
-
-/* Service Cards */
-.service-item {
-    @apply bg-white bg-opacity-90 p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl;
-    color: #3a3a3a;
-}
-
-/* Footer Styling */
-.footer {
-    @apply text-center py-6 bg-gradient-to-r from-blue-500 to-purple-700;
-}
-
-.footer-copy {
-    @apply text-gray-200 font-light;
-}
-
-/* Contact Form */
-.contact-form {
-    @apply max-w-lg mx-auto p-6 bg-white bg-opacity-90 rounded-lg shadow-lg;
-}
-
-.contact-button {
-    @apply w-full mt-4 py-2 bg-yellow-400 text-gray-800 font-semibold rounded-lg hover:bg-yellow-500 transition duration-300;
-}
-
-/* Typography Enhancements */
-h1, h2, h3, h4, h5, h6 {
-    color: white;
-}
-
-/* Subtle Hover Animations */
-a:hover, button:hover {
-    @apply opacity-80 transform scale-105;
-}
-
-/* Media Queries */
+/* Responsive styling */
 @media (max-width: 768px) {
-    .banner {
-        @apply h-[400px];
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
     }
 
-    .banner .heading-xl {
-        @apply text-3xl;
+    .hero-text h1 {
+        font-size: 2em;
     }
 
-    .section-title {
-        @apply text-2xl;
+    .hero-text p {
+        font-size: 1em;
     }
-    }}
+}
