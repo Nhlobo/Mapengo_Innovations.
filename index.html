@@ -4,14 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Home Page</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General body styling with background image */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('IMG-20241015-WA0023.png'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Navbar styling - fully transparent */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            background: transparent; /* Fully transparent */
+        }
+
+        .logo img {
+            width: 50px; /* Smaller, rounded logo */
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Hero section styling */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            text-align: left;
+            height: 100%;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            flex-direction: row;
+            gap: 20px;
+            color: #fff;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a73e8;
+        }
+
+        .hero-text span {
+            color: #fff;
+        }
+
+        .hero-text p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            margin-right: 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .hero-buttons {
+            margin-top: 20px;
+        }
+
+        .cta-btn {
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2em;
+            }
+
+            .hero-text p {
+                font-size: 1em;
+            }
+
+            .hero-buttons {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Section -->
     <header class="navbar">
         <div class="logo">
-            <img src="assets/logo.png" alt="Your Logo"> <!-- Replace with your logo image -->
+            <img src="assets/logo.png" alt="Your Logo"> <!-- Logo path -->
         </div>
         <nav>
             <ul class="nav-links">
@@ -19,11 +170,10 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Pricing</a></li>
+                <li><a href="pricing.html">Pricing</a></li> <!-- Link to Pricing page -->
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-        <button class="quote-btn">Get Quotes</button>
     </header>
 
     <!-- Main Content Section -->
@@ -39,12 +189,11 @@
                     <a href="#"><i class="fab fa-tiktok"></i></a>
                 </div>
                 <div class="hero-buttons">
-                    <button class="cta-btn">Get Quotes</button>
                     <button class="cta-btn">Get Started</button>
                 </div>
             </div>
             <div class="hero-image">
-                <!-- Replace with your own image -->
+                <!-- Hero image updated to your specified image -->
                 <img src="IMG-20241015-WA0023.png" alt="Technology Graphic">
             </div>
         </div>
