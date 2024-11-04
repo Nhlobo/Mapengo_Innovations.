@@ -261,3 +261,65 @@
     font-size: 1.1em;
     color: #666;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1000px;
+        padding: 20px;
+    }
+
+    #portfolio .portfolio-item {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .section-title {
+        font-size: 2em;
+    }
+
+    #about p,
+    #services .service-item p,
+    #testimonials .testimonial-item p {
+        font-size: 1em;
+    }
+
+    #our-values ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #portfolio .button {
+        padding: 8px 20px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.8em;
+    }
+
+    #why-choose-us ul li,
+    #our-values ul li {
+        font-size: 1em;
+    }
+
+    #portfolio .portfolio-container {
+        grid-template-columns: 1fr;
+    }
+
+    #faq .faq-container {
+        gap: 15px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 0.8em;
+    }
+    }
