@@ -7,23 +7,23 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    color: #333;
-    background-color: #f5f5f5;
+    color: #444; /* Darker text for better readability */
+    background-color: #f8f9fa; /* Light background for a cleaner look */
     position: relative;
 }
 
 /* Navbar Styles */
 .navbar {
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 20px 40px; /* Increased padding for a more spacious feel */
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: background-color 0.5s ease; /* Navbar background color transition */
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transition for shadow */
 }
 
 .logo img {
@@ -33,12 +33,13 @@ body {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 25px; /* Increased gap for better separation */
 }
 
 .nav-links a {
     text-decoration: none;
     color: #007bff;
+    font-weight: 500; /* Added font weight for emphasis */
     transition: color 0.3s, transform 0.3s; /* Color and scale transition */
 }
 
@@ -48,12 +49,13 @@ body {
 }
 
 .cta-btn {
-    padding: 10px 20px;
+    padding: 12px 25px; /* Increased padding for a more button-like feel */
     background-color: #1a73e8;
     color: #fff;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px; /* More rounded corners for a modern look */
     cursor: pointer;
+    font-weight: 600; /* Bold text */
     transition: background-color 0.3s ease, transform 0.3s; /* Button color and scale transition */
 }
 
@@ -67,8 +69,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 50px 30px;
-    background-color: #e9f5ff;
+    padding: 60px 40px; /* Increased padding for spacious layout */
+    background-color: #e9f5ff; /* Soft background */
 }
 
 .hero-content {
@@ -82,7 +84,7 @@ body {
 
 .hero-text {
     flex: 1;
-    max-width: 600px;
+    max-width: 650px; /* Slightly wider text block */
     text-align: left;
     opacity: 0;
     animation: slideInLeft 1s ease forwards; /* Slide-in effect */
@@ -90,8 +92,9 @@ body {
 }
 
 .hero-text h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
+    font-size: 3.5em; /* Increased font size for prominence */
+    margin-bottom: 15px;
+    font-weight: 700; /* Bold for better emphasis */
 }
 
 .hero-text h1 span {
@@ -100,13 +103,14 @@ body {
 
 .hero-text p {
     margin: 20px 0;
-    font-size: 1.2em;
+    font-size: 1.25em; /* Slightly larger font size */
+    line-height: 1.6; /* Improved line height for readability */
 }
 
 .hero-image {
     flex: 1;
-    min-width: 280px;
-    max-width: 600px;
+    min-width: 300px;
+    max-width: 650px;
     opacity: 0;
     animation: slideInRight 1s ease forwards; /* Slide-in effect for hero image */
     animation-delay: 0.5s;
@@ -115,21 +119,23 @@ body {
 .hero-image img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
 }
 
 .hero-buttons {
     display: flex;
-    gap: 15px;
+    gap: 20px; /* Increased gap for spacing */
     opacity: 0;
     animation: fadeInUp 1s ease forwards; /* Buttons fade-in from bottom */
     animation-delay: 0.7s;
 }
 
 .social-icons a {
-    margin-right: 10px;
+    margin-right: 15px;
     color: #1a73e8;
     text-decoration: none;
+    font-size: 1.5em; /* Increased icon size for better visibility */
     transition: color 0.3s, transform 0.3s; /* Smooth transition for icons */
 }
 
@@ -146,7 +152,7 @@ body {
     width: 100%;
     height: 100%;
     background: url('animated-pattern.svg') repeat;
-    opacity: 0.1;
+    opacity: 0.15; /* Slightly more visible */
     z-index: -1;
 }
 
@@ -203,7 +209,7 @@ body {
     .nav-links {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
         margin-top: 10px;
     }
 
@@ -214,11 +220,11 @@ body {
     }
 
     .hero-text h1 {
-        font-size: 2em;
+        font-size: 2.5em; /* Adjusted for medium screens */
     }
 
     .hero-text p {
-        font-size: 1em;
+        font-size: 1em; /* Adjusted for medium screens */
     }
 
     .hero-buttons {
@@ -228,23 +234,23 @@ body {
 
 @media (max-width: 480px) {
     .hero-text h1 {
-        font-size: 1.8em;
+        font-size: 2em; /* Adjusted for smaller screens */
     }
 
     .hero-text p {
-        font-size: 0.9em;
+        font-size: 0.9em; /* Adjusted for smaller screens */
     }
 
     .cta-btn {
-        padding: 8px 16px;
+        padding: 10px 20px; /* Adjusted for smaller screens */
     }
-} /* Added closing brace here to complete media query */
+}
 
 /* Global Container */
 .container {
     max-width: 1200px;
     margin: auto;
-    padding: 40px 20px;
+    padding: 50px 20px; /* Increased padding for spacious layout */
 }
 
 /* Section Title */
@@ -252,7 +258,7 @@ body {
     font-size: 2.5em;
     color: #333;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px; /* Increased margin for more space */
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -261,7 +267,7 @@ body {
 
 .section-title::after {
     content: "";
-    width: 80px;
+    width: 100px; /* Increased width for emphasis */
     height: 4px;
     background-color: #3498db;
     display: block;
@@ -270,18 +276,40 @@ body {
 
 /* About Us */
 #about {
-    background-color: #f3f5f7;
-    padding: 60px 20px;
+    background-color: #f7f8fa; /* Lighter background for better contrast */
+    padding: 70px 20px; /* Increased padding */
     text-align: center;
     line-height: 1.8;
-    border-radius: 10px;
+    border-radius: 12px; /* Slightly more rounded corners */
 }
 
 #about p {
-    font-size: 1.2em;
+    font-size: 1.25em; /* Slightly larger font size */
     color: #555;
-    margin: 10px auto;
+    margin: 15px auto; /* Increased margin for better spacing */
     max-width: 800px;
 }
 
-/* Remaining styles below unchanged */
+/* Services Section */
+#services {
+    padding: 70px 0; /* Increased padding for spaciousness */
+}
+
+#services .services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min width */
+    gap: 40px; /* Increased gap for better separation */
+}
+
+#services .service-item {
+    background-color: #fff;
+    padding: 35px; /* Increased padding */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+#services .service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0
