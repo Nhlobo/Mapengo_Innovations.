@@ -312,4 +312,123 @@ body {
 
 #services .service-item:hover {
     transform: translateY(-10px);
-    box-shadow: 0
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+#services .service-item h3 {
+    font-size: 1.5em; /* Slightly larger headings */
+    color: #333;
+    margin-bottom: 15px; /* Increased margin for spacing */
+}
+
+#services .service-item p {
+    font-size: 1em; /* Adjusted font size */
+    color: #777;
+}
+
+/* Testimonials Section */
+#testimonials {
+    padding: 70px 20px; /* Increased padding */
+    background-color: #e9f5ff; /* Soft background */
+}
+
+.testimonial {
+    border-left: 4px solid #3498db; /* Highlight border */
+    padding-left: 20px; /* Spacing from border */
+    margin: 20px 0; /* Increased margin for spacing */
+    font-style: italic; /* Italic style for testimonials */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333; /* Dark background for contrast */
+    color: #fff; /* White text for readability */
+    padding: 30px 20px; /* Padding for spacing */
+    text-align: center;
+}
+
+footer p {
+    margin: 10px 0; /* Adjusted margin for spacing */
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between footer links */
+    margin: 15px 0; /* Space above and below the links */
+}
+
+.footer-links a {
+    color: #fff; /* White text */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.footer-links a:hover {
+    color: #3498db; /* Change color on hover */
+}
+
+/* Button Styles */
+.btn {
+    padding: 15px 30px; /* Consistent button size */
+    border: none;
+    border-radius: 30px; /* Rounded buttons */
+    background-color: #1a73e8; /* Button color */
+    color: white;
+    font-size: 1em;
+    font-weight: 600; /* Bold text */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s; /* Button effects */
+}
+
+.btn:hover {
+    background-color: #155bb5; /* Darker shade on hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+/* Image Styles */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Rounded corners for images */
+}
+
+/* Input and Textarea Styles */
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd; /* Light border for inputs */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below inputs */
+    font-size: 1em; /* Consistent font size */
+}
+
+input:focus,
+textarea:focus {
+    border-color: #3498db; /* Border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .hero {
+        flex-direction: column;
+        padding: 40px 20px; /* Adjusted padding for smaller screens */
+    }
+    
+    .hero-image {
+        max-width: 100%; /* Responsive image */
+    }
+}
+
+@media (max-width: 992px) {
+    #services .services-container {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjusted for smaller screens */
+    }
+
+    .cta-btn {
+        width: 100%; /* Full-width buttons on small screens */
+    }
+}
