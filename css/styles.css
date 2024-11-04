@@ -1,434 +1,158 @@
 /* General Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Roboto', sans-serif;
-    color: #444; /* Darker text for better readability */
-    background-color: #f8f9fa; /* Light background for a cleaner look */
-    position: relative;
-}
-
-/* Navbar Styles */
-.navbar {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px; /* Increased padding for a more spacious feel */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transition for shadow */
-}
-
-.logo img {
-    max-height: 50px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px; /* Increased gap for better separation */
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: 500; /* Added font weight for emphasis */
-    transition: color 0.3s, transform 0.3s; /* Color and scale transition */
-}
-
-.nav-links a:hover {
-    color: #0056b3;
-    transform: scale(1.1); /* Scale link on hover */
-}
-
-.cta-btn {
-    padding: 12px 25px; /* Increased padding for a more button-like feel */
-    background-color: #1a73e8;
-    color: #fff;
-    border: none;
-    border-radius: 30px; /* More rounded corners for a modern look */
-    cursor: pointer;
-    font-weight: 600; /* Bold text */
-    transition: background-color 0.3s ease, transform 0.3s; /* Button color and scale transition */
-}
-
-.cta-btn:hover {
-    background-color: #155bb5;
-    transform: translateY(-2px); /* Subtle lift on hover */
+    font-family: 'Arial', sans-serif; /* Updated to a more professional font */
+    line-height: 1.6; /* Improved line height for readability */
+    color: #444; /* Darker text for better contrast */
+    background-color: #f8f8f8; /* Light background for a clean look */
 }
 
 /* Hero Section */
 .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 60px 40px; /* Increased padding for spacious layout */
-    background-color: #e9f5ff; /* Soft background */
-}
-
-.hero-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-    animation: fadeIn 1s ease-out; /* Fade-in animation */
-}
-
-.hero-text {
-    flex: 1;
-    max-width: 650px; /* Slightly wider text block */
-    text-align: left;
-    opacity: 0;
-    animation: slideInLeft 1s ease forwards; /* Slide-in effect */
-    animation-delay: 0.2s;
-}
-
-.hero-text h1 {
-    font-size: 3.5em; /* Increased font size for prominence */
-    margin-bottom: 15px;
-    font-weight: 700; /* Bold for better emphasis */
-}
-
-.hero-text h1 span {
-    color: #1a73e8;
-}
-
-.hero-text p {
-    margin: 20px 0;
-    font-size: 1.25em; /* Slightly larger font size */
-    line-height: 1.6; /* Improved line height for readability */
-}
-
-.hero-image {
-    flex: 1;
-    min-width: 300px;
-    max-width: 650px;
-    opacity: 0;
-    animation: slideInRight 1s ease forwards; /* Slide-in effect for hero image */
-    animation-delay: 0.5s;
-}
-
-.hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px; /* More rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 20px; /* Increased gap for spacing */
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards; /* Buttons fade-in from bottom */
-    animation-delay: 0.7s;
-}
-
-.social-icons a {
-    margin-right: 15px;
-    color: #1a73e8;
-    text-decoration: none;
-    font-size: 1.5em; /* Increased icon size for better visibility */
-    transition: color 0.3s, transform 0.3s; /* Smooth transition for icons */
-}
-
-.social-icons a:hover {
-    color: #155bb5;
-    transform: scale(1.2); /* Scale icon on hover */
-}
-
-/* Background Overlay */
-.background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('animated-pattern.svg') repeat;
-    opacity: 0.15; /* Slightly more visible */
-    z-index: -1;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin-top: 10px;
-    }
-
-    .hero-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .hero-text h1 {
-        font-size: 2.5em; /* Adjusted for medium screens */
-    }
-
-    .hero-text p {
-        font-size: 1em; /* Adjusted for medium screens */
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-text h1 {
-        font-size: 2em; /* Adjusted for smaller screens */
-    }
-
-    .hero-text p {
-        font-size: 0.9em; /* Adjusted for smaller screens */
-    }
-
-    .cta-btn {
-        padding: 10px 20px; /* Adjusted for smaller screens */
-    }
-}
-
-/* Global Container */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 50px 20px; /* Increased padding for spacious layout */
-}
-
-/* Section Title */
-.section-title {
-    font-size: 2.5em;
-    color: #333;
-    text-align: center;
-    margin-bottom: 40px; /* Increased margin for more space */
-    font-weight: 600;
     position: relative;
-    display: inline-block;
-    text-transform: uppercase;
+    overflow: hidden;
 }
 
-.section-title::after {
-    content: "";
-    width: 100px; /* Increased width for emphasis */
-    height: 4px;
-    background-color: #3498db;
-    display: block;
-    margin: 8px auto 0;
+.hero img {
+    filter: brightness(80%); /* Darken the hero image for text contrast */
 }
 
-/* About Us */
-#about {
-    background-color: #f7f8fa; /* Lighter background for better contrast */
-    padding: 70px 20px; /* Increased padding */
+.hero h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff; /* White text for contrast */
+    font-size: 2.5em; /* Increased size for impact */
     text-align: center;
-    line-height: 1.8;
-    border-radius: 12px; /* Slightly more rounded corners */
-}
-
-#about p {
-    font-size: 1.25em; /* Slightly larger font size */
-    color: #555;
-    margin: 15px auto; /* Increased margin for better spacing */
-    max-width: 800px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Added text shadow for depth */
 }
 
 /* Services Section */
 #services {
-    padding: 70px 0; /* Increased padding for spaciousness */
-}
-
-#services .services-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min width */
-    gap: 40px; /* Increased gap for better separation */
+    background-color: #ffffff; /* Clean white background */
+    padding: 60px 20px; /* Padding for spacing */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
 }
 
 #services .service-item {
-    background-color: #fff;
-    padding: 35px; /* Increased padding */
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
 }
 
 #services .service-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
-#services .service-item h3 {
-    font-size: 1.5em; /* Slightly larger headings */
-    color: #333;
-    margin-bottom: 15px; /* Increased margin for spacing */
+/* Call to Action Section */
+.cta {
+    background-color: #3498db; /* Highlight color */
+    color: #fff; /* White text */
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 
-#services .service-item p {
-    font-size: 1em; /* Adjusted font size */
-    color: #777;
+.cta h2 {
+    margin-bottom: 15px; /* Spacing below heading */
+}
+
+.cta .btn {
+    background-color: #fff; /* Button background */
+    color: #3498db; /* Button text color */
+    border: 2px solid #3498db; /* Button border */
+}
+
+.cta .btn:hover {
+    background-color: #3498db; /* Button hover background */
+    color: #fff; /* Button hover text color */
 }
 
 /* Testimonials Section */
 #testimonials {
-    padding: 70px 20px; /* Increased padding */
-    background-color: #e9f5ff; /* Soft background */
+    padding: 60px 20px; /* Increased padding */
+    background-color: #f1f1f1; /* Light background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 .testimonial {
-    border-left: 4px solid #3498db; /* Highlight border */
+    border-left: 4px solid #3498db; /* Left border for emphasis */
     padding-left: 20px; /* Spacing from border */
-    margin: 20px 0; /* Increased margin for spacing */
-    font-style: italic; /* Italic style for testimonials */
+    margin: 20px 0; /* Increased margin */
+    font-style: italic; /* Italic style for emphasis */
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.testimonial:hover {
+    transform: translateY(-3px); /* Slight lift effect */
 }
 
 /* Footer Styles */
 footer {
-    background-color: #333; /* Dark background for contrast */
-    color: #fff; /* White text for readability */
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
     padding: 30px 20px; /* Padding for spacing */
     text-align: center;
+    position: relative; /* Relative positioning */
+    z-index: 1; /* Ensures footer is above other elements */
 }
 
-footer p {
-    margin: 10px 0; /* Adjusted margin for spacing */
-}
-
-.footer-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Space between footer links */
-    margin: 15px 0; /* Space above and below the links */
-}
-
-.footer-links a {
-    color: #fff; /* White text */
-    text-decoration: none;
-    transition: color 0.3s ease; /* Smooth transition */
-}
-
-.footer-links a:hover {
-    color: #3498db; /* Change color on hover */
+footer::before {
+    content: ''; /* Pseudo-element for decoration */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1); /* Light overlay */
+    z-index: -1; /* Send behind footer content */
 }
 
 /* Button Styles */
 .btn {
-    padding: 15px 30px; /* Consistent button size */
-    border: none;
-    border-radius: 30px; /* Rounded buttons */
-    background-color: #1a73e8; /* Button color */
-    color: white;
-    font-size: 1em;
+    padding: 15px 25px; /* Adjusted padding for a more substantial button */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 1em; /* Consistent font size */
     font-weight: 600; /* Bold text */
-    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s; /* Button effects */
 }
 
 .btn:hover {
-    background-color: #155bb5; /* Darker shade on hover */
     transform: translateY(-2px); /* Subtle lift on hover */
-}
-
-/* Image Styles */
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px; /* Rounded corners for images */
 }
 
 /* Input and Textarea Styles */
 input,
 textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd; /* Light border for inputs */
+    padding: 15px; /* Increased padding for comfort */
+    border: 1px solid #ddd; /* Light border */
     border-radius: 5px; /* Rounded corners */
-    margin-bottom: 15px; /* Space below inputs */
     font-size: 1em; /* Consistent font size */
 }
 
 input:focus,
 textarea:focus {
-    border-color: #3498db; /* Border color on focus */
-    outline: none; /* Remove default outline */
+    border-color: #3498db; /* Highlight border on focus */
+    outline: none; /* Remove outline */
 }
 
 /* Media Queries */
 @media (max-width: 1200px) {
-    .hero {
-        flex-direction: column;
-        padding: 40px 20px; /* Adjusted padding for smaller screens */
-    }
-    
-    .hero-image {
-        max-width: 100%; /* Responsive image */
+    .hero h1 {
+        font-size: 2em; /* Reduced size for smaller screens */
     }
 }
 
 @media (max-width: 992px) {
     #services .services-container {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjusted for smaller screens */
-    }
-
-    .cta-btn {
-        width: 100%; /* Full-width buttons on small screens */
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted for smaller screens */
     }
 }
+
+@media (max-width: 768px) {
+    .cta {
+        padding: 30px 15px; /* Reduced padding */
+    }
+                                  }
