@@ -3,139 +3,173 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f8f9fc;
+    color: #333;
+    line-height: 1.6;
 }
 
 /* Global Container */
 .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 50px 20px;
+    margin: auto;
+    padding: 60px 20px;
 }
 
 /* Section Title */
 .section-title {
-    font-size: 2.5em;
-    color: #333;
+    font-size: 2.8em;
+    color: #222;
     text-align: center;
     margin-bottom: 40px;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     position: relative;
+    display: inline-block;
+    text-transform: uppercase;
 }
 
 .section-title::after {
     content: "";
-    width: 80px;
-    height: 4px;
-    background-color: #3498db;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(45deg, #3498db, #2979b0);
     display: block;
     margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 /* About Us */
 #about {
-    background-color: #f8fafb;
-    padding: 70px 20px;
+    background-color: #ffffff;
+    padding: 70px 30px;
     text-align: center;
-    line-height: 1.8;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 #about p {
-    font-size: 1.2em;
+    font-size: 1.15em;
     color: #555;
-    margin: 15px auto;
-    max-width: 750px;
+    margin: 10px auto;
+    max-width: 800px;
 }
 
 /* Services Section */
 #services {
-    padding: 80px 0;
+    padding: 70px 0;
 }
 
 #services .services-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 40px;
 }
 
 #services .service-item {
-    background-color: #fff;
-    padding: 40px 25px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
 }
 
 #services .service-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 #services .service-item h3 {
-    font-size: 1.5em;
+    font-size: 1.6em;
+    color: #2979b0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#services .service-item h3:hover {
     color: #3498db;
-    margin-bottom: 18px;
-    font-weight: 700;
 }
 
 #services .service-item p {
     color: #666;
     line-height: 1.7;
+    font-size: 1.05em;
 }
 
-/* Why Choose Us */
-#why-choose-us {
-    background-color: #f8fafb;
-    padding: 70px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+/* Portfolio */
+#portfolio {
+    padding: 70px 0;
 }
 
-#why-choose-us ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 30px;
+#portfolio .portfolio-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-#why-choose-us ul li {
-    font-size: 1.15em;
-    color: #333;
-    margin-bottom: 15px;
-    line-height: 1.6;
-    display: flex;
-    align-items: center;
+#portfolio .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
 }
 
-#why-choose-us ul li strong {
+#portfolio .portfolio-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+#portfolio .portfolio-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px 16px 0 0;
+}
+
+#portfolio .portfolio-item h4 {
+    font-size: 1.3em;
     color: #3498db;
-    margin-right: 8px;
+    margin: 20px 0;
+}
+
+#portfolio .button {
+    padding: 12px 30px;
+    color: #fff;
+    background: linear-gradient(45deg, #3498db, #2979b0);
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+#portfolio .button:hover {
+    background: linear-gradient(45deg, #2979b0, #1e5c8d);
 }
 
 /* Our Values */
 #our-values {
     display: flex;
-    justify-content: space-around;
-    background-color: #fff;
+    justify-content: space-between;
+    background-color: #ffffff;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 #our-values ul {
     display: flex;
-    gap: 40px;
+    gap: 25px;
     list-style: none;
 }
 
 #our-values ul li {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 700;
-    color: #333;
+    color: #444;
     text-transform: uppercase;
     position: relative;
     transition: color 0.3s ease;
@@ -145,129 +179,56 @@
     color: #3498db;
 }
 
-/* Portfolio */
-#portfolio {
-    padding: 80px 0;
-}
-
-#portfolio .portfolio-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-}
-
-#portfolio .portfolio-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#portfolio .portfolio-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-}
-
-#portfolio .portfolio-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px 12px 0 0;
-}
-
-#portfolio .portfolio-item h4 {
-    font-size: 1.3em;
-    color: #3498db;
-    margin: 20px 0;
-    font-weight: 600;
-}
-
-/* Portfolio Button */
-#portfolio .button {
-    padding: 12px 30px;
-    color: #fff;
-    background-color: #3498db;
-    text-decoration: none;
-    border-radius: 25px;
-    transition: background-color 0.3s ease;
-}
-
-#portfolio .button:hover {
-    background-color: #2979b0;
-}
-
-/* Testimonials */
-#testimonials {
-    background-color: #f8fafb;
-    padding: 80px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-#testimonials .testimonials-container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: center;
-}
-
-#testimonials .testimonial-item {
-    max-width: 650px;
-    padding: 35px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: box-shadow 0.3s ease;
-}
-
-#testimonials .testimonial-item:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-}
-
-#testimonials .testimonial-item p {
-    font-size: 1.1em;
-    color: #666;
-}
-
-#testimonials .testimonial-item h4 {
-    font-size: 1.3em;
-    color: #333;
-    font-weight: 700;
-    margin-top: 15px;
-}
-
 /* FAQ */
 #faq {
-    padding: 80px 0;
+    padding: 70px 0;
 }
 
 #faq .faq-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
 }
 
 #faq .faq-item {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease;
 }
 
 #faq .faq-item:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 #faq .faq-item h3 {
     font-size: 1.4em;
-    color: #3498db;
-    margin-bottom: 12px;
-    font-weight: 700;
+    color: #2979b0;
+    margin-bottom: 10px;
 }
 
 #faq .faq-item p {
-    font-size: 1.1em;
+    font-size: 1.15em;
     color: #666;
-        }
+}
+
+/* Button Styling */
+.button {
+    display: inline-block;
+    padding: 12px 30px;
+    color: #ffffff;
+    background: linear-gradient(45deg, #3498db, #2979b0);
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    background: linear-gradient(45deg, #2979b0, #1e5c8d);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    }
