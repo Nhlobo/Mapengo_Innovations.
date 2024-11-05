@@ -9,8 +9,8 @@
 /* Global Container */
 .container {
     max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
+    margin: 0 auto;
+    padding: 50px 20px;
 }
 
 /* Section Title */
@@ -18,11 +18,11 @@
     font-size: 2.5em;
     color: #333;
     text-align: center;
-    margin-bottom: 30px;
-    font-weight: 600;
-    position: relative;
-    display: inline-block;
+    margin-bottom: 40px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
 }
 
 .section-title::after {
@@ -31,71 +31,73 @@
     height: 4px;
     background-color: #3498db;
     display: block;
-    margin: 8px auto 0;
+    margin: 10px auto 0;
 }
 
 /* About Us */
 #about {
-    background-color: #f3f5f7;
-    padding: 60px 20px;
+    background-color: #f8fafb;
+    padding: 70px 20px;
     text-align: center;
     line-height: 1.8;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 #about p {
     font-size: 1.2em;
     color: #555;
-    margin: 10px auto;
-    max-width: 800px;
+    margin: 15px auto;
+    max-width: 750px;
 }
 
 /* Services Section */
 #services {
-    padding: 60px 0;
+    padding: 80px 0;
 }
 
 #services .services-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    gap: 40px;
 }
 
 #services .service-item {
     background-color: #fff;
-    padding: 30px;
+    padding: 40px 25px;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
 }
 
 #services .service-item:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 #services .service-item h3 {
-    font-size: 1.4em;
+    font-size: 1.5em;
     color: #3498db;
-    margin-bottom: 15px;
-    font-weight: 600;
+    margin-bottom: 18px;
+    font-weight: 700;
 }
 
 #services .service-item p {
     color: #666;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* Why Choose Us */
 #why-choose-us {
-    background-color: #f3f5f7;
-    padding: 60px 20px;
-    border-radius: 10px;
+    background-color: #f8fafb;
+    padding: 70px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 #why-choose-us ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin-top: 30px;
 }
@@ -105,31 +107,34 @@
     color: #333;
     margin-bottom: 15px;
     line-height: 1.6;
+    display: flex;
+    align-items: center;
 }
 
 #why-choose-us ul li strong {
     color: #3498db;
+    margin-right: 8px;
 }
 
 /* Our Values */
 #our-values {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 #our-values ul {
     display: flex;
-    gap: 30px;
+    gap: 40px;
     list-style: none;
 }
 
 #our-values ul li {
-    font-size: 1.3em;
-    font-weight: 600;
+    font-size: 1.2em;
+    font-weight: 700;
     color: #333;
     text-transform: uppercase;
     position: relative;
@@ -142,25 +147,26 @@
 
 /* Portfolio */
 #portfolio {
-    padding: 60px 0;
+    padding: 80px 0;
 }
 
 #portfolio .portfolio-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
 }
 
 #portfolio .portfolio-item {
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #portfolio .portfolio-item:hover {
     transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
 #portfolio .portfolio-item img {
@@ -170,13 +176,15 @@
 }
 
 #portfolio .portfolio-item h4 {
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #3498db;
     margin: 20px 0;
+    font-weight: 600;
 }
 
+/* Portfolio Button */
 #portfolio .button {
-    padding: 10px 25px;
+    padding: 12px 30px;
     color: #fff;
     background-color: #3498db;
     text-decoration: none;
@@ -190,9 +198,10 @@
 
 /* Testimonials */
 #testimonials {
-    background-color: #f3f5f7;
-    padding: 60px 20px;
-    border-radius: 10px;
+    background-color: #f8fafb;
+    padding: 80px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 #testimonials .testimonials-container {
@@ -203,17 +212,17 @@
 }
 
 #testimonials .testimonial-item {
-    max-width: 600px;
-    padding: 30px;
+    max-width: 650px;
+    padding: 35px;
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: box-shadow 0.3s ease;
 }
 
 #testimonials .testimonial-item:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 #testimonials .testimonial-item p {
@@ -222,42 +231,43 @@
 }
 
 #testimonials .testimonial-item h4 {
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #333;
-    font-weight: bold;
+    font-weight: 700;
     margin-top: 15px;
 }
 
 /* FAQ */
 #faq {
-    padding: 60px 0;
+    padding: 80px 0;
 }
 
 #faq .faq-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 30px;
 }
 
 #faq .faq-item {
     background-color: #fff;
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 #faq .faq-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 }
 
 #faq .faq-item h3 {
-    font-size: 1.3em;
+    font-size: 1.4em;
     color: #3498db;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 #faq .faq-item p {
     font-size: 1.1em;
     color: #666;
-    }
+        }
