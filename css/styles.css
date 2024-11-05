@@ -1,158 +1,263 @@
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif; /* Updated to a more professional font */
-    line-height: 1.6; /* Improved line height for readability */
-    color: #444; /* Darker text for better contrast */
-    background-color: #f8f8f8; /* Light background for a clean look */
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Hero Section */
-.hero {
-    position: relative;
-    overflow: hidden;
+/* Global Container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
 }
 
-.hero img {
-    filter: brightness(80%); /* Darken the hero image for text contrast */
-}
-
-.hero h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffffff; /* White text for contrast */
-    font-size: 2.5em; /* Increased size for impact */
+/* Section Title */
+.section-title {
+    font-size: 2.5em;
+    color: #333;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Added text shadow for depth */
+    margin-bottom: 30px;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.section-title::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background-color: #3498db;
+    display: block;
+    margin: 8px auto 0;
+}
+
+/* About Us */
+#about {
+    background-color: #f3f5f7;
+    padding: 60px 20px;
+    text-align: center;
+    line-height: 1.8;
+    border-radius: 10px;
+}
+
+#about p {
+    font-size: 1.2em;
+    color: #555;
+    margin: 10px auto;
+    max-width: 800px;
 }
 
 /* Services Section */
 #services {
-    background-color: #ffffff; /* Clean white background */
-    padding: 60px 20px; /* Padding for spacing */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+    padding: 60px 0;
+}
+
+#services .services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
 }
 
 #services .service-item {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
 }
 
 #services .service-item:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Call to Action Section */
-.cta {
-    background-color: #3498db; /* Highlight color */
-    color: #fff; /* White text */
-    padding: 40px 20px;
-    text-align: center;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+#services .service-item h3 {
+    font-size: 1.4em;
+    color: #3498db;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-.cta h2 {
-    margin-bottom: 15px; /* Spacing below heading */
+#services .service-item p {
+    color: #666;
+    line-height: 1.6;
 }
 
-.cta .btn {
-    background-color: #fff; /* Button background */
-    color: #3498db; /* Button text color */
-    border: 2px solid #3498db; /* Button border */
+/* Why Choose Us */
+#why-choose-us {
+    background-color: #f3f5f7;
+    padding: 60px 20px;
+    border-radius: 10px;
 }
 
-.cta .btn:hover {
-    background-color: #3498db; /* Button hover background */
-    color: #fff; /* Button hover text color */
+#why-choose-us ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
 }
 
-/* Testimonials Section */
+#why-choose-us ul li {
+    font-size: 1.15em;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+#why-choose-us ul li strong {
+    color: #3498db;
+}
+
+/* Our Values */
+#our-values {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#our-values ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+#our-values ul li {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#our-values ul li:hover {
+    color: #3498db;
+}
+
+/* Portfolio */
+#portfolio {
+    padding: 60px 0;
+}
+
+#portfolio .portfolio-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+#portfolio .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#portfolio .portfolio-item:hover {
+    transform: scale(1.05);
+}
+
+#portfolio .portfolio-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px 12px 0 0;
+}
+
+#portfolio .portfolio-item h4 {
+    font-size: 1.2em;
+    color: #3498db;
+    margin: 20px 0;
+}
+
+#portfolio .button {
+    padding: 10px 25px;
+    color: #fff;
+    background-color: #3498db;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+#portfolio .button:hover {
+    background-color: #2979b0;
+}
+
+/* Testimonials */
 #testimonials {
-    padding: 60px 20px; /* Increased padding */
-    background-color: #f1f1f1; /* Light background */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #f3f5f7;
+    padding: 60px 20px;
+    border-radius: 10px;
 }
 
-.testimonial {
-    border-left: 4px solid #3498db; /* Left border for emphasis */
-    padding-left: 20px; /* Spacing from border */
-    margin: 20px 0; /* Increased margin */
-    font-style: italic; /* Italic style for emphasis */
-    transition: transform 0.3s ease; /* Smooth transition */
+#testimonials .testimonials-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
 }
 
-.testimonial:hover {
-    transform: translateY(-3px); /* Slight lift effect */
-}
-
-/* Footer Styles */
-footer {
-    background-color: #333; /* Dark background */
-    color: #fff; /* White text */
-    padding: 30px 20px; /* Padding for spacing */
+#testimonials .testimonial-item {
+    max-width: 600px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     text-align: center;
-    position: relative; /* Relative positioning */
-    z-index: 1; /* Ensures footer is above other elements */
+    transition: box-shadow 0.3s ease;
 }
 
-footer::before {
-    content: ''; /* Pseudo-element for decoration */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1); /* Light overlay */
-    z-index: -1; /* Send behind footer content */
+#testimonials .testimonial-item:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Button Styles */
-.btn {
-    padding: 15px 25px; /* Adjusted padding for a more substantial button */
-    border-radius: 25px; /* Rounded edges */
-    font-size: 1em; /* Consistent font size */
-    font-weight: 600; /* Bold text */
-    transition: background-color 0.3s ease, transform 0.3s; /* Button effects */
+#testimonials .testimonial-item p {
+    font-size: 1.1em;
+    color: #666;
 }
 
-.btn:hover {
-    transform: translateY(-2px); /* Subtle lift on hover */
+#testimonials .testimonial-item h4 {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    margin-top: 15px;
 }
 
-/* Input and Textarea Styles */
-input,
-textarea {
-    padding: 15px; /* Increased padding for comfort */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 1em; /* Consistent font size */
+/* FAQ */
+#faq {
+    padding: 60px 0;
 }
 
-input:focus,
-textarea:focus {
-    border-color: #3498db; /* Highlight border on focus */
-    outline: none; /* Remove outline */
+#faq .faq-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
 }
 
-/* Media Queries */
-@media (max-width: 1200px) {
-    .hero h1 {
-        font-size: 2em; /* Reduced size for smaller screens */
+#faq .faq-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#faq .faq-item:hover {
+    transform: translateY(-5px);
+}
+
+#faq .faq-item h3 {
+    font-size: 1.3em;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+#faq .faq-item p {
+    font-size: 1.1em;
+    color: #666;
     }
-}
-
-@media (max-width: 992px) {
-    #services .services-container {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted for smaller screens */
-    }
-}
-
-@media (max-width: 768px) {
-    .cta {
-        padding: 30px 15px; /* Reduced padding */
-    }
-                                  }
