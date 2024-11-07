@@ -350,32 +350,188 @@ Contact us today to transform your ideas into reality.</p>
     </section>
     
     <!-- ================= PORTFOLIO ================= -->
-    <section id="portfolio" class="container">
-        <h2 class="section-title">Portfolio</h2>
-        <div class="portfolio-container">
-            <!-- Apps -->
-            <div class="portfolio-item websites">
-                <img src="assets/img/projects/Calculator.png" alt="Calculator">
-                <h4>Calculator</h4>
-                <a href="https://nhlobo.github.io/calculator/" class="button">View Project</a>
-            </div>
-            <div class="portfolio-item websites">
-                <img src="assets/img/projects/Weather Forecast App.png" alt="Weather Forecast App">
-                <h4>Weather Forecast App</h4>
-                <a href="https://weather-ebon-beta.vercel.app/" class="button">View Project</a>
-            </div>
-            <div class="portfolio-item apps">
-                <img src="assets/img/projects/Calendar App.png" alt="Calendar App">
-                <h4>Calendar App</h4>
-                <a href="https://test2-4-dxs5.onrender.com" class="button">View Project</a>
-            </div>
+<section id="portfolio" class="container">
+    <h2 class="section-title">Portfolio</h2>
+    <div class="portfolio-container">
+        <!-- Portfolio Items -->
+        <div class="portfolio-item websites">
+            <img src="assets/img/projects/Calculator.png" alt="Calculator">
+            <h4>Calculator</h4>
+            <a href="https://nhlobo.github.io/calculator/" class="button">View Project</a>
+        </div>
+        <div class="portfolio-item websites">
+            <img src="assets/img/projects/Weather Forecast App.png" alt="Weather Forecast App">
+            <h4>Weather Forecast App</h4>
+            <a href="https://weather-ebon-beta.vercel.app/" class="button">View Project</a>
+        </div>
+        <div class="portfolio-item apps">
+            <img src="assets/img/projects/Calendar App.png" alt="Calendar App">
+            <h4>Calendar App</h4>
+            <a href="https://test2-4-dxs5.onrender.com" class="button">View Project</a>
+        </div>
+        <div class="portfolio-item apps">
+            <img src="assets/img/projects/Quran Knowledge Quiz.png" alt="Quran Knowledge Quiz">
+            <h4>Quran Knowledge Quiz</h4>
+            <a href="https://nhlobo.github.io/quran-knowledge-quiz/" class="button">View Project</a>
+        </div>
+    </div>
 
-            <!-- Websites -->
-            <div class="portfolio-item apps">
-                <img src="assets/img/projects/Quran Knowledge Quiz.png" alt="Quran Knowledge Quiz">
-                <h4>Quran Knowledge Quiz</h4>
-                <a href="https://nhlobo.github.io/quran-knowledge-quiz/" class="button">View Project</a>
-            </div>
+    <!-- Navigation Arrows and Dots -->
+    <div class="portfolio-navigation">
+        <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+        <div class="dot" onclick="currentSlide(1)"></div>
+        <div class="dot" onclick="currentSlide(2)"></div>
+        <div class="dot" onclick="currentSlide(3)"></div>
+        <div class="dot" onclick="currentSlide(4)"></div>
+        <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+    </div>
+
+    <style>
+        /* Container styling */
+        #portfolio {
+            padding: 2em 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 1em;
+            color: #333;
+        }
+
+        /* Portfolio item styling */
+        .portfolio-container {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .portfolio-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background: linear-gradient(to bottom right, #292929, #1b1b1b);
+            color: #fff;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1em;
+        }
+
+        .portfolio-item h4 {
+            font-size: 1.5em;
+            margin: 0.5em 0;
+        }
+
+        .portfolio-item .button {
+            display: inline-block;
+            padding: 0.5em 1em;
+            background-color: #ff9900;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .portfolio-item .button:hover {
+            background-color: #cc7a00;
+        }
+
+        /* Navigation and dots styling */
+        .portfolio-navigation {
+            position: absolute;
+            bottom: 1em;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portfolio-navigation .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #999;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .portfolio-navigation .dot.active {
+            background-color: #ff9900;
+        }
+
+        .portfolio-navigation .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .portfolio-navigation .arrow:hover {
+            background-color: #ff9900;
+        }
+
+        .portfolio-navigation .arrow.left {
+            left: 10px;
+        }
+
+        .portfolio-navigation .arrow.right {
+            right: 10px;
+        }
+    </style>
+
+    <script>
+        let currentSlideIndex = 1;
+        showSlides(currentSlideIndex);
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("portfolio-item");
+            let dots = document.getElementsByClassName("dot");
+
+            if (n > slides.length) { currentSlideIndex = 1 }
+            if (n < 1) { currentSlideIndex = slides.length }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[currentSlideIndex - 1].style.display = "block";
+            dots[currentSlideIndex - 1].className += " active";
+        }
+
+        function nextSlide() {
+            showSlides(currentSlideIndex += 1);
+        }
+
+        function prevSlide() {
+            showSlides(currentSlideIndex -= 1);
+        }
+
+        function currentSlide(n) {
+            showSlides(currentSlideIndex = n);
+        }
+    </script>
     </section>
 
     <!-- ================= TESTIMONIALS ================= -->
