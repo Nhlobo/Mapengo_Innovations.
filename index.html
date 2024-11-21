@@ -561,21 +561,42 @@ input:focus ~ label::after, textarea:focus ~ label::after {
     font-size: 0.8rem;
   }
 }
+@media (max-width: 600px) {
+  #contact-form, .contact-container {
+    padding: 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
-@media (max-width: 480px) {
-  .contact-container h1 {
-    font-size: 1.3rem;
+  .form-group {
+    margin-bottom: 15px;
   }
 
   input, textarea {
-    font-size: 0.9rem;
-    padding: 10px;
+    font-size: 1rem;
+    padding: 8px;
   }
 
   button {
-    font-size: 0.9rem;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
   }
-}
-                  </style>
+
+  .checkbox-group label {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  }
+</style>
 </body>
 </html>
+  
+
+
+
+
+
+
+
+  
