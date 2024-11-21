@@ -542,61 +542,58 @@ button:active {
 input:focus ~ label::after, textarea:focus ~ label::after {
   transform: scaleX(1);
 }
-
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-  .contact-container {
-    padding: 20px;
-  }
-
-  .contact-container h1 {
-    font-size: 1.6rem;
-  }
-
-  button {
-    padding: 10px 15px;
-  }
-
-  .checkbox-group {
-    font-size: 0.8rem;
-  }
-}
-@media (max-width: 600px) {
   #contact-form, .contact-container {
-    padding: 10px;
-    max-width: 100%;
-    box-sizing: border-box;
+    max-width: 90%; /* Adjust the width to fit the screen */
+    padding: 20px; /* Reduce padding for smaller screens */
   }
 
-  .form-group {
-    margin-bottom: 15px;
+  .contact-title {
+    font-size: 1.2rem; /* Smaller font size for title */
   }
 
   input, textarea {
-    font-size: 1rem;
-    padding: 8px;
+    font-size: 0.9rem; /* Adjust font size for readability */
+    padding: 8px; /* Reduce padding for smaller input fields */
   }
 
   button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Adjust button text size */
+    padding: 8px 12px; /* Adjust button padding */
   }
 
-  .checkbox-group label {
-    font-size: 0.9rem;
-    line-height: 1.4;
+  .form-group {
+    margin-bottom: 15px; /* Add spacing between form groups */
   }
+}
+
+@media (max-width: 480px) {
+  #contact-form, .contact-container {
+    max-width: 95%; /* Further reduce width for very small screens */
+    padding: 15px; /* Adjust padding */
   }
+
+  .contact-title {
+    font-size: 1rem; /* Further reduce title size */
+  }
+
+  input, textarea {
+    font-size: 0.85rem; /* Smaller text for inputs and textareas */
+  }
+
+  button {
+    font-size: 0.8rem; /* Adjust button text size */
+    padding: 6px 10px; /* Compact button padding */
+  }
+
+  .form-group {
+    margin-bottom: 10px; /* Reduce spacing for tight layouts */
+  }
+
+  label {
+    font-size: 0.85rem; /* Smaller label text */
+  }
+}
 </style>
 </body>
 </html>
-  
-
-
-
-
-
-
-
-  
