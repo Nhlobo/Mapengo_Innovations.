@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ Section with Popup</title>
+  <title>Contact Form</title>
   <style>
+    /* General Body Styling */
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
-      color: #333;
+      background: #121212;
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,557 +21,276 @@
       overflow-x: hidden;
     }
 
-    .faq-section {
-      max-width: 600px;
+    /* Contact Section */
+    .contact {
+      max-width: 800px;
       margin: 20px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      background: #fff; /* White background for the contact form */
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px); /* Optional background blur effect */
     }
 
-    .section-title {
-      font-size: 1.6rem;
+    .contact-container h1 {
+      font-size: 2rem;
       font-weight: 600;
-      margin-bottom: 20px;
-      color: #333;
+      color: #00bcd4; /* Retain the AI-inspired color */
+      margin-bottom: 30px;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .faq-container {
+    .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 20px;
     }
 
-    .faq-item {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border: 1px solid #ddd;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInItem 0.3s ease-in-out forwards;
-    }
-
-    .faq-item:hover {
-      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
-      transform: translateY(-5px);
-    }
-
-    .faq-item h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #333;
-      text-align: left;
-      margin: 0;
-      padding-left: 15px;
-      cursor: pointer;
+    .form-group {
+      display: flex;
+      flex-direction: column;
       position: relative;
     }
 
-    .faq-item p {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: #555;
-      display: none;
+    label {
+      font-weight: 500;
+      margin-bottom: 5px;
       text-align: left;
-      padding-left: 15px;
+      color: #333; /* Dark text for readability */
+      letter-spacing: 0.5px;
     }
 
-    .faq-item.active p {
-      display: block;
-      color: #333;
-    }
-
-    .arrow {
-      margin-top: 8px;
-      display: block;
-      width: 14px;
-      height: 14px;
-      border-top: 2px solid #333;
-      border-right: 2px solid #333;
-      transform: rotate(45deg);
-      margin: 0 auto;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .arrow.rotate {
-      transform: rotate(-135deg);
-    }
-
-    @keyframes fadeInItem {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .faq-section {
-        padding: 15px;
-      }
-
-      .section-title {
-        font-size: 1.3rem;
-      }
-
-      .faq-item h3 {
-        font-size: 1rem;
-      }
-
-      .faq-item p {
-        font-size: 0.95rem;
-      }
-    }
-
-    .popup-btn {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 20px;
-      background: #00bcd4;
-      color: #fff;
-      font-size: 1rem;
-      padding: 12px 20px;
-      border-radius: 50px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      z-index: 100;
-      display: none;
-    }
-
-    .popup-btn:hover {
-      background: #0097a7;
-      transform: scale(1.1);
-    }
-
-    .popup-btn:active {
-      background: #00838f;
-      transform: scale(1);
-    }
-
-    #contact-form {
-      margin-top: 50px;
-      padding: 30px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      width: 100%;
-      display: none;
-    }
-
-    .contact-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-
+    /* Input and Textarea Styling */
     input, textarea {
+      padding: 15px;
+      border: 1px solid #ccc; /* Lighter border for contrast */
+      border-radius: 8px;
+      margin-top: 5px;
+      font-size: 1rem;
+      color: #333; /* Dark text inside inputs */
+      background: #fff; /* White background for inputs */
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    /* AI-style glowing effect on focus */
+    input:focus, textarea:focus {
+      border-color: #00bcd4;
+      box-shadow: 0 0 8px rgba(0, 188, 212, 0.7); /* Glowing effect */
+      background: #f1f1f1; /* Slight gray background on focus */
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #333; /* Dark text for checkbox group */
+    }
+
+    .checkbox-group input {
+      width: auto;
+      transform: scale(1.2);
     }
 
     button {
-      background-color: #00bcd4;
+      background-color: #00bcd4; /* Primary color */
       color: #fff;
-      padding: 10px 15px;
+      padding: 12px 20px;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s ease;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
     }
 
     button:hover {
-      background-color: #0097a7;
+      background-color: #0097a7; /* Slightly darker color on hover */
+      transform: translateY(-3px);
+    }
+
+    button:active {
+      background-color: #00838f;
+      transform: translateY(2px);
+    }
+
+    /* Loader and Response */
+    #loader {
+      display: none;
+      text-align: center;
+    }
+
+    #response {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #00bcd4;
+      font-weight: 500;
+    }
+
+    /* AI-style glowing effect on the form labels */
+    .form-group label {
+      position: relative;
+    }
+
+    .form-group label::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #00bcd4;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    input:focus ~ label::after, textarea:focus ~ label::after {
+      transform: scaleX(1);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      #contact-form, .contact-container {
+        max-width: 90%; /* Adjust the width to fit the screen */
+        padding: 20px; /* Reduce padding for smaller screens */
+      }
+
+      .contact-title {
+        font-size: 1.2rem; /* Smaller font size for title */
+      }
+
+      input, textarea {
+        font-size: 0.9rem; /* Adjust font size for readability */
+        padding: 8px; /* Reduce padding for smaller input fields */
+      }
+
+      button {
+        font-size: 0.9rem; /* Adjust button text size */
+        padding: 8px 12px; /* Adjust button padding */
+      }
+
+      .form-group {
+        margin-bottom: 15px; /* Add spacing between form groups */
+      }
+    }
+
+    @media (max-width: 480px) {
+      #contact-form, .contact-container {
+        max-width: 95%; /* Further reduce width for very small screens */
+        padding: 15px; /* Adjust padding */
+      }
+
+      .contact-title {
+        font-size: 1rem; /* Further reduce title size */
+      }
+
+      input, textarea {
+        font-size: 0.85rem; /* Smaller text for inputs and textareas */
+      }
+
+      button {
+        font-size: 0.8rem; /* Adjust button text size */
+        padding: 6px 10px; /* Compact button padding */
+      }
+
+      .form-group {
+        margin-bottom: 10px; /* Reduce spacing for tight layouts */
+      }
+
+      label {
+        font-size: 0.85rem; /* Smaller label text */
+      }
     }
   </style>
 </head>
 <body>
-  <section id="faq" class="faq-section">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <h3>What services do you offer?</h3>
-        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
-        <div class="arrow"></div>
+  <section class="contact" id="contact">
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+      <form action="https://formspree.io/f/xwpkkvnk" class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required minlength="2" maxlength="50" 
+                 pattern="[a-zA-Z ]+" aria-label="Name field" title="Please enter a valid name (letters and spaces only)">
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" required aria-label="Email field" title="Please enter a valid email address">
+        </div>
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500"
+                    aria-label="Message field" title="Message should be between 10 and 500 characters"></textarea>
+        </div>
+
+        <!-- Privacy Policy and Communication Checkboxes -->
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+          <label for="privacyPolicy">
+            I agree to the <a href="privacy.html" style="color: #00bcd4;">Privacy Policy</a> .
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="communicationOptIn" name="communicationOptIn">
+          <label for="communicationOptIn">
+            I would like to receive updates and promotional communications.
+          </label>
+        </div>
+
+        <button type="submit" class="button contact-button">Send Message</button>
+      </form>
+
+      <!-- Loader and Response -->
+      <div id="loader" style="display:none;" aria-live="polite">
+        <img src="loader.gif" alt="Loading..." />
       </div>
-      <div class="faq-item">
-        <h3>How much do your services cost?</h3>
-        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How long does a project take?</h3>
-        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>Do you offer support after the project is completed?</h3>
-        <p>Yes, we offer maintenance and support packages to ensure your website or app continues to perform optimally.</p>
-        <div class="arrow"></div>
-      </div>
+      <div id="response" style="display:none;" aria-live="polite"></div>
     </div>
   </section>
 
-  <section id="contact-form">
-    <h2 class="contact-title">Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <div class="popup-btn" id="popup-btn">
-    Ask too!
-  </div>
-
   <script>
-    document.querySelectorAll('.faq-item').forEach((faq) => {
-      const arrow = faq.querySelector('.arrow');
-      faq.addEventListener('click', () => {
-        faq.classList.toggle('active');
-        arrow.classList.toggle('rotate');
-      });
-    });
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-    document.getElementById('popup-btn').addEventListener('click', () => {
-      document.getElementById('contact-form').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-      document.getElementById('popup-btn').style.display = 'none';
-    });
+        // Show loading indicator
+        document.getElementById('loader').style.display = 'block';
 
-    window.addEventListener('scroll', () => {
-      const faqSection = document.getElementById('faq');
-      const faqPosition = faqSection.getBoundingClientRect();
-      const popupBtn = document.getElementById('popup-btn');
+        // Validate inputs
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        const privacyPolicy = document.getElementById('privacyPolicy').checked;
 
-      if (faqPosition.top <= 0 && faqPosition.bottom >= 0) {
-        popupBtn.style.display = 'block';
-      } else {
-        popupBtn.style.display = 'none';
-      }
+        if (!name || !email || !message || !privacyPolicy) {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('response').style.display = 'block';
+            document.getElementById('response').innerText = 'Please fill in all fields and agree to the privacy policy.';
+            return;
+        }
+
+        // Simulate an AJAX call for demo purposes
+        setTimeout(function() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('response').style.display = 'block';
+            document.getElementById('response').innerText = 'Thank you for your message! We will get back to you soon.';
+        }, 2000);
     });
   </script>
-  <!--================= CONTACT ================ -->
-<section class="contact" id="contact">
-    <div class="contact-container">
-        <h1>Contact Us</h1>
-        <form action="https://formspree.io/f/xwpkkvnk" class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required minlength="2" maxlength="50" 
-                    pattern="[a-zA-Z ]+" aria-label="Name field" title="Please enter a valid name (letters and spaces only)">
-            </div>
-            <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" required aria-label="Email field" title="Please enter a valid email address">
-            </div>
-            <div class="form-group">
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500"
-                    aria-label="Message field" title="Message should be between 10 and 500 characters"></textarea>
-            </div>
-
-            <!-- Privacy Policy and Communication Checkboxes -->
-            <div class="form-group checkbox-group">
-                <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
-                <label for="privacyPolicy">
-                    I agree to the <a href="privacy.html" style="color: #00bcd4;">Privacy Policy</a> .
-                </label>
-            </div>
-            <div class="form-group checkbox-group">
-                <input type="checkbox" id="communicationOptIn" name="communicationOptIn">
-                <label for="communicationOptIn">
-                    I would like to receive updates and promotional communications.
-                </label>
-            </div>
-
-            <button type="submit" class="button contact-button">Send Message</button>
-        </form>
-
-        <!-- Loader and Response -->
-        <div id="loader" style="display:none;" aria-live="polite">
-            <img src="loader.gif" alt="Loading..." />
-        </div>
-        <div id="response" style="display:none;" aria-live="polite"></div>
-    </div>
-  <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Show loading indicator
-            document.getElementById('loader').style.display = 'block';
-
-            // Validate inputs
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            const privacyPolicy = document.getElementById('privacyPolicy').checked;
-
-            // Validate email pattern
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                showResponse('Please enter a valid email address.', 'error');
-                return;
-            }
-
-            if (!privacyPolicy) {
-                showResponse('You must agree to the Privacy Policy before submitting.', 'error');
-                return;
-            }
-
-            if (!name || !email || !message) {
-                showResponse('Please fill in all required fields.', 'error');
-                return;
-            }
-
-            // Check if the user is online
-            if (!navigator.onLine) {
-                showResponse('It seems there’s an issue with your internet connection. Please check your connection and try again.', 'error');
-                return;
-            }
-
-            // Submit the form via Fetch API
-            const formData = new FormData(this);
-
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    Accept: 'application/json'
-                }
-            })
-            .then(response => {
-                document.getElementById('loader').style.display = 'none'; // Hide loader
-                if (response.ok) {
-                    showResponse('Thank you! Your message has been successfully sent.', 'success');
-                    this.reset(); // Reset the form after successful submission
-                } else {
-                    showResponse('Oops! There was an issue with your submission. Please try again later.', 'error');
-                }
-            })
-            .catch(error => {
-                document.getElementById('loader').style.display = 'none'; // Hide loader
-                if (!navigator.onLine) {
-                    showResponse('It seems there’s an issue with your internet connection. Please check your connection and try again.', 'error');
-                } else {
-                    showResponse('There was a problem with your submission. Please try again later.', 'error');
-                }
-            });
-        });
-
-        // Function to show messages dynamically
-        function showResponse(message, type) {
-            const responseDiv = document.getElementById('response');
-            responseDiv.style.display = 'block';
-            responseDiv.textContent = message;
-            responseDiv.className = type === 'success' ? 'success-message' : 'error-message';
-
-            // Optionally hide the message after a few seconds for a better user experience
-            setTimeout(() => {
-                responseDiv.style.display = 'none';
-            }, 5000);
-        }
-    </script>
-
-<style>
-/* General Body Styling */
-body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #121212;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-/* Contact Section */
-.contact {
-  max-width: 800px;
-  margin: 20px;
-  padding: 30px;
-  background: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.contact-container h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #00bcd4;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-label {
-  font-weight: 500;
-  margin-bottom: 5px;
-  text-align: left;
-  color: #bbb;
-  letter-spacing: 0.5px;
-}
-
-input, textarea {
-  padding: 15px;
-  border: 1px solid #444;
-  border-radius: 8px;
-  margin-top: 5px;
-  font-size: 1rem;
-  color: #fff;
-  background: #222;
-  width: 100%;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  outline: none;
-}
-
-input:focus, textarea:focus {
-  border-color: #00bcd4;
-  box-shadow: 0 0 8px rgba(0, 188, 212, 0.7);
-  background: #333;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  color: #bbb;
-}
-
-.checkbox-group input {
-  width: auto;
-  transform: scale(1.2);
-}
-
-button {
-  background-color: #00bcd4;
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  width: 100%;
-  margin-top: 30px;
-  box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
-}
-
-button:hover {
-  background-color: #0097a7;
-  transform: translateY(-3px);
-}
-
-button:active {
-  background-color: #00838f;
-  transform: translateY(2px);
-}
-
-/* Loader and Response */
-#loader {
-  display: none;
-  text-align: center;
-}
-
-#response {
-  display: none;
-  text-align: center;
-  margin-top: 20px;
-  font-size: 1.1rem;
-  color: #00bcd4;
-  font-weight: 500;
-}
-
-/* AI-style glowing effect on the form labels */
-.form-group label {
-  position: relative;
-}
-
-.form-group label::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: #00bcd4;
-  bottom: 0;
-  left: 0;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-input:focus ~ label::after, textarea:focus ~ label::after {
-  transform: scaleX(1);
-}
-@media (max-width: 600px) {
-  #contact-form, .contact-container {
-    padding: 15px;
-    width: 90%;
-  }
-
-  input, textarea {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
-
-  button {
-    padding: 10px 12px;
-    font-size: 0.9rem;
-  }
-
-  .form-group label {
-    font-size: 0.85rem;
-  }
-
-  textarea {
-    height: auto;
-    resize: none; /* Prevents resizing on small screens */
-  }
-
-  h1, .contact-title {
-    font-size: 1.3rem;
-  }
-  }
-</style>
 </body>
-</html>
+  </html>
+            
