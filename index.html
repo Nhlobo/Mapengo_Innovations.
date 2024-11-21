@@ -542,58 +542,35 @@ button:active {
 input:focus ~ label::after, textarea:focus ~ label::after {
   transform: scaleX(1);
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   #contact-form, .contact-container {
-    max-width: 90%; /* Adjust the width to fit the screen */
-    padding: 20px; /* Reduce padding for smaller screens */
-  }
-
-  .contact-title {
-    font-size: 1.2rem; /* Smaller font size for title */
+    padding: 15px;
+    width: 90%;
   }
 
   input, textarea {
-    font-size: 0.9rem; /* Adjust font size for readability */
-    padding: 8px; /* Reduce padding for smaller input fields */
+    padding: 8px;
+    font-size: 0.9rem;
   }
 
   button {
-    font-size: 0.9rem; /* Adjust button text size */
-    padding: 8px 12px; /* Adjust button padding */
+    padding: 10px 12px;
+    font-size: 0.9rem;
   }
 
-  .form-group {
-    margin-bottom: 15px; /* Add spacing between form groups */
-  }
-}
-
-@media (max-width: 480px) {
-  #contact-form, .contact-container {
-    max-width: 95%; /* Further reduce width for very small screens */
-    padding: 15px; /* Adjust padding */
+  .form-group label {
+    font-size: 0.85rem;
   }
 
-  .contact-title {
-    font-size: 1rem; /* Further reduce title size */
+  textarea {
+    height: auto;
+    resize: none; /* Prevents resizing on small screens */
   }
 
-  input, textarea {
-    font-size: 0.85rem; /* Smaller text for inputs and textareas */
+  h1, .contact-title {
+    font-size: 1.3rem;
   }
-
-  button {
-    font-size: 0.8rem; /* Adjust button text size */
-    padding: 6px 10px; /* Compact button padding */
   }
-
-  .form-group {
-    margin-bottom: 10px; /* Reduce spacing for tight layouts */
-  }
-
-  label {
-    font-size: 0.85rem; /* Smaller label text */
-  }
-}
 </style>
 </body>
 </html>
