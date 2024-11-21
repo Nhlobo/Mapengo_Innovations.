@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compact FAQ</title>
+  <title>FAQ Section</title>
   <style>
     /* General Styles */
     body {
@@ -29,26 +29,27 @@
     }
 
     .section-title {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.6rem;
+      font-weight: 600;
       margin-bottom: 20px;
       color: #333;
+      text-transform: uppercase;
     }
 
     /* FAQ Item Styles */
     .faq-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .faq-item {
       background: #f9f9f9;
       border-radius: 8px;
-      padding: 12px;
+      padding: 16px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       border: 1px solid #ddd;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
       opacity: 0;
       transform: translateY(10px);
@@ -73,10 +74,11 @@
 
     .faq-item p {
       margin: 10px 0;
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #555;
       display: none;
       text-align: left;
+      padding-left: 15px;
     }
 
     .faq-item.active p {
@@ -89,12 +91,16 @@
       display: block;
       width: 20px;
       height: 20px;
-      background-color: transparent;
       border: solid #333;
       border-width: 0 3px 3px 0;
       transform: rotate(45deg);
       margin: 8px auto;
+      transition: transform 0.3s ease;
       cursor: pointer;
+    }
+
+    .arrow.rotate {
+      transform: rotate(-135deg);
     }
 
     /* Animation for FAQ items */
@@ -110,7 +116,7 @@
       }
 
       .section-title {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
 
       .faq-item h3 {
@@ -118,7 +124,7 @@
       }
 
       .faq-item p {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -154,9 +160,12 @@
   <script>
     // FAQ Toggle Logic
     document.querySelectorAll('.faq-item').forEach((faq) => {
+      const arrow = faq.querySelector('.arrow');
       faq.addEventListener('click', () => {
-        // Toggle current item
+        // Toggle the answer visibility
         faq.classList.toggle('active');
+        // Toggle the arrow rotation
+        arrow.classList.toggle('rotate');
       });
     });
   </script>
