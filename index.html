@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Section with Popup</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -38,7 +37,6 @@
       text-transform: uppercase;
     }
 
-    /* FAQ Item Styles */
     .faq-container {
       display: flex;
       flex-direction: column;
@@ -88,7 +86,6 @@
       color: #333;
     }
 
-    /* New Small, Minimalistic Arrow */
     .arrow {
       margin-top: 8px;
       display: block;
@@ -106,13 +103,11 @@
       transform: rotate(-135deg);
     }
 
-    /* Animation for FAQ items */
     @keyframes fadeInItem {
       0% { opacity: 0; transform: translateY(10px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Responsive Design */
     @media (max-width: 600px) {
       .faq-section {
         padding: 15px;
@@ -131,10 +126,10 @@
       }
     }
 
-    /* AI Inspired Popup Button */
     .popup-btn {
       position: fixed;
-      right: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 20px;
       background: #00bcd4;
       color: #fff;
@@ -145,6 +140,7 @@
       cursor: pointer;
       transition: background 0.3s, transform 0.3s;
       z-index: 100;
+      display: none;
     }
 
     .popup-btn:hover {
@@ -157,7 +153,6 @@
       transform: scale(1);
     }
 
-    /* Contact Form Section */
     #contact-form {
       margin-top: 50px;
       padding: 30px;
@@ -200,7 +195,6 @@
   </style>
 </head>
 <body>
-  <!-- FAQ Section -->
   <section id="faq" class="faq-section">
     <h2 class="section-title">Frequently Asked Questions</h2>
     <div class="faq-container">
@@ -227,7 +221,6 @@
     </div>
   </section>
 
-  <!-- Contact Form Section -->
   <section id="contact-form">
     <h2 class="contact-title">Contact Us</h2>
     <form>
@@ -238,30 +231,38 @@
     </form>
   </section>
 
-  <!-- Popup Button -->
   <div class="popup-btn" id="popup-btn">
     Ask too!
   </div>
 
   <script>
-    // FAQ Toggle Logic
     document.querySelectorAll('.faq-item').forEach((faq) => {
       const arrow = faq.querySelector('.arrow');
       faq.addEventListener('click', () => {
-        // Toggle the answer visibility
         faq.classList.toggle('active');
-        // Toggle the arrow rotation
         arrow.classList.toggle('rotate');
       });
     });
 
-    // Scroll to Contact Form
     document.getElementById('popup-btn').addEventListener('click', () => {
       document.getElementById('contact-form').scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
+      document.getElementById('popup-btn').style.display = 'none';
+    });
+
+    window.addEventListener('scroll', () => {
+      const faqSection = document.getElementById('faq');
+      const faqPosition = faqSection.getBoundingClientRect();
+      const popupBtn = document.getElementById('popup-btn');
+
+      if (faqPosition.top <= 0 && faqPosition.bottom >= 0) {
+        popupBtn.style.display = 'block';
+      } else {
+        popupBtn.style.display = 'none';
+      }
     });
   </script>
 </body>
-  </html>
+</html>
