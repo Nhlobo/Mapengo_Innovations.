@@ -1,216 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Investment Calculator</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Africa Weather Forecast</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #141414;
-      color: #fff;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://www.example.com/clouds.jpg') no-repeat center center fixed; /* Replace with actual cloud image URL */
+            background-size: cover;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    h1, h2 {
-      font-family: 'Arial', sans-serif;
-      color: #fff;
-      margin-bottom: 30px;
-    }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      text-align: center;
-    }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
 
-    /* Container */
-    .container {
-      max-width: 800px;
-      margin: 50px auto;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
+        .input-group {
+            margin-bottom: 15px;
+        }
 
-    /* Input Fields */
-    .input-group {
-      margin-bottom: 15px;
-    }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #00f1ff;
+            background-color: #222;
+            color: #fff;
+            border-radius: 5px;
+        }
 
-    .input-group label {
-      display: block;
-      color: #ccc;
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
+        button {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #00f1ff;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
 
-    .input-group input, .input-group select {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #00f1ff;
-      background-color: #222;
-      color: #fff;
-      border-radius: 5px;
-    }
+        button:hover {
+            background-color: #00b3d9;
+        }
 
-    button {
-      width: 100%;
-      padding: 12px 20px;
-      background-color: #00f1ff;
-      border-radius: 10px;
-      border: none;
-      color: #fff;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
+        #weather-info, #forecast-info {
+            margin-top: 30px;
+            color: #fff;
+        }
 
-    button:hover {
-      background-color: #00b3d9;
-    }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #fff;
+        }
 
-    /* Result Section */
-    #result {
-      margin-top: 20px;
-      font-size: 1.5rem;
-      color: #00f1ff;
-      text-align: center;
-    }
+        footer p {
+            font-size: 1rem;
+        }
 
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      color: #fff;
-    }
+        /* Ads Styling */
+        .ads-container {
+            text-align: center;
+            margin-top: 30px;
+        }
 
-    footer p {
-      font-size: 1rem;
-    }
+        /* Chart Styling */
+        .chart-container {
+            margin-top: 20px;
+        }
 
-    /* Ads Styling */
-    .ads-container {
-      text-align: center;
-      margin-top: 30px;
-    }
-  </style>
+        canvas {
+            width: 100% !important;
+            height: 400px !important;
+        }
+
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Investment Calculator</h1>
+    <div class="container">
+        <h1>South Africa Weather Forecast</h1>
+        <div class="input-group">
+            <input type="text" id="location-input" placeholder="Enter South African city">
+        </div>
+        <button id="search-button">Search</button>
 
-    <!-- Investment Form -->
-    <div class="input-group">
-      <label for="principal">Initial Investment Amount (ZAR):</label>
-      <input type="number" id="principal" placeholder="Enter initial amount">
-    </div>
-    
-    <div class="input-group">
-      <label for="rate">Annual Interest Rate (%):</label>
-      <input type="number" id="rate" placeholder="Enter annual interest rate">
-    </div>
-    
-    <div class="input-group">
-      <label for="period">Investment Period (years):</label>
-      <input type="number" id="period" placeholder="Enter investment period in years">
+        <div id="weather-info">
+            <!-- Current weather data will be displayed here -->
+        </div>
+        <div id="forecast-info">
+            <!-- 5-day forecast data will be displayed here -->
+        </div>
     </div>
 
-    <div class="input-group">
-      <label for="type">Interest Type:</label>
-      <select id="type">
-        <option value="simple">Simple Interest</option>
-        <option value="compound">Compound Interest</option>
-      </select>
+    <footer>
+        <p>&copy; 2024 Mapengo Innovations. All rights reserved</p>
+    </footer>
+
+    <!-- Ads Section -->
+    <div class="ads-container">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2364061825619418"
+            data-ad-slot="4168297600"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
-    <div class="input-group">
-      <label for="frequency">Interest Compounding Frequency:</label>
-      <select id="frequency">
-        <option value="monthly">Monthly</option>
-        <option value="quarterly">Quarterly</option>
-        <option value="yearly">Yearly</option>
-      </select>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2364061825619418"
+            crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2364061825619418"
+            crossorigin="anonymous"></script>
 
-    <!-- Calculate Button -->
-    <button onclick="calculate()">Calculate</button>
-
-    <!-- Result Output -->
-    <div id="result"></div>
-
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2024 Mapengo Innovations. All rights reserved</p>
-  </footer>
-
-  <!-- Ads Section -->
-  <div class="ads-container">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-2364061825619418"
-         data-ad-slot="3603119577"
-         data-ad-format="auto"></ins>
     <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
+        document.getElementById('search-button').addEventListener('click', getWeather);
+
+        async function getWeather() {
+            const location = document.getElementById('location-input').value;
+            const apiKey = '27590cdf19ad5bc53ef27ac7ec78ae64'; // Your OpenWeatherMap API key
+            const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location},ZA&appid=${apiKey}&units=metric`;
+            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location},ZA&appid=${apiKey}&units=metric`;
+
+            try {
+                const [currentResponse, forecastResponse] = await Promise.all([
+                    fetch(currentWeatherUrl),
+                    fetch(forecastUrl)
+                ]);
+                const currentData = await currentResponse.json();
+                const forecastData = await forecastResponse.json();
+
+                displayCurrentWeather(currentData);
+                displayForecast(forecastData);
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        function displayCurrentWeather(data) {
+            const weatherInfo = document.getElementById('weather-info');
+            const temp = data.main.temp;
+            const weatherCondition = temp <= 15 ? 'Cold' : temp <= 25 ? 'Warm' : 'Hot';
+
+            weatherInfo.innerHTML = `
+                <h2>${data.name}</h2>
+                <p>Temperature: ${temp} °C</p>
+                <p>Weather: ${data.weather[0].description}</p>
+                <p>Condition: ${weatherCondition}</p>
+            `;
+        }
+
+        function displayForecast(data) {
+            const forecastInfo = document.getElementById('forecast-info');
+            forecastInfo.innerHTML = `
+                <h3>5-Day Forecast</h3>
+                <div class="chart-container">
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            `;
+
+            const labels = data.list.filter((item, index) => index % 8 === 0).map(item => item.dt_txt.split(' ')[0]);
+            const temps = data.list.filter((item, index) => index % 8 === 0).map(item => item.main.temp);
+
+            const ctx = document.getElementById('forecastChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Temperature (°C)',
+                        data: temps,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
     </script>
-  </div>
-
-  <script>
-    function calculate() {
-      var principal = parseFloat(document.getElementById('principal').value);
-      var rate = parseFloat(document.getElementById('rate').value);
-      var period = parseFloat(document.getElementById('period').value);
-      var type = document.getElementById('type').value;
-      var frequency = document.getElementById('frequency').value;
-      
-      // Validate inputs
-      if (isNaN(principal) || isNaN(rate) || isNaN(period)) {
-        document.getElementById('result').innerHTML = "Please enter valid numbers.";
-        return;
-      }
-
-      if (principal <= 0 || rate <= 0 || period <= 0) {
-        document.getElementById('result').innerHTML = "Please enter positive numbers for principal, rate, and period.";
-        return;
-      }
-      
-      // Set compounding frequency
-      var n = 1;
-      if (frequency === 'monthly') {
-        n = 12;
-      } else if (frequency === 'quarterly') {
-        n = 4;
-      }
-
-      // Convert annual rate to decimal
-      var effectiveRate = rate / 100;
-      var totalAmount;
-
-      // Calculate total amount based on interest type
-      if (type === 'simple') {
-        totalAmount = principal * (1 + effectiveRate * period);
-      } else {
-        totalAmount = principal * Math.pow(1 + effectiveRate / n, n * period);
-      }
-      
-      totalAmount = totalAmount.toFixed(2);  // Round to 2 decimal places
-      document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately ZAR " + totalAmount + ".";
-    }
-  </script>
 
 </body>
 </html>
