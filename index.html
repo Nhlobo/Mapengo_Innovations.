@@ -287,10 +287,8 @@
     </div>
     <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
     <button onclick="sendMessage()">Send</button>
+    <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
   </div>
-
-  <!-- Close Chat Button -->
-  <button class="close-chat-button" id="closeChatButton" onclick="closeChat()">Close Chat</button>
 
   <script>
     const chatButton = document.querySelector('.chat-button');
@@ -299,14 +297,19 @@
     let typingMessageIndex = 0;
     const typingSpeed = 100;
     let lastActivityTime = Date.now();
+    let inactivityTimer;
 
     function toggleChatPopup() {
       chatPopup.classList.toggle('active');
       closeChatButton.classList.add('active');
-      lastActivityTime = Date.now();
-      startInactivityTimer(); // Restart inactivity timer when chat is opened
+      if (chatPopup.classList.contains('active')) {
+        lastActivityTime = Date.now();
+        startInactivityTimer(); // Restart inactivity timer when chat is opened
+        clearChat(); // Clear any previous messages or input
+      }
     }
 
+    // Close chat when the close button is clicked
     function closeChat() {
       chatPopup.classList.remove('active');
       closeChatButton.classList.remove('active');
@@ -314,6 +317,19 @@
       clearTimeout(inactivityTimer); // Clear any running inactivity timer
     }
 
+    // Clear the chat history and reset input when reopening chat
+    function clearChat() {
+      chatPopup.innerHTML = `
+        <div class="message bot-message">
+          <div class="avatar"></div>
+          <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
+        </div>
+        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+        <button onclick="sendMessage()">Send</button>
+      `;
+    }
+
+    // Send a message
     function sendMessage() {
       let message = document.getElementById('userMessage').value;
 
@@ -357,7 +373,6 @@
     }
 
     // Inactivity timer to close the chat after 1 minute of inactivity
-    let inactivityTimer;
     function startInactivityTimer() {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
@@ -378,6 +393,14 @@
         faq.classList.toggle('active');
         arrow.classList.toggle('rotate');
       });
+    });
+
+    // Close the chat if the user clicks outside of the popup
+    document.addEventListener('click', (event) => {
+      const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
+      if (!isClickInside) {
+        closeChat(); // Close the chat if the click is outside the popup
+      }
     });
   </script>
 </body>
