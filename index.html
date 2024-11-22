@@ -35,12 +35,15 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
             overflow: hidden; /* Hide overflow content */
+            position: relative;
         }
 
         /* Testimonials Container */
         .testimonials-container {
             display: flex;
+            position: absolute;
             animation: scrollTestimonials 20s linear infinite; /* Continuous scroll animation */
+            gap: 80px; /* Larger spacing between cards */
         }
 
         /* Keyframes for smooth continuous scroll */
@@ -49,7 +52,7 @@
                 transform: translateX(0); /* Start at the beginning */
             }
             100% {
-                transform: translateX(-100%); /* Move to the left */
+                transform: translateX(-100%); /* Move to the left (all cards move out) */
             }
         }
 
@@ -61,7 +64,6 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
             text-align: center;
             max-width: 230px;
-            margin-right: 50px; /* Space between cards */
             flex-shrink: 0; /* Prevent shrinking */
             transition: all 0.3s ease;
         }
@@ -142,6 +144,26 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // JavaScript for detecting if the section is visible
+        const testimonialsSection = document.getElementById('testimonials');
+        const testimonialsContainer = document.querySelector('.testimonials-container');
+
+        function checkVisibility() {
+            const rect = testimonialsSection.getBoundingClientRect();
+            // If the section is within the viewport, resume animation; otherwise, pause
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                testimonialsContainer.style.animationPlayState = 'running';  // Resume animation
+            } else {
+                testimonialsContainer.style.animationPlayState = 'paused';  // Pause animation
+            }
+        }
+
+        // Check visibility when the page is loaded and on scroll
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+    </script>
 
 </body>
 </html>
