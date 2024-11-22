@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Investment Calculator</title>
+  <title>AI-Enhanced Apps</title>
   <style>
     /* Global Styles */
     * {
@@ -16,13 +16,12 @@
       font-family: 'Arial', sans-serif;
       background-color: #141414;
       color: #fff;
+      overflow-x: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow-x: hidden;
       position: relative;
-      padding: 20px;
     }
 
     h2, h3, p {
@@ -54,12 +53,36 @@
       }
     }
 
+    /* Phone Frame */
+    .phone-frame {
+      width: 375px;
+      height: 700px;
+      background-color: #fff;
+      border-radius: 36px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+      background-color: #141414;
+    }
+
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      width: 60px;
+      height: 5px;
+      background-color: #ddd;
+      border-radius: 5px;
+      transform: translateX(-50%);
+    }
+
     /* Investment Calculator Styles */
     .container {
-      width: 100%;
-      max-width: 350px;  /* Reduced container width */
+      max-width: 100%;
       margin: 0 auto;
-      padding: 15px;
+      padding: 20px;
       background-color: rgba(0, 0, 0, 0.8);
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
@@ -67,27 +90,21 @@
       position: relative;
     }
 
-    h1 {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
     .input-group {
-      margin-bottom: 10px;  /* Reduced margin */
+      margin-bottom: 15px;
     }
 
     .input-group label {
       display: block;
       color: #ccc;
-      font-size: 0.9rem;  /* Reduced label font size */
+      font-size: 1.2rem;
       margin-bottom: 5px;
     }
 
     .input-group input, .input-group select {
       width: 100%;
-      padding: 8px;  /* Reduced padding */
-      font-size: 0.9rem;  /* Reduced input font size */
+      padding: 10px;
+      font-size: 1rem;
       border: 1px solid #00f1ff;
       background-color: #222;
       color: #fff;
@@ -96,14 +113,14 @@
 
     button {
       width: 100%;
-      padding: 10px;  /* Reduced padding */
+      padding: 12px 20px;
       background-color: #00f1ff;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       color: #fff;
-      font-size: 1rem;  /* Reduced font size */
+      font-size: 1.2rem;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 20px;
       transition: background-color 0.3s ease;
     }
 
@@ -112,20 +129,20 @@
     }
 
     #result {
-      margin-top: 15px;  /* Reduced margin */
-      font-size: 1.2rem;  /* Reduced result font size */
+      margin-top: 20px;
+      font-size: 1.5rem;
       color: #00f1ff;
       text-align: center;
     }
 
     footer {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 50px;
       color: #fff;
     }
 
     footer p {
-      font-size: 0.9rem;  /* Reduced footer font size */
+      font-size: 1rem;
     }
 
     /* Apps Section */
@@ -134,70 +151,21 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 20px;
+      gap: 30px;
     }
 
     .section-header h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
+      font-size: 3rem;
+      margin-bottom: 20px;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     .section-header p {
-      font-size: 1rem;
-      max-width: 500px;
-      margin: 0 auto 30px;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 40px;
       color: #ccc;
-    }
-
-    /* Phone structure */
-    .phone-container {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 30px;
-      border: 10px solid #00f1ff;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.9);
-      position: relative;
-    }
-
-    .phone-header {
-      width: 40px;
-      height: 5px;
-      background-color: #fff;
-      margin: 10px auto;
-      border-radius: 10px;
-    }
-
-    /* Responsive Design for smaller screens */
-    @media (max-width: 400px) {
-      .container {
-        max-width: 90%;  /* Ensure it fits smaller screens */
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 1.3rem;  /* Smaller header */
-      }
-
-      button {
-        font-size: 0.9rem;
-        padding: 8px;
-      }
-
-      .input-group input, .input-group select {
-        font-size: 0.85rem;
-        padding: 6px;
-      }
-
-      #result {
-        font-size: 1rem;
-      }
-
-      footer p {
-        font-size: 0.8rem;
-      }
     }
   </style>
 </head>
@@ -211,13 +179,25 @@
       <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <h3>Investment Calculator</h3>
+    <!-- CloudySky App Placeholder -->
+    <div class="cloud-app">
+      <div class="container">
+        <div class="cloud front">
+          <span class="left-front"></span>
+          <span class="right-front"></span>
+        </div>
+        <span class="sun sunshine"></span>
+        <span class="sun"></span>
+        <div class="cloud back">
+          <span class="left-back"></span>
+          <span class="right-back"></span>
+        </div>
+      </div>
+    </div>
+    <h3>CloudySky</h3>
 
-    <!-- Phone Frame Container -->
-    <div class="phone-container">
-      <div class="phone-header"></div>
-
-      <!-- Investment Calculator -->
+    <!-- Investment Calculator within Phone Frame -->
+    <div class="phone-frame">
       <div class="container">
         <h1>Investment Calculator</h1>
 
@@ -305,6 +285,5 @@
       document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately ZAR " + totalAmount + ".";
     }
   </script>
-
 </body>
 </html>
