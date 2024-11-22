@@ -198,6 +198,25 @@
       box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
     }
 
+    /* Close Chat Button */
+    .close-chat-button {
+      position: absolute;
+      top: -50px;
+      right: 10px;
+      background-color: #1de9b6;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 12px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .close-chat-button.active {
+      display: inline-block;
+    }
+
     @media (max-width: 600px) {
       .chat-popup {
         width: 280px;
@@ -209,7 +228,6 @@
         font-size: 32px;
       }
     }
-
   </style>
 </head>
 <body>
@@ -234,6 +252,9 @@
         <p>Yes, we offer maintenance and support packages to ensure your website or app continues to perform optimally.</p>
       </div>
     </div>
+
+    <!-- Close Chat Button (Initially hidden) -->
+    <button class="close-chat-button" id="closeChatButton" onclick="closeChat()">Hi, I'm Tomie! Let me help you send your question without filling the contact form</button>
   </section>
 
   <!-- Chat Button -->
@@ -250,47 +271,45 @@
   </div>
 
   <script>
-    // FAQ Toggle Logic
-    document.querySelectorAll('.faq-item').forEach((faq) => {
-      faq.addEventListener('click', () => {
-        faq.classList.toggle('active');
-      });
-    });
+    let chatPopup = document.getElementById('chatPopup');
+    let closeChatButton = document.getElementById('closeChatButton');
 
-    // Toggle chat popup visibility
     function toggleChatPopup() {
-      const chatPopup = document.getElementById('chatPopup');
       chatPopup.classList.toggle('active');
+      closeChatButton.classList.add('active');  // Show the close button when the chat is active
     }
 
-    // Function to send message
+    function closeChat() {
+      chatPopup.classList.remove('active');
+      closeChatButton.classList.remove('active');  // Hide the close button when the chat is closed
+    }
+
     function sendMessage() {
-      const userMessage = document.getElementById('userMessage').value;
-      if (userMessage.trim()) {
-        // Create and display the user's message
+      let message = document.getElementById('userMessage').value;
+
+      if (message.trim()) {
+        // Display user message
         const userMessageElement = document.createElement('div');
         userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${userMessage}</div>`;
-
-        const chatPopup = document.getElementById('chatPopup');
+        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
         chatPopup.appendChild(userMessageElement);
 
-        // Clear the input field after sending
+        // Clear input field
         document.getElementById('userMessage').value = '';
 
-        // Scroll to the bottom
+        // Scroll to the bottom of the chat
         chatPopup.scrollTop = chatPopup.scrollHeight;
 
-        // Simulate bot reply after a small delay
+        // Bot reply
         setTimeout(() => {
           const botMessage = document.createElement('div');
           botMessage.classList.add('message', 'bot-message');
-          botMessage.innerHTML = `<div class="avatar"></div><div class="message-text">Thanks for reaching out! We'll get back to you shortly.</div>`;
+          botMessage.innerHTML = `<div class="avatar"></div><div class="message-text">Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.</div>`;
           chatPopup.appendChild(botMessage);
 
-          // Scroll to the bottom
+          // Scroll to the bottom of the chat
           chatPopup.scrollTop = chatPopup.scrollHeight;
-        }, 1500); // Bot responds after 1.5 seconds
+        }, 1500);
       }
     }
   </script>
