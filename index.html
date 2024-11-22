@@ -265,7 +265,7 @@
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
   <!-- Chat Popup -->
-  <div class="chat-popup" id="chatPopup">
+  <div id="chatPopup" class="chat-popup">
     <div class="message bot-message">
       <div class="avatar"></div>
       <div class="message-text">Hi, I'm Tomie! Let me help you send your question without filling the contact form.</div>
@@ -278,9 +278,9 @@
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
-
+    
     function toggleChatPopup() {
-      // Clear chat history whenever popup is opened
+      // Clear chat history when popup opens
       chatPopup.innerHTML = `
         <div class="message bot-message">
           <div class="avatar"></div>
@@ -289,14 +289,13 @@
         <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
         <button onclick="sendMessage()">Send</button>
       `;
-
       chatPopup.classList.toggle('active');
-      closeChatButton.classList.add('active');  // Show the close button when the chat is active
+      closeChatButton.classList.add('active'); // Show the close button when chat is active
     }
 
     function closeChat() {
       chatPopup.classList.remove('active');
-      closeChatButton.classList.remove('active');  // Hide the close button when the chat is closed
+      closeChatButton.classList.remove('active'); // Hide the close button when chat is closed
     }
 
     function sendMessage() {
@@ -325,13 +324,22 @@
           // Scroll to the bottom of the chat
           chatPopup.scrollTop = chatPopup.scrollHeight;
           
-          // Close chat after 0.3 seconds
+          // Close chat after 1 second (slower than 0.3s)
           setTimeout(() => {
             closeChat();
-          }, 300);
+          }, 1000); // 1 second delay
         }, 1500);
       }
     }
+
+    // FAQ Toggle Logic (Arrows and answers)
+    document.querySelectorAll('.faq-item').forEach((faq) => {
+      const arrow = faq.querySelector('.arrow');
+      faq.addEventListener('click', () => {
+        faq.classList.toggle('active');
+        arrow.classList.toggle('rotate');
+      });
+    });
   </script>
 </body>
 </html>
