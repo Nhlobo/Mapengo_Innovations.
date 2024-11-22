@@ -103,7 +103,7 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background-color: #3498db;
+      background-color: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 50%;
@@ -124,13 +124,13 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Light Sky Blue Chat Popup */
+    /* Chat Popup (White background, FAQ color for buttons) */
     .chat-popup {
       position: fixed;
       bottom: 100px;
       right: 30px;
       width: 350px;
-      background: #87ceeb; /* Light Sky Blue */
+      background: white; /* Clean White */
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -151,7 +151,7 @@
       gap: 12px;
     }
 
-    /* Message user style */
+    /* User message styles */
     .message.user-message {
       justify-content: flex-end;
     }
@@ -200,7 +200,7 @@
     }
 
     .chat-popup button {
-      background: #3498db;
+      background: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 25px;
@@ -221,7 +221,7 @@
       position: absolute;
       top: -50px;
       right: 10px;
-      background-color: #3498db;
+      background-color: #87ceeb;
       color: #fff;
       border: none;
       border-radius: 20px;
@@ -269,8 +269,8 @@
         <div class="arrow"></div>
       </div>
       <div class="faq-item">
-        <h3>Do you offer support after the project is completed?</h3>
-        <p>Yes, we offer maintenance and support packages to ensure your website or app continues to perform optimally.</p>
+        <h3>Do you offer ongoing support?</h3>
+        <p>Yes, we offer maintenance and support packages to ensure the continued success of your project post-launch.</p>
         <div class="arrow"></div>
       </div>
     </div>
@@ -296,6 +296,8 @@
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
+    let typingMessageIndex = 0;
+    const typingSpeed = 100;
 
     function toggleChatPopup() {
       chatPopup.classList.toggle('active');
@@ -324,21 +326,29 @@
         // Scroll to the bottom of the chat
         chatPopup.scrollTop = chatPopup.scrollHeight;
 
-        // Bot reply
-        setTimeout(() => {
-          const botMessage = document.createElement('div');
-          botMessage.classList.add('message', 'bot-message');
-          botMessage.innerHTML = `<div class="avatar"></div><div class="message-text">Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.</div>`;
-          chatPopup.appendChild(botMessage);
+        // Bot reply (typing simulation)
+        typingMessageIndex = 0;
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('message', 'bot-message');
+        botMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text"></div>`;
+        chatPopup.appendChild(botMessageElement);
+        chatPopup.scrollTop = chatPopup.scrollHeight;
 
-          // Scroll to the bottom of the chat
-          chatPopup.scrollTop = chatPopup.scrollHeight;
-
-          // Close chat after 5 seconds
-          setTimeout(() => {
-            closeChat();
-          }, 5000); // 5 second delay for smoother reading and closing
-        }, 1500);
+        // Simulate typing
+        function typeBotMessage() {
+          const botMessageTextElement = botMessageElement.querySelector('.message-text');
+          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
+          if (typingMessageIndex < text.length) {
+            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
+            typingMessageIndex++;
+            setTimeout(typeBotMessage, typingSpeed);
+          } else {
+            setTimeout(() => {
+              closeChat();
+            }, 5000); // 5 seconds after message appears
+          }
+        }
+        typeBotMessage();
       }
     }
 
