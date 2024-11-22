@@ -3,253 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Testimonials - Glassmorphism AI</title>
+    <title>AI-Driven Testimonials</title>
     <style>
-        /* General reset and body styling */
-        * {
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #f3f3f3;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: #ffffff;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            padding: 2rem;
-        }
-
-        /* Testimonials Section */
-        #testimonials {
-            width: 100%;
-            max-width: 1200px;
+        h2.section-title {
             text-align: center;
-            padding: 2rem;
-            background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        /* Title Styling */
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #111;
-            margin-bottom: 2rem;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: #00c7ff; /* AI inspired neon blue */
             text-transform: uppercase;
             letter-spacing: 2px;
-            animation: textGlow 1.5s infinite alternate;
+            font-weight: bold;
         }
 
-        /* Testimonials Container with Flexbox */
+        /* Testimonials Container */
         .testimonials-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            justify-content: center;
-            padding: 1rem;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 0 20px;
         }
 
-        /* Glassmorphism effect for cards */
+        /* Testimonial Cards */
         .card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            background-color: #2c2c2c;
             border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            overflow: hidden;
-            will-change: transform, box-shadow;
-            backdrop-filter: blur(20px);
-            color: white;
-            animation: fallDown 0.8s ease-out;
+            padding: 30px;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.3); /* Neon blue glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
         }
 
         .card:hover {
             transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
         }
 
-        /* Flip effect on hover */
-        .card:hover .testimonial-img {
-            transform: scale(1.1);
-        }
-
-        .card .testimonial-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        /* Title inside Cards */
-        .title {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: #f5f5f5;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Animations for Falling and Flipping */
-        @keyframes fallDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes textGlow {
-            0% {
-                color: #333;
-            }
-            50% {
-                color: #ff6f61;
-            }
-            100% {
-                color: #ff9800;
-            }
-        }
-
-        /* Rating System */
+        /* Testimonial Rating */
         .rating {
-            position: absolute;
-            top: 10px;
-            left: 10px;
             display: flex;
-            gap: 5px;
-            z-index: 10;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #ffd700; /* Gold color for stars */
         }
 
         .rating label {
-            font-size: 24px;
-            color: #ddd;
             cursor: pointer;
-            transition: color 0.3s ease;
         }
 
-        .rating label:hover {
-            color: #ff9800;
+        /* Testimonial Image */
+        .testimonial-img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 2px solid #00c7ff;
         }
 
-        .rating label:nth-child(-n+5) {
-            color: #ff9800;
+        /* Testimonial Text */
+        .title {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            font-style: italic;
         }
 
-        /* Text Fade In */
         h4 {
             font-size: 1rem;
-            color: #f5f5f5;
-            opacity: 0;
-            animation: fadeInText 1.5s ease-out forwards;
+            color: #b0b0b0;
+            font-weight: normal;
         }
 
-        /* Keyframe for Fade-in effect */
-        @keyframes fadeInText {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Styling */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .testimonial-img {
-                width: 50px;
-                height: 50px;
+            .testimonials-container {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- ================= TESTIMONIALS ================= -->
-<section id="testimonials">
-    <h2 class="section-title">What Our Clients Say</h2>
-    <div class="testimonials-container">
-        <!-- Testimonial 1 -->
-        <div class="card">
-            <div class="rating">
-                <label for="star1">&#9733;</label>
-                <label for="star2">&#9733;</label>
-                <label for="star3">&#9733;</label>
-                <label for="star4">&#9733;</label>
-                <label for="star5">&#9733;</label>
+    <!-- ================= TESTIMONIALS ================= -->
+    <section id="testimonials">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonials-container">
+            <!-- Testimonial 1 -->
+            <div class="card">
+                <div class="rating">
+                    <label for="star1">&#9733;</label>
+                    <label for="star2">&#9733;</label>
+                    <label for="star3">&#9733;</label>
+                    <label for="star4">&#9733;</label>
+                    <label for="star5">&#9733;</label>
+                </div>
+                <img src="john-doe.jpg" alt="John Doe" class="testimonial-img">
+                <p class="title">"Mapengo Innovations delivered a top-notch app for our business. Their professionalism and attention to detail were exceptional!"</p>
+                <h4>- Tinyiko, CEO of Mzansi Taste Kitchen</h4>
             </div>
-            <img src="john-doe.jpg" alt="John Doe" class="testimonial-img">
-            <p class="title">"Mapengo Innovations delivered a top-notch app for our business. Their professionalism and attention to detail were exceptional!"</p>
-            <h4>- Tinyiko, CEO of Mzansi Taste Kitchen</h4>
-        </div>
 
-        <!-- Testimonial 2 -->
-        <div class="card">
-            <div class="rating">
-                <label for="star1">&#9733;</label>
-                <label for="star2">&#9733;</label>
-                <label for="star3">&#9733;</label>
-                <label for="star4">&#9733;</label>
-                <label for="star5">&#9734;</label>
+            <!-- Testimonial 2 -->
+            <div class="card">
+                <div class="rating">
+                    <label for="star1">&#9733;</label>
+                    <label for="star2">&#9733;</label>
+                    <label for="star3">&#9733;</label>
+                    <label for="star4">&#9733;</label>
+                    <label for="star5">&#9734;</label>
+                </div>
+                <img src="jane-smith.jpg" alt="Jane Smith" class="testimonial-img">
+                <p class="title">"The website they developed for us is exactly what we needed. Affordable and high-quality service!"</p>
+                <h4>- Mvelo, Owner of Mvelo Livestock Co.</h4>
             </div>
-            <img src="jane-smith.jpg" alt="Jane Smith" class="testimonial-img">
-            <p class="title">"The website they developed for us is exactly what we needed. Affordable and high-quality service!"</p>
-            <h4>- Mvelo, Owner of Mvelo Livestock Co.</h4>
-        </div>
 
-        <!-- Testimonial 3 -->
-        <div class="card">
-            <div class="rating">
-                <label for="star1">&#9733;</label>
-                <label for="star2">&#9733;</label>
-                <label for="star3">&#9733;</label>
-                <label for="star4">&#9734;</label>
-                <label for="star5">&#9734;</label>
+            <!-- Testimonial 3 -->
+            <div class="card">
+                <div class="rating">
+                    <label for="star1">&#9733;</label>
+                    <label for="star2">&#9733;</label>
+                    <label for="star3">&#9733;</label>
+                    <label for="star4">&#9734;</label>
+                    <label for="star5">&#9734;</label>
+                </div>
+                <img src="alice-brown.jpg" alt="Alice Brown" class="testimonial-img">
+                <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
+                <h4>- Alice Brown, Founder of InnovateTech</h4>
             </div>
-            <img src="alice-brown.jpg" alt="Alice Brown" class="testimonial-img">
-            <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
-            <h4>- Alice Brown, Founder of InnovateTech</h4>
-        </div>
 
-        <!-- Testimonial 4 -->
-        <div class="card">
-            <div class="rating">
-                <label for="star1">&#9733;</label>
-                <label for="star2">&#9733;</label>
-                <label for="star3">&#9734;</label>
-                <label for="star4">&#9734;</label>
-                <label for="star5">&#9734;</label>
+            <!-- Testimonial 4 -->
+            <div class="card">
+                <div class="rating">
+                    <label for="star1">&#9733;</label>
+                    <label for="star2">&#9733;</label>
+                    <label for="star3">&#9734;</label>
+                    <label for="star4">&#9734;</label>
+                    <label for="star5">&#9734;</label>
+                </div>
+                <img src="michael-johnson.jpg" alt="Michael Johnson" class="testimonial-img">
+                <p class="title">"Fast, reliable, and exceptional quality work. We couldn't be happier with the result!"</p>
+                <h4>- Michael Johnson, Director of WebWorks</h4>
             </div>
-            <img src="michael-johnson.jpg" alt="Michael Johnson" class="testimonial-img">
-            <p class="title">"Fast, reliable, and exceptional quality work. We couldn't be happier with the result!"</p>
-            <h4>- Michael Johnson, Director of WebWorks</h4>
-        </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 
 </body>
 </html>
