@@ -390,13 +390,6 @@
         arrow.classList.toggle('rotate');
       });
     });
-
-    // Close the chat if clicking outside
-    window.addEventListener('click', function(event) {
-      if (!chatPopup.contains(event.target) && !chatButton.contains(event.target)) {
-        closeChat();
-      }
-    });
   </script>
 </body>
 </html>
