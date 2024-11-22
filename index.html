@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>South Africa Weather Forecast</title>
+  <title>AI-Enhanced Apps</title>
   <style>
     /* Global Styles */
     * {
@@ -48,11 +48,16 @@
       }
     }
 
-    /* Weather Section */
-    .weather-section {
+    /* Apps Section */
+    .apps-section {
       padding: 80px 20px;
       text-align: center;
       position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
     }
 
     .section-header h2 {
@@ -69,47 +74,92 @@
       color: #ccc;
     }
 
-    /* Weather App */
+    /* CloudySky App Animation */
     .cloud-app {
       position: relative;
       width: 400px;
       height: 350px;
       padding: 15px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      animation: cloud-move 8s infinite ease-in-out;
     }
 
-    .cloud-app .container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
+    /* CloudySky Animation */
     .cloud-app .cloud {
       width: 250px;
     }
 
-    .cloud-app .front, .cloud-app .back {
+    .cloud-app .front {
       padding-top: 45px;
+      margin-left: 25px;
       display: inline;
       position: absolute;
       z-index: 11;
       animation: clouds 8s infinite ease-in-out;
     }
 
-    .cloud-app .weather-info {
-      font-size: 1.5rem;
-      color: #fff;
-      margin-top: 15px;
+    .cloud-app .back {
+      margin-top: -30px;
+      margin-left: 150px;
+      z-index: 12;
+      animation: clouds 12s infinite ease-in-out;
+    }
+
+    .cloud-app .right-front {
+      width: 45px;
+      height: 45px;
+      border-radius: 50% 50% 50% 0%;
+      background-color: #4c9beb;
+      display: inline-block;
+      margin-left: -25px;
+      z-index: 5;
+    }
+
+    .cloud-app .left-front {
+      width: 65px;
+      height: 65px;
+      border-radius: 50% 50% 0% 50%;
+      background-color: #4c9beb;
+      display: inline-block;
+      z-index: 5;
+    }
+
+    .cloud-app .right-back {
+      width: 50px;
+      height: 50px;
+      border-radius: 50% 50% 50% 0%;
+      background-color: #4c9beb;
+      display: inline-block;
+      margin-left: -20px;
+      z-index: 5;
+    }
+
+    .cloud-app .left-back {
+      width: 30px;
+      height: 30px;
+      border-radius: 50% 50% 0% 50%;
+      background-color: #4c9beb;
+      display: inline-block;
+      z-index: 5;
+    }
+
+    .cloud-app .sun {
+      width: 120px;
+      height: 120px;
+      background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
+      background: linear-gradient(to right, #fcbb04, #fffc00);
+      border-radius: 60px;
+      display: inline;
+      position: absolute;
+    }
+
+    .cloud-app .sunshine {
+      animation: sunshines 2s infinite;
     }
 
     @keyframes clouds {
@@ -126,157 +176,188 @@
       }
     }
 
-    /* Investment Calculator */
-    .investment-calculator {
-      margin-top: 40px;
+    @keyframes sunshines {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Investment Calculator Styles */
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .investment-calculator input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      border: 2px solid #00f1ff;
-      background-color: #222;
-      color: #fff;
+    .input-group {
+      margin-bottom: 15px;
     }
 
-    .investment-calculator button {
+    .input-group label {
+      display: block;
+      color: #ccc;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #00f1ff;
+      background-color: #222;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 20px;
       background-color: #00f1ff;
-      padding: 12px 30px;
       border-radius: 10px;
       border: none;
       color: #fff;
       font-size: 1.2rem;
       cursor: pointer;
       margin-top: 20px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
 
-    .investment-calculator button:hover {
+    button:hover {
       background-color: #00b3d9;
     }
 
-    .investment-calculator .result {
+    #result {
       margin-top: 20px;
       font-size: 1.5rem;
       color: #00f1ff;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="background-animation"></div>
 
-  <!-- Weather Section -->
-  <section class="weather-section">
+  <!-- Apps Section -->
+  <section class="apps-section">
     <div class="section-header">
-      <h2>South Africa Weather Forecast</h2>
-      <p>Explore current weather and a 5-day forecast for cities in South Africa.</p>
+      <h2>Our AI-powered Apps</h2>
+      <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <!-- Weather App -->
+    <!-- CloudySky App -->
     <div class="cloud-app">
       <div class="container">
         <div class="cloud front">
           <span class="left-front"></span>
           <span class="right-front"></span>
         </div>
-        <div class="weather-info" id="weather-info">Loading weather...</div>
+        <span class="sun sunshine"></span>
+        <span class="sun"></span>
         <div class="cloud back">
           <span class="left-back"></span>
           <span class="right-back"></span>
         </div>
       </div>
     </div>
-    <h3>CloudySky Weather</h3>
+    <h3>CloudySky</h3>
 
-    <!-- 5-Day Forecast -->
-    <div id="forecast-info">
-      <!-- Forecast data will be displayed here -->
+    <!-- Investment Calculator -->
+    <div class="container">
+      <h1>Investment Calculator</h1>
+
+      <!-- Investment Form -->
+      <div class="input-group">
+        <label for="principal">Initial Investment Amount (ZAR):</label>
+        <input type="number" id="principal" placeholder="Enter initial amount">
+      </div>
+
+      <div class="input-group">
+        <label for="rate">Annual Interest Rate (%):</label>
+        <input type="number" id="rate" placeholder="Enter annual interest rate">
+      </div>
+
+      <div class="input-group">
+        <label for="period">Investment Period (years):</label>
+        <input type="number" id="period" placeholder="Enter investment period in years">
+      </div>
+
+      <div class="input-group">
+        <label for="type">Interest Type:</label>
+        <select id="type">
+          <option value="simple">Simple Interest</option>
+          <option value="compound">Compound Interest</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="frequency">Interest Compounding Frequency:</label>
+        <select id="frequency">
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </div>
+
+      <!-- Calculate Button -->
+      <button onclick="calculate()">Calculate</button>
+
+      <!-- Result Output -->
+      <div id="result"></div>
     </div>
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <footer>
+    <p>© 2024 Mapengo Innovations. All rights reserved</p>
+  </footer>
+
   <script>
-    document.getElementById('search-button').addEventListener('click', getWeather);
+    function calculate() {
+      var principal = parseFloat(document.getElementById('principal').value);
+      var rate = parseFloat(document.getElementById('rate').value);
+      var period = parseFloat(document.getElementById('period').value);
+      var type = document.getElementById('type').value;
+      var frequency = document.getElementById('frequency').value;
 
-    async function getWeather() {
-      const location = document.getElementById('location-input').value;
-      const apiKey = '27590cdf19ad5bc53ef27ac7ec78ae64'; // OpenWeatherMap API key
-      const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location},ZA&appid=${apiKey}&units=metric`;
-      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location},ZA&appid=${apiKey}&units=metric`;
-
-      try {
-        const [currentResponse, forecastResponse] = await Promise.all([
-          fetch(currentWeatherUrl),
-          fetch(forecastUrl)
-        ]);
-        const currentData = await currentResponse.json();
-        const forecastData = await forecastResponse.json();
-
-        displayCurrentWeather(currentData);
-        displayForecast(forecastData);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
+      if (isNaN(principal) || isNaN(rate) || isNaN(period)) {
+        document.getElementById('result').innerHTML = "Please enter valid numbers.";
+        return;
       }
-    }
 
-    function displayCurrentWeather(data) {
-      const weatherInfo = document.getElementById('weather-info');
-      const temp = data.main.temp;
-      const weatherCondition = temp <= 15 ? 'Cold' : temp <= 25 ? 'Warm' : 'Hot';
+      if (principal <= 0 || rate <= 0 || period <= 0) {
+        document.getElementById('result').innerHTML = "Please enter positive numbers for principal, rate, and period.";
+        return;
+      }
 
-      weatherInfo.innerHTML = `
-        <h2>${data.name}</h2>
-        <p>Temperature: ${temp} °C</p>
-        <p>Weather: ${data.weather[0].description}</p>
-        <p>Condition: ${weatherCondition}</p>
-      `;
-    }
+      var n = 1;
+      if (frequency === 'monthly') {
+        n = 12;
+      } else if (frequency === 'quarterly') {
+        n = 4;
+      }
 
-    function displayForecast(data) {
-      const forecastInfo = document.getElementById('forecast-info');
-      forecastInfo.innerHTML = `
-        <h3>5-Day Forecast</h3>
-        <div class="chart-container">
-          <canvas id="forecastChart"></canvas>
-        </div>
-      `;
+      var effectiveRate = rate / 100;
+      var totalAmount;
 
-      // Preparing data for the chart (5-day forecast every 8th entry in forecast data)
-      const labels = data.list.filter((item, index) => index % 8 === 0).map(item => item.dt_txt.split(' ')[0]);
-      const temps = data.list.filter((item, index) => index % 8 === 0).map(item => item.main.temp);
+      if (type === 'simple') {
+        totalAmount = principal * (1 + effectiveRate * period);
+      } else {
+        totalAmount = principal * Math.pow(1 + effectiveRate / n, n * period);
+      }
 
-      const ctx = document.getElementById('forecastChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Temperature (°C)',
-            data: temps,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            x: {
-              beginAtZero: true
-            },
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
+      totalAmount = totalAmount.toFixed(2);
+      document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately R " + totalAmount + ".";
     }
   </script>
+
 </body>
 </html>
