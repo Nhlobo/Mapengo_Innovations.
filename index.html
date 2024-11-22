@@ -140,13 +140,128 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Optional: App Grid Layout */
-    .apps-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+    /* CloudySky App Animation */
+    .cloud-app {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      animation: cloud-move 8s infinite ease-in-out;
     }
+
+    .cloud-app .container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cloud-app .cloud {
+      width: 250px;
+    }
+
+    .cloud-app .front {
+      padding-top: 45px;
+      margin-left: 25px;
+      display: inline;
+      position: absolute;
+      z-index: 11;
+      animation: clouds 8s infinite ease-in-out;
+    }
+
+    .cloud-app .back {
+      margin-top: -30px;
+      margin-left: 150px;
+      z-index: 12;
+      animation: clouds 12s infinite ease-in-out;
+    }
+
+    .cloud-app .right-front {
+      width: 45px;
+      height: 45px;
+      border-radius: 50% 50% 50% 0%;
+      background-color: #4c9beb;
+      display: inline-block;
+      margin-left: -25px;
+      z-index: 5;
+    }
+
+    .cloud-app .left-front {
+      width: 65px;
+      height: 65px;
+      border-radius: 50% 50% 0% 50%;
+      background-color: #4c9beb;
+      display: inline-block;
+      z-index: 5;
+    }
+
+    .cloud-app .right-back {
+      width: 50px;
+      height: 50px;
+      border-radius: 50% 50% 50% 0%;
+      background-color: #4c9beb;
+      display: inline-block;
+      margin-left: -20px;
+      z-index: 5;
+    }
+
+    .cloud-app .left-back {
+      width: 30px;
+      height: 30px;
+      border-radius: 50% 50% 0% 50%;
+      background-color: #4c9beb;
+      display: inline-block;
+      z-index: 5;
+    }
+
+    .cloud-app .sun {
+      width: 120px;
+      height: 120px;
+      background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
+      background: linear-gradient(to right, #fcbb04, #fffc00);
+      border-radius: 60px;
+      display: inline;
+      position: absolute;
+    }
+
+    .cloud-app .sunshine {
+      animation: sunshines 2s infinite;
+    }
+
+    @keyframes clouds {
+      0% {
+        transform: translateX(15px);
+      }
+
+      50% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(15px);
+      }
+    }
+
+    @keyframes sunshines {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -179,9 +294,28 @@
 
       <div class="app-item" data-title="App 3" data-description="A powerful brainstorming app that uses AI to generate ideas">
         <div class="app-image">
-          <img src="quranknowledgquiz.png" alt="App 3">
+          <img src="https://via.placeholder.com/250x350?text=App+3" alt="App 3">
         </div>
         <h3>BrainStormer</h3>
+      </div>
+
+      <!-- CloudySky App -->
+      <div class="app-item" data-title="CloudySky" data-description="An AI-powered weather simulation with beautiful cloud and sunshine animations.">
+        <div class="cloud-app">
+          <div class="container">
+            <div class="cloud front">
+              <span class="left-front"></span>
+              <span class="right-front"></span>
+            </div>
+            <span class="sun sunshine"></span>
+            <span class="sun"></span>
+            <div class="cloud back">
+              <span class="left-back"></span>
+              <span class="right-back"></span>
+            </div>
+          </div>
+        </div>
+        <h3>CloudySky</h3>
       </div>
     </div>
   </section>
