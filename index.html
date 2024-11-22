@@ -3,246 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovative Web & App Development</title>
+    <title>Mapengo Innovations - Web & App Development</title>
     <style>
-        /* General Styling */
-        body {
-            font-family: 'Arial', sans-serif;
+        /* Global Styles */
+        * {
             margin: 0;
             padding: 0;
-            background: #f2f2f2;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f1f1f1;
             color: #333;
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            line-height: 1.5;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
         }
 
-        /* Section Title */
-        h2.section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 30px;
-            color: #00e5ff; /* Neon blue */
-            text-transform: uppercase;
-            font-weight: 600;
-            position: relative;
-            letter-spacing: 3px;
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
-        }
-
-        h2.section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 70px;
-            height: 3px;
-            background-color: #00e5ff;
-            border-radius: 3px;
-        }
-
-        /* Gradient background */
-        .testimonials-container {
+        /* Hero Section */
+        .hero {
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            padding: 60px 20px;
-            background: linear-gradient(45deg, rgba(0, 229, 255, 0.2), rgba(0, 0, 0, 0.2));
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .testimonials-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('circuit-pattern.png') center/cover no-repeat;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        /* Testimonial Cards */
-        .card {
-            background-color: #fff;
-            border-radius: 15px;
-            width: 280px;
-            padding: 25px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            background: linear-gradient(135deg, #00bcd4, #ff4081);
+            color: #fff;
             text-align: center;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-            border: 2px solid transparent;
-            background-clip: padding-box;
+            padding: 0 20px;
         }
 
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: #00e5ff;
-        }
-
-        /* Testimonial Image */
-        .testimonial-img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            border: 3px solid #00e5ff;
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            background-color: #fff;
+            color: #00bcd4;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 30px;
             transition: transform 0.3s ease;
         }
 
-        .testimonial-img:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
+        .cta-button:hover {
+            transform: scale(1.1);
         }
 
-        /* Testimonial Content */
-        .title {
-            font-size: 1.1rem;
-            margin: 20px 0;
-            font-style: italic;
-            color: #444;
-            line-height: 1.6;
+        /* Testimonials Section */
+        section {
+            padding: 80px 20px;
+            background-color: #fff;
+            text-align: center;
         }
 
-        h4 {
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #00bcd4;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .testimonials-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 25px;
+            text-align: center;
+            color: #333;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-card img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card h4 {
             font-size: 1.2rem;
             font-weight: 500;
-            color: #555;
-            letter-spacing: 1px;
-            text-transform: capitalize;
+            margin-bottom: 10px;
+            color: #00bcd4;
         }
 
-        /* Rating Stars */
-        .rating {
+        .testimonial-card p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card .rating {
             display: flex;
             justify-content: center;
-            margin-bottom: 15px;
-            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card .rating i {
             color: #ffcc00;
+            margin-right: 5px;
         }
 
-        .rating label {
+        /* Light/Dark Mode Toggle */
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #00bcd4;
+            color: #fff;
+            padding: 12px;
+            border-radius: 50%;
+            font-size: 1.5rem;
             cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
-        /* Light/Dark Mode */
+        /* Dark Mode */
         body.dark-mode {
-            background-color: #222;
-            color: #ddd;
+            background-color: #121212;
+            color: #f5f5f5;
         }
 
-        body.dark-mode .testimonials-container {
-            background: linear-gradient(45deg, rgba(0, 229, 255, 0.05), rgba(0, 0, 0, 0.4));
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #ff4081, #00bcd4);
+        }
+
+        body.dark-mode .testimonial-card {
+            background-color: #1f1f1f;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .cta-button {
+            background-color: #ff4081;
+            color: #fff;
         }
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
             .testimonials-container {
                 flex-direction: column;
                 align-items: center;
             }
-        }
 
-        /* Button Styling */
-        .toggle-button {
-            background: #00e5ff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-            margin: 20px auto;
-            display: block;
+            .testimonial-card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
-
-        .toggle-button:hover {
-            background-color: #00b0c7;
-        }
-
     </style>
 </head>
 <body>
 
     <!-- Light/Dark Mode Toggle -->
-    <button class="toggle-button" onclick="toggleMode()">Toggle Light/Dark Mode</button>
+    <button class="toggle-btn" onclick="toggleMode()">🌙</button>
 
-    <!-- ================= TESTIMONIALS ================= -->
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1>Innovative Web & App Development</h1>
+            <p>We specialize in cutting-edge solutions that push boundaries. From web to app development, we create products that stand out.</p>
+            <button class="cta-button">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
     <section id="testimonials">
-        <h2 class="section-title">What Our Clients Say</h2>
+        <h2>What Our Clients Say</h2>
         <div class="testimonials-container">
             <!-- Testimonial 1 -->
-            <div class="card">
-                <div class="rating">
-                    <label for="star1">&#9733;</label>
-                    <label for="star2">&#9733;</label>
-                    <label for="star3">&#9733;</label>
-                    <label for="star4">&#9733;</label>
-                    <label for="star5">&#9733;</label>
-                </div>
-                <img src="john-doe.jpg" alt="John Doe" class="testimonial-img">
-                <p class="title">"Mapengo Innovations delivered a top-notch app for our business. Their professionalism and attention to detail were exceptional!"</p>
+            <div class="testimonial-card">
+                <img src="john-doe.jpg" alt="John Doe">
+                <p>"Mapengo Innovations delivered a top-notch app for our business. Their professionalism and attention to detail were exceptional!"</p>
                 <h4>- Tinyiko, CEO of Mzansi Taste Kitchen</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
             </div>
 
             <!-- Testimonial 2 -->
-            <div class="card">
-                <div class="rating">
-                    <label for="star1">&#9733;</label>
-                    <label for="star2">&#9733;</label>
-                    <label for="star3">&#9733;</label>
-                    <label for="star4">&#9733;</label>
-                    <label for="star5">&#9734;</label>
-                </div>
-                <img src="jane-smith.jpg" alt="Jane Smith" class="testimonial-img">
-                <p class="title">"The website they developed for us is exactly what we needed. Affordable and high-quality service!"</p>
+            <div class="testimonial-card">
+                <img src="jane-smith.jpg" alt="Jane Smith">
+                <p>"The website they developed for us is exactly what we needed. Affordable and high-quality service!"</p>
                 <h4>- Mvelo, Owner of Mvelo Livestock Co.</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half"></i>
+                </div>
             </div>
 
             <!-- Testimonial 3 -->
-            <div class="card">
-                <div class="rating">
-                    <label for="star1">&#9733;</label>
-                    <label for="star2">&#9733;</label>
-                    <label for="star3">&#9733;</label>
-                    <label for="star4">&#9734;</label>
-                    <label for="star5">&#9734;</label>
-                </div>
-                <img src="alice-brown.jpg" alt="Alice Brown" class="testimonial-img">
-                <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
+            <div class="testimonial-card">
+                <img src="alice-brown.jpg" alt="Alice Brown">
+                <p>"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
                 <h4>- Alice Brown, Founder of InnovateTech</h4>
-            </div>
-
-            <!-- Testimonial 4 -->
-            <div class="card">
                 <div class="rating">
-                    <label for="star1">&#9733;</label>
-                    <label for="star2">&#9733;</label>
-                    <label for="star3">&#9734;</label>
-                    <label for="star4">&#9734;</label>
-                    <label for="star5">&#9734;</label>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                 </div>
-                <img src="michael-johnson.jpg" alt="Michael Johnson" class="testimonial-img">
-                <p class="title">"Fast, reliable, and exceptional quality work. We couldn't be happier with the result!"</p>
-                <h4>- Michael Johnson, Director of WebWorks</h4>
             </div>
-
         </div>
     </section>
 
     <script>
-        // Light/Dark Mode Toggle Functionality
+        // Toggle Light/Dark Mode
         function toggleMode() {
             document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.toggle-btn');
+            if (document.body.classList.contains('dark-mode')) {
+                btn.innerHTML = '🌕';
+            } else {
+                btn.innerHTML = '🌙';
+            }
         }
     </script>
 
