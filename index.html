@@ -5,11 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Testimonials</title>
     <style>
-        /* ================= TESTIMONIALS ================= */
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
         #testimonials {
             padding: 3rem 2rem;
             text-align: center;
             margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
         }
 
         .testimonials-container {
@@ -20,12 +40,17 @@
             padding: 0 10px;
             margin: 0 auto;
             max-width: 90%;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonials-container:hover {
+            transform: scale(1.05);
         }
 
         .card {
-            background: #ffffff;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f3f4f6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
             padding: 2.5rem;
             text-align: center;
             flex-shrink: 0;
@@ -33,6 +58,12 @@
             margin: 1.5rem;
             color: #111827;
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.1);
         }
 
         .rating {
@@ -48,6 +79,7 @@
             font-size: 24px;
             color: #ddd;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
 
         .rating label:hover {
@@ -59,27 +91,68 @@
         }
 
         .testimonial-img {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            border: 2px solid #fff;
-            margin-top: 10px;
+            border: 3px solid #fff;
+            margin-top: 20px;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-img:hover {
+            transform: scale(1.1);
         }
 
         .title {
             font-size: 1.1rem;
             font-style: italic;
             margin-bottom: 1rem;
-            color: var(--dark-gray);
+            color: #555;
+            animation: fadeIn 2s ease-out;
         }
 
-        @media (min-width: 768px) {
-            .testimonials-container {
-                gap: 1rem;
+        .title, h4 {
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        h4 {
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
             }
         }
 
+        /* Responsive design */
+        @media (min-width: 768px) {
+            .testimonials-container {
+                gap: 1.5rem;
+            }
+        }
+
+        /* Mobile-first hover effects */
+        @media (max-width: 767px) {
+            .card {
+                width: 100%;
+                margin: 1rem 0;
+                padding: 1.5rem;
+            }
+
+            .testimonial-img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -90,7 +163,6 @@
     <div class="testimonials-container">
         <div class="card">
             <div class="rating">
-                <!-- 5/5 rating (all stars gold) -->
                 <label for="star1-1">&#9733;</label>
                 <label for="star2-1">&#9733;</label>
                 <label for="star3-1">&#9733;</label>
@@ -104,12 +176,11 @@
 
         <div class="card">
             <div class="rating">
-                <!-- 4/5 rating (4 stars gold) -->
                 <label for="star1-2">&#9733;</label>
                 <label for="star2-2">&#9733;</label>
                 <label for="star3-2">&#9733;</label>
                 <label for="star4-2">&#9733;</label>
-                <label for="star5-2">&#9734;</label> <!-- Empty star -->
+                <label for="star5-2">&#9734;</label>
             </div>
             <img src="jane-smith.jpg" alt="Jane Smith" class="testimonial-img">
             <p class="title">"The website they developed for us is exactly what we needed. Affordable and high-quality service!"</p>
@@ -118,12 +189,11 @@
 
         <div class="card">
             <div class="rating">
-                <!-- 3/5 rating (3 stars gold) -->
                 <label for="star1-3">&#9733;</label>
                 <label for="star2-3">&#9733;</label>
                 <label for="star3-3">&#9733;</label>
-                <label for="star4-3">&#9734;</label> <!-- Empty star -->
-                <label for="star5-3">&#9734;</label> <!-- Empty star -->
+                <label for="star4-3">&#9734;</label>
+                <label for="star5-3">&#9734;</label>
             </div>
             <img src="alice-brown.jpg" alt="Alice Brown" class="testimonial-img">
             <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
@@ -132,12 +202,11 @@
 
         <div class="card">
             <div class="rating">
-                <!-- 2/5 rating (2 stars gold) -->
                 <label for="star1-4">&#9733;</label>
                 <label for="star2-4">&#9733;</label>
-                <label for="star3-4">&#9734;</label> <!-- Empty star -->
-                <label for="star4-4">&#9734;</label> <!-- Empty star -->
-                <label for="star5-4">&#9734;</label> <!-- Empty star -->
+                <label for="star3-4">&#9734;</label>
+                <label for="star4-4">&#9734;</label>
+                <label for="star5-4">&#9734;</label>
             </div>
             <img src="michael-johnson.jpg" alt="Michael Johnson" class="testimonial-img">
             <p class="title">"Fast, reliable, and exceptional quality work. We couldn't be happier with the result!"</p>
