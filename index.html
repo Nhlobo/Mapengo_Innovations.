@@ -81,6 +81,7 @@
       height: 350px;
       padding: 15px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background-color: rgba(255, 255, 255, 0.1);
@@ -96,79 +97,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
 
-    /* CloudySky Animation */
     .cloud-app .cloud {
       width: 250px;
     }
 
-    .cloud-app .front {
+    .cloud-app .front, .cloud-app .back {
       padding-top: 45px;
-      margin-left: 25px;
       display: inline;
       position: absolute;
       z-index: 11;
       animation: clouds 8s infinite ease-in-out;
     }
 
-    .cloud-app .back {
-      margin-top: -30px;
-      margin-left: 150px;
-      z-index: 12;
-      animation: clouds 12s infinite ease-in-out;
-    }
-
-    .cloud-app .right-front {
-      width: 45px;
-      height: 45px;
-      border-radius: 50% 50% 50% 0%;
-      background-color: #4c9beb;
-      display: inline-block;
-      margin-left: -25px;
-      z-index: 5;
-    }
-
-    .cloud-app .left-front {
-      width: 65px;
-      height: 65px;
-      border-radius: 50% 50% 0% 50%;
-      background-color: #4c9beb;
-      display: inline-block;
-      z-index: 5;
-    }
-
-    .cloud-app .right-back {
-      width: 50px;
-      height: 50px;
-      border-radius: 50% 50% 50% 0%;
-      background-color: #4c9beb;
-      display: inline-block;
-      margin-left: -20px;
-      z-index: 5;
-    }
-
-    .cloud-app .left-back {
-      width: 30px;
-      height: 30px;
-      border-radius: 50% 50% 0% 50%;
-      background-color: #4c9beb;
-      display: inline-block;
-      z-index: 5;
-    }
-
-    .cloud-app .sun {
-      width: 120px;
-      height: 120px;
-      background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
-      background: linear-gradient(to right, #fcbb04, #fffc00);
-      border-radius: 60px;
-      display: inline;
-      position: absolute;
-    }
-
-    .cloud-app .sunshine {
-      animation: sunshines 2s infinite;
+    .cloud-app .weather-info {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-top: 15px;
     }
 
     @keyframes clouds {
@@ -182,18 +129,6 @@
 
       100% {
         transform: translateX(15px);
-      }
-    }
-
-    @keyframes sunshines {
-      0% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-
-      100% {
-        transform: scale(1.4);
-        opacity: 0;
       }
     }
 
@@ -250,22 +185,21 @@
       <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <!-- CloudySky App -->
+    <!-- CloudySky App with Weather -->
     <div class="cloud-app">
       <div class="container">
         <div class="cloud front">
           <span class="left-front"></span>
           <span class="right-front"></span>
         </div>
-        <span class="sun sunshine"></span>
-        <span class="sun"></span>
+        <div class="weather-info" id="weather-info">Loading weather...</div>
         <div class="cloud back">
           <span class="left-back"></span>
           <span class="right-back"></span>
         </div>
       </div>
     </div>
-    <h3>CloudySky</h3>
+    <h3>CloudySky Weather</h3>
 
     <!-- Investment Calculator -->
     <div class="investment-calculator">
@@ -294,6 +228,25 @@
       const finalValue = initialAmount * Math.pow(1 + (interestRate / 100), timePeriod);
       document.getElementById('result').textContent = `Final Value: $${finalValue.toFixed(2)}`;
     }
+
+    // Fetch Weather Data from OpenWeatherMap API
+    async function fetchWeather() {
+      const apiKey = 'your-api-key-here';  // Get your API key from OpenWeatherMap
+      const city = 'New York';  // Replace with your desired city
+
+      try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const data = await response.json();
+        const temp = data.main.temp;
+        const description = data.weather[0].description;
+        document.getElementById('weather-info').textContent = `Weather: ${temp}°C, ${description}`;
+      } catch (error) {
+        document.getElementById('weather-info').textContent = 'Failed to load weather data.';
+      }
+    }
+
+    // Call the weather API on page load
+    window.onload = fetchWeather;
   </script>
 </body>
 </html>
