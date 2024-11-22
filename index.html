@@ -165,21 +165,23 @@
     }
 
     .message .message-text {
-      background: #000;
-      color: #fff;
+      background: #fff;
+      color: #000;
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
       max-width: 220px;
       word-wrap: break-word;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .message.bot-message .message-text {
-      background: #333;
+      background: #fff;
+      color: #000;
     }
 
     .message.user-message .message-text {
-      background: #444;
+      background: #fff;
     }
 
     /* Input area */
@@ -283,7 +285,7 @@
   <div class="chat-popup" id="chatPopup">
     <div class="message bot-message">
       <div class="avatar"></div>
-      <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
+      <div class="message-text" id="typingMessage"></div>
     </div>
     <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
     <button onclick="sendMessage()">Send</button>
@@ -296,15 +298,24 @@
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
+    const typingMessageElement = document.getElementById('typingMessage');
     let typingMessageIndex = 0;
     const typingSpeed = 100;
     let lastActivityTime = Date.now();
 
+    // Clear the chat when opening
+    function clearChat() {
+      chatPopup.innerHTML = ''; // Clear all previous messages
+      typingMessageIndex = 0;
+    }
+
     function toggleChatPopup() {
+      clearChat();
       chatPopup.classList.toggle('active');
       closeChatButton.classList.add('active');
       lastActivityTime = Date.now();
       startInactivityTimer(); // Restart inactivity timer when chat is opened
+      typeBotMessage("Hi! I’m Tomie, let me help you send your question without filling the contact form.");
     }
 
     function closeChat() {
@@ -339,20 +350,20 @@
         chatPopup.scrollTop = chatPopup.scrollHeight;
 
         // Simulate typing
-        function typeBotMessage() {
+        function typeBotMessage(messageText) {
           const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
+          const text = messageText;
           if (typingMessageIndex < text.length) {
             botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
             typingMessageIndex++;
-            setTimeout(typeBotMessage, typingSpeed);
+            setTimeout(() => typeBotMessage(messageText), typingSpeed);
           } else {
             setTimeout(() => {
               closeChat();
-            }, 5000); // 5 seconds after message appears
+            }, 5000); // Close chat after 5 seconds once message is typed
           }
         }
-        typeBotMessage();
+        typeBotMessage("Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.");
       }
     }
 
@@ -378,6 +389,13 @@
         faq.classList.toggle('active');
         arrow.classList.toggle('rotate');
       });
+    });
+
+    // Close the chat if clicking outside
+    window.addEventListener('click', function(event) {
+      if (!chatPopup.contains(event.target) && !chatButton.contains(event.target)) {
+        closeChat();
+      }
     });
   </script>
 </body>
