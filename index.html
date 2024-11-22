@@ -1,169 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Clients Say</title>
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Apps & Web Solutions</title>
+  <style>
+    /* Hero Section Styles */
+    #hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 5%;
+      background: linear-gradient(135deg, #1c1c1c, #4a4a4a);
+      color: #fff;
+      border-radius: 10px;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
+    .hero-content {
+      max-width: 50%;
+    }
 
-        h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #333;
-        }
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
 
-        /* Testimonials Section */
-        section {
-            background-color: #fff;
-            padding: 50px 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-            overflow: hidden; /* Hide overflow content */
-            position: relative;
-        }
+    .hero-description {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      color: #ddd;
+      max-width: 400px;
+    }
 
-        /* Testimonials Container */
-        .testimonials-container {
-            display: flex;
-            position: absolute;
-            animation: scrollTestimonials 20s linear infinite; /* Continuous scroll animation */
-            gap: 80px; /* Larger spacing between cards */
-        }
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+    }
 
-        /* Keyframes for smooth continuous scroll */
-        @keyframes scrollTestimonials {
-            0% {
-                transform: translateX(0); /* Start at the beginning */
-            }
-            100% {
-                transform: translateX(-100%); /* Move to the left (all cards move out) */
-            }
-        }
+    .cta-btn {
+      font-size: 1.125rem;
+      padding: 15px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
 
-        /* Testimonial Card */
-        .testimonial-card {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            max-width: 230px;
-            flex-shrink: 0; /* Prevent shrinking */
-            transition: all 0.3s ease;
-        }
+    .primary {
+      background-color: #00b3b3;
+      color: white;
+    }
 
-        /* Hover effect for cards */
-        .testimonial-card:hover {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-            transform: translateY(-10px); /* More elevation */
-        }
+    .primary:hover {
+      background-color: #009999;
+    }
 
-        .testimonial-card img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 3px solid #00bcd4;
-            padding: 2px;
-        }
+    .secondary {
+      background-color: #ff6f61;
+      color: white;
+    }
 
-        .testimonial-card p {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
+    .secondary:hover {
+      background-color: #e2574d;
+    }
 
-        .testimonial-card h4 {
-            font-size: 1rem;
-            color: #333;
-            font-weight: 600;
-        }
+    .hero-image img {
+      max-width: 600px;
+      height: auto;
+      border-radius: 10px;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .testimonial-card {
-                width: 180px;
-                padding: 15px;
-            }
+    /* Apps Showcase Section */
+    #apps {
+      padding: 80px 5%;
+      background-color: #fafafa;
+    }
 
-            .testimonial-card h4 {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .app-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .app-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .app-image img {
+      width: 100%;
+      height: auto;
+      border-bottom: 3px solid #ddd;
+    }
+
+    .app-info {
+      padding: 20px;
+    }
+
+    .app-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .app-description {
+      font-size: 1.125rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .app-features {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .app-features li {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-size: 1.125rem;
+      padding: 12px 20px;
+      background-color: #00b3b3;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #009999;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .cta-section h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.125rem;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .cta-btn.primary {
+      background-color: #28a745;
+    }
+
+    .cta-btn.primary:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
 
-    <section id="testimonials">
-        <h2>What Our Clients Say</h2>
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Empowering Your Business with Cutting-Edge AI Solutions</h1>
+      <p class="hero-description">Unlock the full potential of AI-powered apps and web platforms. Our solutions are live now, transforming businesses and delivering next-gen experiences.</p>
+      <div class="cta-buttons">
+        <a href="#apps" class="cta-btn primary">Explore Our Apps</a>
+        <a href="#contact" class="cta-btn secondary">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="path_to_hero_image.jpg" alt="AI-powered app solutions" />
+    </div>
+  </section>
 
-        <div class="testimonials-container">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card">
-                <img src="john-doe.jpg" alt="John Doe">
-                <p>"Mapengo Innovations provided an exceptional app solution, tailored to our needs. We highly recommend their services!"</p>
-                <h4>- Tinyiko, CEO of Mzansi Taste Kitchen</h4>
-            </div>
+  <!-- Apps Showcase Section -->
+  <section id="apps">
+    <div class="container">
+      <h2 class="section-title">Discover Our Live AI Apps & Web Solutions</h2>
+      <p class="section-description">All our applications are live, AI-powered, and ready to help you transform your business. Explore each app and see how they can work for you.</p>
 
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card">
-                <img src="jane-smith.jpg" alt="Jane Smith">
-                <p>"The website Mapengo created for us is perfect. It's not just functional, but visually stunning too!"</p>
-                <h4>- Mvelo, Owner of Mvelo Livestock Co.</h4>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card">
-                <img src="alice-brown.jpg" alt="Alice Brown">
-                <p>"Working with Mapengo was an absolute pleasure. Their customer service and attention to detail are second to none."</p>
-                <h4>- Alice Brown, Founder of InnovateTech</h4>
-            </div>
-
-            <!-- Testimonial 4 -->
-            <div class="testimonial-card">
-                <img src="michael-johnson.jpg" alt="Michael Johnson">
-                <p>"Mapengo's team delivered on every aspect of our project. Highly professional and committed to excellence!"</p>
-                <h4>- Michael Johnson, Director of WebWorks</h4>
-            </div>
+      <div class="apps-grid">
+        <!-- App 1 -->
+        <div class="app-card">
+          <div class="app-image">
+            <img src="path_to_app1_image.jpg" alt="App 1" />
+          </div>
+          <div class="app-info">
+            <h3 class="app-title">[App Name 1]</h3>
+            <p class="app-description">AI-powered to revolutionize [specific task or business process].</p>
+            <ul class="app-features">
+              <li>Real-time data analysis</li>
+              <li>Customizable AI models</li>
+              <li>Seamless integration with existing tools</li>
+            </ul>
+            <a href="[app_link]" class="cta-btn">Try It Now</a>
+          </div>
         </div>
-    </section>
 
-    <script>
-        // JavaScript for detecting if the section is visible
-        const testimonialsSection = document.getElementById('testimonials');
-        const testimonialsContainer = document.querySelector('.testimonials-container');
+        <!-- App 2 -->
+        <div class="app-card">
+          <div class="app-image">
+            <img src="path_to_app2_image.jpg" alt="App 2" />
+          </div>
+          <div class="app-info">
+            <h3 class="app-title">[App Name 2]</h3>
+            <p class="app-description">AI-driven insights and automated workflows for enhanced productivity.</p>
+            <ul class="app-features">
+              <li>Smart automation</li>
+              <li>Scalable solutions</li>
+              <li>Optimized for cloud integration</li>
+            </ul>
+            <a href="[app_link]" class="cta-btn">Start Using</a>
+          </div>
+        </div>
 
-        function checkVisibility() {
-            const rect = testimonialsSection.getBoundingClientRect();
-            // If the section is within the viewport, resume animation; otherwise, pause
-            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                testimonialsContainer.style.animationPlayState = 'running';  // Resume animation
-            } else {
-                testimonialsContainer.style.animationPlayState = 'paused';  // Pause animation
-            }
-        }
+        <!-- Web Service -->
+        <div class="app-card">
+          <div class="app-image">
+            <img src="path_to_web_service_image.jpg" alt="Web Service" />
+          </div>
+          <div class="app-info">
+            <h3 class="app-title">[Web Service Name]</h3>
+            <p class="app-description">Transform your business with our secure, scalable, and AI-enhanced platform.</p>
+            <ul class="app-features">
+              <li>AI-based web performance</li>
+              <li>Responsive and user-friendly</li>
+              <li>Enterprise-ready solutions</li>
+            </ul>
+            <a href="[service_link]" class="cta-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
 
-        // Check visibility when the page is loaded and on scroll
-        window.addEventListener('scroll', checkVisibility);
-        window.addEventListener('load', checkVisibility);
-    </script>
+      <div class="cta-section">
+        <h3>Ready to Innovate with AI?</h3>
+        <p>All of our apps and services are live and ready to take your business to the next level. Get in touch with us today to start your journey!</p>
+        <a href="#contact" class="cta-btn primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
