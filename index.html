@@ -124,7 +124,6 @@
       text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 50px rgba(0, 255, 255, 0.5);
     }
 
-    /* Description on Hover */
     .app-item:hover::after {
       content: attr(data-description);
       position: absolute;
@@ -141,7 +140,7 @@
     }
 
     /* CloudySky App Animation */
-    .cloud-app {
+    .cloud-app, .calculator-app {
       position: relative;
       width: 250px;
       height: 250px;
@@ -155,7 +154,7 @@
       animation: cloud-move 8s infinite ease-in-out;
     }
 
-    .cloud-app .container {
+    .cloud-app .container, .calculator-app .container {
       width: 100%;
       height: 100%;
       position: relative;
@@ -164,6 +163,7 @@
       justify-content: center;
     }
 
+    /* CloudySky Animation */
     .cloud-app .cloud {
       width: 250px;
     }
@@ -262,43 +262,45 @@
       }
     }
 
+    /* Calculator App Style */
+    .calculator-app .container {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .calculator-app .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #333;
+      border: 2px solid #00f1ff;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .calculator-app .button:hover {
+      background-color: #00f1ff;
+    }
   </style>
 </head>
 <body>
+  <div class="background-animation"></div>
 
+  <!-- Apps Section -->
   <section class="apps-section">
-    <!-- Background Animation: AI-inspired effect -->
-    <div class="background-animation"></div>
-
-    <!-- Section Title and Description -->
     <div class="section-header">
-      <h2>AI-Powered Apps</h2>
-      <p>Explore the next generation of applications built with intelligence, precision, and cutting-edge technology.</p>
+      <h2>Our AI-powered Apps</h2>
+      <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <!-- App Showcase -->
     <div class="apps-container">
-      <div class="app-item" data-title="App 1" data-description="A smart task management system with AI-powered suggestions">
-        <div class="app-image">
-          <img src="https://via.placeholder.com/250x350?text=App+1" alt="App 1">
-        </div>
-        <h3>TaskMaster</h3>
-      </div>
-
-      <div class="app-item" data-title="App 2" data-description="An intelligent budgeting assistant that learns your spending habits">
-        <div class="app-image">
-          <img src="https://via.placeholder.com/250x350?text=App+2" alt="App 2">
-        </div>
-        <h3>BudgetBot</h3>
-      </div>
-
-      <div class="app-item" data-title="App 3" data-description="A powerful brainstorming app that uses AI to generate ideas">
-        <div class="app-image">
-          <img src="https://via.placeholder.com/250x350?text=App+3" alt="App 3">
-        </div>
-        <h3>BrainStormer</h3>
-      </div>
-
       <!-- CloudySky App -->
       <div class="app-item" data-title="CloudySky" data-description="An AI-powered weather simulation with beautiful cloud and sunshine animations.">
         <div class="cloud-app">
@@ -317,8 +319,32 @@
         </div>
         <h3>CloudySky</h3>
       </div>
+
+      <!-- Calculator App -->
+      <div class="app-item" data-title="Calculator" data-description="An interactive AI-powered calculator with real-time results.">
+        <div class="calculator-app">
+          <div class="container">
+            <div class="button">1</div>
+            <div class="button">2</div>
+            <div class="button">3</div>
+            <div class="button">+</div>
+            <div class="button">4</div>
+            <div class="button">5</div>
+            <div class="button">6</div>
+            <div class="button">-</div>
+            <div class="button">7</div>
+            <div class="button">8</div>
+            <div class="button">9</div>
+            <div class="button">*</div>
+            <div class="button">0</div>
+            <div class="button">C</div>
+            <div class="button">=</div>
+            <div class="button">/</div>
+          </div>
+        </div>
+        <h3>Calculator</h3>
+      </div>
     </div>
   </section>
-
 </body>
 </html>
