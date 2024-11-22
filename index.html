@@ -86,49 +86,38 @@
       color: #333;
     }
 
-    /* New Modern Arrow Style */
+    /* Modern Arrow Design */
     .arrow {
-      margin-top: 8px;
-      width: 22px;
-      height: 22px;
-      background: linear-gradient(45deg, #00bcd4, #00796b);
+      width: 30px;
+      height: 30px;
+      border: 2px solid #00796b;
       border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease;
       cursor: pointer;
+      margin-top: 12px;
     }
 
-    .arrow:before,
-    .arrow:after {
+    .arrow:before {
       content: '';
-      position: absolute;
-      top: 8px;
-      left: 4px;
-      width: 12px;
-      height: 2px;
-      background-color: #fff;
+      width: 14px;
+      height: 14px;
+      border-left: 2px solid #00796b;
+      border-bottom: 2px solid #00796b;
+      transform: rotate(45deg);
       transition: transform 0.3s ease;
     }
 
-    .arrow:after {
-      top: 12px;
-      transform: rotate(90deg);
-    }
-
     .arrow.rotate:before {
-      transform: rotate(45deg);
-      top: 6px;
+      transform: rotate(-135deg);
     }
 
-    .arrow.rotate:after {
-      transform: rotate(-45deg);
-      top: 6px;
-    }
-
-    /* Hover effect */
     .arrow:hover {
-      background-color: #00796b;
       transform: scale(1.1);
+      border-color: #00bcd4;
     }
 
     /* Animation for FAQ items */
