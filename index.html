@@ -165,21 +165,26 @@
     }
 
     .message .message-text {
-      background: #000;
-      color: #fff;
+      background: white; /* White background for conversation */
+      color: black; /* Black text */
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
       max-width: 220px;
       word-wrap: break-word;
+      border: 1px solid #ddd;
     }
 
     .message.bot-message .message-text {
-      background: #333;
+      background: white; /* White background for bot messages */
+      color: black; /* Black text */
+      border-color: #ccc;
     }
 
     .message.user-message .message-text {
-      background: #444;
+      background: white; /* White background for user messages */
+      color: black; /* Black text */
+      border-color: #ccc;
     }
 
     /* Input area */
