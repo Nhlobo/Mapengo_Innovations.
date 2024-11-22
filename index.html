@@ -157,26 +157,39 @@
     }
 
     .message .avatar {
-      width: 40px; /* Default size for normal chat */
-      height: 40px; /* Default size for normal chat */
-      margin-right: 10px; /* Space between avatar and message */
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      overflow: hidden;
+      object-fit: cover;
     }
 
     .message .avatar-img {
-      width: 100%; /* Make it fill the parent container */
-      height: 100%; /* Ensure it's always a circle */
-      border-radius: 50%; /* Round the image */
-      object-fit: cover; /* Crop to fill the circle */
-      max-width: 40px; /* Ensure the image doesn't exceed a certain size */
-      max-height: 40px; /* Ensure the image doesn't exceed a certain size */
+      width: 100%;
+      height: 100%;
     }
 
-    /* Ensure the image is responsive */
-    @media (max-width: 600px) {
-      .avatar {
-        width: 35px; /* Slightly smaller on mobile */
-        height: 35px; /* Slightly smaller on mobile */
-      }
+    .message .message-text {
+      background: white; /* White background for conversation */
+      color: black; /* Black text */
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      max-width: 220px;
+      word-wrap: break-word;
+      border: 1px solid #ddd;
+    }
+
+    .message.bot-message .message-text {
+      background: white; /* White background for bot messages */
+      color: black; /* Black text */
+      border-color: #ccc;
+    }
+
+    .message.user-message .message-text {
+      background: white; /* White background for user messages */
+      color: black; /* Black text */
+      border-color: #ccc;
     }
 
     /* Input area */
@@ -250,7 +263,26 @@
   <section id="faq" class="faq-section">
     <h2 class="section-title">Frequently Asked Questions</h2>
     <div class="faq-container">
-      <!-- FAQ Items here -->
+      <div class="faq-item">
+        <h3>What services do you offer?</h3>
+        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>How much do your services cost?</h3>
+        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>How long does a project take?</h3>
+        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>Do you offer ongoing support?</h3>
+        <p>Yes, we offer maintenance and support packages to ensure the continued success of your project post-launch.</p>
+        <div class="arrow"></div>
+      </div>
     </div>
   </section>
 
@@ -261,8 +293,7 @@
   <div class="chat-popup" id="chatPopup">
     <div class="message bot-message">
       <div class="avatar">
-        <!-- Replace the below src with your image path -->
-        <img src="IMG-20241015-WA0023.png" alt="Tomie's Avatar" class="avatar-img">
+        <img src="path/to/tomie-avatar.jpg" alt="Tomie" class="avatar-img">
       </div>
       <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
     </div>
@@ -272,38 +303,37 @@
   </div>
 
   <script>
-    // Function to toggle chat popup
+    // FAQ Accordion Toggle
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+        item.querySelector('.arrow').classList.toggle('rotate');
+      });
+    });
+
+    // Chat Popup Toggle
     function toggleChatPopup() {
-      const chatPopup = document.getElementById('chatPopup');
-      const closeButton = document.getElementById('closeChatButton');
-      chatPopup.classList.toggle('active');
-      closeButton.classList.toggle('active');
+      document.getElementById('chatPopup').classList.toggle('active');
+      document.getElementById('closeChatButton').classList.toggle('active');
     }
 
-    // Function to send user message (will be enhanced later)
-    function sendMessage() {
-      const userMessageInput = document.getElementById('userMessage');
-      const messageText = userMessageInput.value.trim();
-      if (messageText) {
-        const userMessageDiv = document.createElement('div');
-        userMessageDiv.classList.add('message', 'user-message');
-        userMessageDiv.innerHTML = `
-          <div class="avatar">
-            <img src="images/tomie-avatar.jpg" alt="User's Avatar" class="avatar-img">
-          </div>
-          <div class="message-text">${messageText}</div>
-        `;
-        document.querySelector('.chat-popup').appendChild(userMessageDiv);
-        userMessageInput.value = ''; // Clear input after sending
-      }
-    }
-
-    // Function to close chat popup
     function closeChat() {
-      const chatPopup = document.getElementById('chatPopup');
-      const closeButton = document.getElementById('closeChatButton');
-      chatPopup.classList.remove('active');
-      closeButton.classList.remove('active');
+      document.getElementById('chatPopup').classList.remove('active');
+      document.getElementById('closeChatButton').classList.remove('active');
+    }
+
+    function sendMessage() {
+      const messageInput = document.getElementById('userMessage');
+      const userMessage = messageInput.value.trim();
+      if (userMessage) {
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message', 'user-message');
+        userMessageElement.innerHTML = `
+          <div class="message-text">${userMessage}</div>
+        `;
+        document.querySelector('.chat-popup').appendChild(userMessageElement);
+        messageInput.value = ''; // Clear input field
+      }
     }
   </script>
 </body>
