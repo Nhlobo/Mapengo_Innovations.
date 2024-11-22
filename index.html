@@ -124,13 +124,13 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Clean White Chat Popup */
+    /* Light Sky Blue Chat Popup */
     .chat-popup {
       position: fixed;
       bottom: 100px;
       right: 30px;
       width: 350px;
-      background: #fff;
+      background: #87ceeb; /* Light Sky Blue */
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -165,8 +165,8 @@
     }
 
     .message .message-text {
-      background: #ecf0f1;
-      color: #2c3e50;
+      background: #000;
+      color: #fff;
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
@@ -175,11 +175,11 @@
     }
 
     .message.bot-message .message-text {
-      background: #bdc3c7;
+      background: #333;
     }
 
     .message.user-message .message-text {
-      background: #aab7b8;
+      background: #444;
     }
 
     /* Input area */
@@ -283,7 +283,7 @@
   <div class="chat-popup" id="chatPopup">
     <div class="message bot-message">
       <div class="avatar"></div>
-      <div class="message-text">Hi, I'm Tomie! Let me help you send your question without filling the contact form.</div>
+      <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
     </div>
     <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
     <button onclick="sendMessage()">Send</button>
@@ -334,10 +334,10 @@
           // Scroll to the bottom of the chat
           chatPopup.scrollTop = chatPopup.scrollHeight;
 
-          // Close chat after 3 seconds
+          // Close chat after 5 seconds
           setTimeout(() => {
             closeChat();
-          }, 3000); // 3 second delay for smooth closing
+          }, 5000); // 5 second delay for smoother reading and closing
         }, 1500);
       }
     }
