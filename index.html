@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Enhanced Apps</title>
+  <title>South Africa Weather Forecast</title>
   <style>
     /* Global Styles */
     * {
@@ -48,16 +48,11 @@
       }
     }
 
-    /* Apps Section */
-    .apps-section {
+    /* Weather Section */
+    .weather-section {
       padding: 80px 20px;
       text-align: center;
       position: relative;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 50px;
-      flex-wrap: wrap;
     }
 
     .section-header h2 {
@@ -74,8 +69,8 @@
       color: #ccc;
     }
 
-    /* CloudySky App Animation */
-    .cloud-app, .investment-calculator {
+    /* Weather App */
+    .cloud-app {
       position: relative;
       width: 400px;
       height: 350px;
@@ -87,10 +82,9 @@
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-      animation: cloud-move 8s infinite ease-in-out;
     }
 
-    .cloud-app .container, .investment-calculator .container {
+    .cloud-app .container {
       width: 100%;
       height: 100%;
       position: relative;
@@ -133,12 +127,12 @@
     }
 
     /* Investment Calculator */
-    .investment-calculator .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      height: 100%;
+    .investment-calculator {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     }
 
     .investment-calculator input {
@@ -178,14 +172,14 @@
 <body>
   <div class="background-animation"></div>
 
-  <!-- Apps Section -->
-  <section class="apps-section">
+  <!-- Weather Section -->
+  <section class="weather-section">
     <div class="section-header">
-      <h2>Our AI-powered Apps</h2>
-      <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
+      <h2>South Africa Weather Forecast</h2>
+      <p>Explore current weather and a 5-day forecast for cities in South Africa.</p>
     </div>
 
-    <!-- CloudySky App with Weather -->
+    <!-- Weather App -->
     <div class="cloud-app">
       <div class="container">
         <div class="cloud front">
@@ -201,52 +195,88 @@
     </div>
     <h3>CloudySky Weather</h3>
 
-    <!-- Investment Calculator -->
-    <div class="investment-calculator">
-      <div class="container">
-        <input type="number" id="initialAmount" placeholder="Initial Amount ($)">
-        <input type="number" id="interestRate" placeholder="Interest Rate (%)">
-        <input type="number" id="timePeriod" placeholder="Time Period (Years)">
-        <button onclick="calculateInvestment()">Calculate</button>
-        <div class="result" id="result">Final Value: $0</div>
-      </div>
+    <!-- 5-Day Forecast -->
+    <div id="forecast-info">
+      <!-- Forecast data will be displayed here -->
     </div>
-    <h3>Investment Calculator</h3>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    function calculateInvestment() {
-      const initialAmount = parseFloat(document.getElementById('initialAmount').value);
-      const interestRate = parseFloat(document.getElementById('interestRate').value);
-      const timePeriod = parseFloat(document.getElementById('timePeriod').value);
+    document.getElementById('search-button').addEventListener('click', getWeather);
 
-      if (!initialAmount || !interestRate || !timePeriod) {
-        alert("Please fill in all fields");
-        return;
-      }
-
-      const finalValue = initialAmount * Math.pow(1 + (interestRate / 100), timePeriod);
-      document.getElementById('result').textContent = `Final Value: $${finalValue.toFixed(2)}`;
-    }
-
-    // Fetch Weather Data from OpenWeatherMap API
-    async function fetchWeather() {
-      const apiKey = 'your-api-key-here';  // Get your API key from OpenWeatherMap
-      const city = 'New York';  // Replace with your desired city
+    async function getWeather() {
+      const location = document.getElementById('location-input').value;
+      const apiKey = '27590cdf19ad5bc53ef27ac7ec78ae64'; // OpenWeatherMap API key
+      const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location},ZA&appid=${apiKey}&units=metric`;
+      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location},ZA&appid=${apiKey}&units=metric`;
 
       try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
-        const data = await response.json();
-        const temp = data.main.temp;
-        const description = data.weather[0].description;
-        document.getElementById('weather-info').textContent = `Weather: ${temp}°C, ${description}`;
+        const [currentResponse, forecastResponse] = await Promise.all([
+          fetch(currentWeatherUrl),
+          fetch(forecastUrl)
+        ]);
+        const currentData = await currentResponse.json();
+        const forecastData = await forecastResponse.json();
+
+        displayCurrentWeather(currentData);
+        displayForecast(forecastData);
       } catch (error) {
-        document.getElementById('weather-info').textContent = 'Failed to load weather data.';
+        console.error('Error fetching weather data:', error);
       }
     }
 
-    // Call the weather API on page load
-    window.onload = fetchWeather;
+    function displayCurrentWeather(data) {
+      const weatherInfo = document.getElementById('weather-info');
+      const temp = data.main.temp;
+      const weatherCondition = temp <= 15 ? 'Cold' : temp <= 25 ? 'Warm' : 'Hot';
+
+      weatherInfo.innerHTML = `
+        <h2>${data.name}</h2>
+        <p>Temperature: ${temp} °C</p>
+        <p>Weather: ${data.weather[0].description}</p>
+        <p>Condition: ${weatherCondition}</p>
+      `;
+    }
+
+    function displayForecast(data) {
+      const forecastInfo = document.getElementById('forecast-info');
+      forecastInfo.innerHTML = `
+        <h3>5-Day Forecast</h3>
+        <div class="chart-container">
+          <canvas id="forecastChart"></canvas>
+        </div>
+      `;
+
+      // Preparing data for the chart (5-day forecast every 8th entry in forecast data)
+      const labels = data.list.filter((item, index) => index % 8 === 0).map(item => item.dt_txt.split(' ')[0]);
+      const temps = data.list.filter((item, index) => index % 8 === 0).map(item => item.main.temp);
+
+      const ctx = document.getElementById('forecastChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Temperature (°C)',
+            data: temps,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>
