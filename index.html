@@ -157,13 +157,21 @@
     }
 
     .message .avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: #7f8c8d;
-      object-fit: cover;
+      width: 40px; /* Default size for normal chat */
+      height: 40px; /* Default size for normal chat */
+      margin-right: 10px; /* Space between avatar and message */
     }
 
+    .avatar img {
+      width: 100%; /* Make it fill the parent container */
+      height: 100%; /* Ensure it's always a circle */
+      border-radius: 50%; /* Round the image */
+      object-fit: cover; /* Crop to fill the circle */
+      max-width: 40px; /* Ensure the image doesn't exceed a certain size */
+      max-height: 40px; /* Ensure the image doesn't exceed a certain size */
+    }
+
+    /* User message text */
     .message .message-text {
       background: white; /* White background for conversation */
       color: black; /* Black text */
@@ -250,6 +258,11 @@
         height: 60px;
         font-size: 32px;
       }
+
+      .avatar {
+        width: 35px; /* Slightly smaller on mobile */
+        height: 35px; /* Slightly smaller on mobile */
+      }
     }
   </style>
 </head>
@@ -274,8 +287,8 @@
         <div class="arrow"></div>
       </div>
       <div class="faq-item">
-        <h3>Do you offer ongoing support?</h3>
-        <p>Yes, we offer maintenance and support packages to ensure the continued success of your project post-launch.</p>
+        <h3>How can I contact your team?</h3>
+        <p>You can contact us via the contact form on our website or directly via email at support@company.com.</p>
         <div class="arrow"></div>
       </div>
     </div>
@@ -285,128 +298,56 @@
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
   <!-- Chat Popup -->
-  <div class="chat-popup" id="chatPopup">
+  <div class="chat-popup">
+    <div class="close-chat-button" onclick="toggleChatPopup()">X</div>
+
+    <!-- Chat Message (Bot) -->
     <div class="message bot-message">
-      <div class="avatar"></div>
+      <div class="avatar">
+        <img src="images/tomie-avatar.jpg" alt="Tomie Avatar" class="avatar-img">
+      </div>
       <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
     </div>
-    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+
+    <!-- User input and Send button -->
+    <input type="text" id="user-input" placeholder="Type your question...">
     <button onclick="sendMessage()">Send</button>
-    <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
   </div>
 
   <script>
-    const chatButton = document.querySelector('.chat-button');
-    const chatPopup = document.getElementById('chatPopup');
-    const closeChatButton = document.getElementById('closeChatButton');
-    let typingMessageIndex = 0;
-    const typingSpeed = 100;
-    let lastActivityTime = Date.now();
-    let inactivityTimer;
-
-    function toggleChatPopup() {
-      chatPopup.classList.toggle('active');
-      closeChatButton.classList.add('active');
-      if (chatPopup.classList.contains('active')) {
-        lastActivityTime = Date.now();
-        startInactivityTimer(); // Restart inactivity timer when chat is opened
-        clearChat(); // Clear any previous messages or input
-      }
-    }
-
-    // Close chat when the close button is clicked
-    function closeChat() {
-      chatPopup.classList.remove('active');
-      closeChatButton.classList.remove('active');
-      document.getElementById('userMessage').value = ''; // Clear chat input
-      clearTimeout(inactivityTimer); // Clear any running inactivity timer
-    }
-
-    // Clear the chat history and reset input when reopening chat
-    function clearChat() {
-      chatPopup.innerHTML = `
-        <div class="message bot-message">
-          <div class="avatar"></div>
-          <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
-        </div>
-        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-        <button onclick="sendMessage()">Send</button>
-      `;
-    }
-
-    // Send a message
-    function sendMessage() {
-      let message = document.getElementById('userMessage').value;
-
-      if (message.trim()) {
-        // Display user message
-        const userMessageElement = document.createElement('div');
-        userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-        chatPopup.appendChild(userMessageElement);
-
-        // Clear input field
-        document.getElementById('userMessage').value = '';
-
-        // Scroll to the bottom of the chat
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Bot reply (typing simulation)
-        typingMessageIndex = 0;
-        const botMessageElement = document.createElement('div');
-        botMessageElement.classList.add('message', 'bot-message');
-        botMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text"></div>`;
-        chatPopup.appendChild(botMessageElement);
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Simulate typing
-        function typeBotMessage() {
-          const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
-          if (typingMessageIndex < text.length) {
-            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-            typingMessageIndex++;
-            setTimeout(typeBotMessage, typingSpeed);
-          } else {
-            setTimeout(() => {
-              closeChat();
-            }, 5000); // 5 seconds after message appears
-          }
-        }
-        typeBotMessage();
-      }
-    }
-
-    // Inactivity timer to close the chat after 1 minute of inactivity
-    function startInactivityTimer() {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
-        closeChat();
-      }, 60000); // Close chat after 1 minute
-    }
-
-    // FAQ Toggle Logic (Arrows and answers)
-    document.querySelectorAll('.faq-item').forEach((faq) => {
-      const arrow = faq.querySelector('.arrow');
-      faq.addEventListener('click', () => {
-        document.querySelectorAll('.faq-item').forEach((item) => {
-          if (item !== faq) {
-            item.classList.remove('active');
-            item.querySelector('.arrow').classList.remove('rotate');
-          }
-        });
-        faq.classList.toggle('active');
-        arrow.classList.toggle('rotate');
+    // Toggle FAQ active state
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+        item.querySelector('.arrow').classList.toggle('rotate');
       });
     });
 
-    // Close the chat if the user clicks outside of the popup
-    document.addEventListener('click', (event) => {
-      const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
-      if (!isClickInside) {
-        closeChat(); // Close the chat if the click is outside the popup
-      }
-    });
+    // Toggle chat popup visibility
+    function toggleChatPopup() {
+      const chatPopup = document.querySelector('.chat-popup');
+      chatPopup.classList.toggle('active');
+      document.querySelector('.close-chat-button').classList.toggle('active');
+    }
+
+    // Send message
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value;
+      if (userInput.trim() === "") return;
+
+      const userMessage = `
+        <div class="message user-message">
+          <div class="message-text">${userInput}</div>
+        </div>
+      `;
+      document.querySelector('.chat-popup').insertAdjacentHTML('beforeend', userMessage);
+
+      // Clear input
+      document.getElementById('user-input').value = "";
+
+      // Scroll to bottom
+      document.querySelector('.chat-popup').scrollTop = document.querySelector('.chat-popup').scrollHeight;
+    }
   </script>
 </body>
 </html>
