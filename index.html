@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Section with Clean Chat</title>
-<style>
+  <style>
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -308,116 +308,122 @@
 
   <script>
     const chatButton = document.querySelector('.chat-button');
-const chatPopup = document.getElementById('chatPopup');
-const closeChatButton = document.getElementById('closeChatButton');
-let typingMessageIndex = 0;
-const typingSpeed = 100;
-let lastActivityTime = Date.now();
-let inactivityTimer;
-const inactivityDelay = 60000; // Close chat after 1 minute of inactivity
-const botMessageTimeout = 5000; // 5 seconds after bot message appears to close chat
+    const chatPopup = document.getElementById('chatPopup');
+    const closeChatButton = document.getElementById('closeChatButton');
+    let typingMessageIndex = 0;
+    const typingSpeed = 100;
+    let lastActivityTime = Date.now();
+    let inactivityTimer;
 
-// Toggle the chat popup
-function toggleChatPopup() {
-  chatPopup.classList.toggle('active');
-  closeChatButton.classList.add('active');
-  if (chatPopup.classList.contains('active')) {
-    lastActivityTime = Date.now();
-    startInactivityTimer(); // Restart inactivity timer when chat is opened
-    clearChat(); // Clear any previous messages or input
-  }
-}
-
-// Close chat when the close button is clicked
-function closeChat() {
-  chatPopup.classList.remove('active');
-  closeChatButton.classList.remove('active');
-  document.getElementById('userMessage').value = ''; // Clear chat input
-  clearTimeout(inactivityTimer); // Clear any running inactivity timer
-}
-
-// Start inactivity timer
-function startInactivityTimer() {
-  clearTimeout(inactivityTimer);
-  inactivityTimer = setTimeout(() => {
-    closeChat(); // Close chat after inactivity period
-  }, inactivityDelay);
-}
-
-// Send a message
-function sendMessage() {
-  let message = document.getElementById('userMessage').value;
-
-  if (message.trim()) {
-    // Display user message
-    const userMessageElement = document.createElement('div');
-    userMessageElement.classList.add('message', 'user-message');
-    userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-    chatPopup.appendChild(userMessageElement);
-
-    // Clear input field
-    document.getElementById('userMessage').value = '';
-
-    // Scroll to the bottom of the chat
-    chatPopup.scrollTop = chatPopup.scrollHeight;
-
-    // Bot reply (typing simulation)
-    typingMessageIndex = 0;
-    const botMessageElement = document.createElement('div');
-    botMessageElement.classList.add('message', 'bot-message');
-    botMessageElement.innerHTML = `
-      <div class="avatar">
-        <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-      </div>
-      <div class="message-text"></div>`;
-    chatPopup.appendChild(botMessageElement);
-    chatPopup.scrollTop = chatPopup.scrollHeight;
-
-    // Simulate typing
-    function typeBotMessage() {
-      const botMessageTextElement = botMessageElement.querySelector('.message-text');
-      const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
-      if (typingMessageIndex < text.length) {
-        botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-        typingMessageIndex++;
-        setTimeout(typeBotMessage, typingSpeed);
-      } else {
-        setTimeout(() => {
-          closeChat();
-        }, botMessageTimeout); // Close after 5 seconds after bot message completes
+    function toggleChatPopup() {
+      chatPopup.classList.toggle('active');
+      closeChatButton.classList.add('active');
+      if (chatPopup.classList.contains('active')) {
+        lastActivityTime = Date.now();
+        startInactivityTimer(); // Restart inactivity timer when chat is opened
+        clearChat(); // Clear any previous messages or input
       }
     }
-    typeBotMessage();
-  }
-}
 
-// Reset the inactivity timer when user interacts
-document.getElementById('userMessage').addEventListener('input', () => {
-  startInactivityTimer(); // Reset inactivity timer on typing
-});
+    // Close chat when the close button is clicked
+    function closeChat() {
+      chatPopup.classList.remove('active');
+      closeChatButton.classList.remove('active');
+      document.getElementById('userMessage').value = ''; // Clear chat input
+      clearTimeout(inactivityTimer); // Clear any running inactivity timer
+    }
 
-// FAQ Toggle Logic (Arrows and answers)
-document.querySelectorAll('.faq-item').forEach((faq) => {
-  const arrow = faq.querySelector('.arrow');
-  faq.addEventListener('click', () => {
-    document.querySelectorAll('.faq-item').forEach((item) => {
-      if (item !== faq) {
-        item.classList.remove('active');
-        item.querySelector('.arrow').classList.remove('rotate');
+    // Clear the chat history and reset input when reopening chat
+    function clearChat() {
+      chatPopup.innerHTML = `
+        <div class="message bot-message">
+          <div class="avatar">
+            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
+          </div>
+          <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
+        </div>
+        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+        <button onclick="sendMessage()">Send</button>
+      `;
+    }
+
+    // Send a message
+    function sendMessage() {
+      let message = document.getElementById('userMessage').value;
+
+      if (message.trim()) {
+        // Display user message
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message', 'user-message');
+        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
+        chatPopup.appendChild(userMessageElement);
+
+        // Clear input field
+        document.getElementById('userMessage').value = '';
+
+        // Scroll to the bottom of the chat
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Bot reply (typing simulation)
+        typingMessageIndex = 0;
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('message', 'bot-message');
+        botMessageElement.innerHTML = `
+          <div class="avatar">
+            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
+          </div>
+          <div class="message-text"></div>`;
+        chatPopup.appendChild(botMessageElement);
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Simulate typing
+        function typeBotMessage() {
+          const botMessageTextElement = botMessageElement.querySelector('.message-text');
+          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
+          if (typingMessageIndex < text.length) {
+            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
+            typingMessageIndex++;
+            setTimeout(typeBotMessage, typingSpeed);
+          } else {
+            setTimeout(() => {
+              closeChat();
+            }, 5000); // 5 seconds after message appears
+          }
+        }
+        typeBotMessage();
+      }
+    }
+
+    // Inactivity timer to close the chat after 1 minute of inactivity
+    function startInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        closeChat();
+      }, 5000); // Close chat after 1 minute
+    }
+
+    // FAQ Toggle Logic (Arrows and answers)
+    document.querySelectorAll('.faq-item').forEach((faq) => {
+      const arrow = faq.querySelector('.arrow');
+      faq.addEventListener('click', () => {
+        document.querySelectorAll('.faq-item').forEach((item) => {
+          if (item !== faq) {
+            item.classList.remove('active');
+            item.querySelector('.arrow').classList.remove('rotate');
+          }
+        });
+        faq.classList.toggle('active');
+        arrow.classList.toggle('rotate');
+      });
+    });
+
+    // Close the chat if the user clicks outside of the popup
+    document.addEventListener('click', (event) => {
+      const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
+      if (!isClickInside) {
+        closeChat(); // Close the chat if the click is outside the popup
       }
     });
-    faq.classList.toggle('active');
-    arrow.classList.toggle('rotate');
-  });
-});
-
-// Close the chat if the user clicks outside of the popup
-document.addEventListener('click', (event) => {
-  const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
-  if (!isClickInside) {
-    closeChat(); // Close the chat if the click is outside the popup
-  }
-});
-</script>
+  </script>
 </body>
 </html>
