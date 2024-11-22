@@ -69,76 +69,6 @@
       color: #ccc;
     }
 
-    /* App Container */
-    .apps-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px;
-      padding: 0 20px;
-    }
-
-    .app-item {
-      position: relative;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      border: 2px solid transparent;
-      background-image: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.3));
-      position: relative;
-      padding: 20px;
-    }
-
-    .app-item .app-image img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      transition: transform 0.4s ease;
-    }
-
-    .app-item h3 {
-      font-size: 1.6rem;
-      color: #00f1ff;
-      margin-top: 15px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.5);
-      transition: text-shadow 0.3s ease;
-    }
-
-    /* Hover Effects */
-    .app-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-      border-color: #00f1ff;
-    }
-
-    .app-item:hover .app-image img {
-      transform: scale(1.05);
-    }
-
-    .app-item:hover h3 {
-      text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 50px rgba(0, 255, 255, 0.5);
-    }
-
-    .app-item:hover::after {
-      content: attr(data-description);
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 15px;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 1rem;
-      opacity: 0.9;
-      transition: opacity 0.3s ease;
-    }
-
     /* CloudySky App Animation */
     .cloud-app, .calculator-app {
       position: relative;
@@ -152,6 +82,7 @@
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
       animation: cloud-move 8s infinite ease-in-out;
+      margin: 20px auto;
     }
 
     .cloud-app .container, .calculator-app .container {
@@ -300,51 +231,46 @@
       <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <div class="apps-container">
-      <!-- CloudySky App -->
-      <div class="app-item" data-title="CloudySky" data-description="An AI-powered weather simulation with beautiful cloud and sunshine animations.">
-        <div class="cloud-app">
-          <div class="container">
-            <div class="cloud front">
-              <span class="left-front"></span>
-              <span class="right-front"></span>
-            </div>
-            <span class="sun sunshine"></span>
-            <span class="sun"></span>
-            <div class="cloud back">
-              <span class="left-back"></span>
-              <span class="right-back"></span>
-            </div>
-          </div>
+    <div class="cloud-app">
+      <div class="container">
+        <div class="cloud front">
+          <span class="left-front"></span>
+          <span class="right-front"></span>
         </div>
-        <h3>CloudySky</h3>
-      </div>
-
-      <!-- Calculator App -->
-      <div class="app-item" data-title="Calculator" data-description="An interactive AI-powered calculator with real-time results.">
-        <div class="calculator-app">
-          <div class="container">
-            <div class="button">1</div>
-            <div class="button">2</div>
-            <div class="button">3</div>
-            <div class="button">+</div>
-            <div class="button">4</div>
-            <div class="button">5</div>
-            <div class="button">6</div>
-            <div class="button">-</div>
-            <div class="button">7</div>
-            <div class="button">8</div>
-            <div class="button">9</div>
-            <div class="button">*</div>
-            <div class="button">0</div>
-            <div class="button">C</div>
-            <div class="button">=</div>
-            <div class="button">/</div>
-          </div>
+        <span class="sun sunshine"></span>
+        <span class="sun"></span>
+        <div class="cloud back">
+          <span class="left-back"></span>
+          <span class="right-back"></span>
         </div>
-        <h3>Calculator</h3>
       </div>
     </div>
+
+    <h3>CloudySky</h3>
+
+    <!-- Calculator App -->
+    <div class="calculator-app">
+      <div class="container">
+        <div class="button">1</div>
+        <div class="button">2</div>
+        <div class="button">3</div>
+        <div class="button">+</div>
+        <div class="button">4</div>
+        <div class="button">5</div>
+        <div class="button">6</div>
+        <div class="button">-</div>
+        <div class="button">7</div>
+        <div class="button">8</div>
+        <div class="button">9</div>
+        <div class="button">*</div>
+        <div class="button">0</div>
+        <div class="button">C</div>
+        <div class="button">=</div>
+        <div class="button">/</div>
+      </div>
+    </div>
+
+    <h3>Calculator</h3>
   </section>
 </body>
 </html>
