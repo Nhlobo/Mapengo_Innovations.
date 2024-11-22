@@ -3,261 +3,183 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>High-Performance Custom Apps</title>
+  <title>AI-Enhanced Apps</title>
   <style>
-    /* Apps Showcase Section */
-    #apps {
-      padding: 80px 5%;
-      background-color: #fafafa;
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #141414;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
+    h2, h3, p {
+      font-family: 'Arial', sans-serif;
+      color: #fff;
     }
 
-    .section-description {
-      font-size: 1.2rem;
-      color: #666;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .app-card {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-      overflow: hidden;
-    }
-
-    .app-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .app-image img {
+    /* AI-inspired Background Animation */
+    .background-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      border-bottom: 3px solid #ddd;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.5));
+      animation: float 15s ease-in-out infinite;
+      z-index: -1;
     }
 
-    .app-info {
-      padding: 20px;
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
 
-    .app-title {
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 15px;
-    }
-
-    .app-description {
-      font-size: 1.125rem;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      font-size: 1.125rem;
-      padding: 12px 20px;
-      background-color: #00b3b3;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      background-color: #009999;
-    }
-
-    .cta-section {
+    /* Apps Section */
+    .apps-section {
+      padding: 80px 20px;
       text-align: center;
-      margin-top: 60px;
-    }
-
-    .cta-section h3 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .cta-section p {
-      font-size: 1.125rem;
-      color: #444;
-      margin-bottom: 30px;
-    }
-
-    .cta-btn.primary {
-      background-color: #28a745;
-    }
-
-    .cta-btn.primary:hover {
-      background-color: #218838;
-    }
-
-    /* Cloud section styling (below Weather image) */
-    .cloud-container {
-      width: 150px;
-      height: 150px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px auto;
-    }
-
-    .cloud {
-      width: 150px;
       position: relative;
     }
 
-    .front {
-      display: inline-block;
+    .section-header h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      color: #ccc;
+    }
+
+    /* App Container */
+    .apps-container {
+      display: flex;
+      justify-content: space-around;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .app-item {
+      position: relative;
+      width: 250px;
+      height: 350px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .app-item .app-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .app-item h3 {
       position: absolute;
-      animation: clouds 8s infinite ease-in-out;
-      z-index: 11;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      font-size: 1.6rem;
+      color: #fff;
+      z-index: 1;
     }
 
-    .back {
-      display: inline-block;
+    /* Hover Effects */
+    .app-item:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-item:hover h3 {
+      transform: translateY(-10px);
+    }
+
+    .app-item:hover::after {
+      content: attr(data-description);
       position: absolute;
-      animation: clouds 12s infinite ease-in-out;
-      z-index: 12;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1rem;
+      opacity: 0.9;
     }
 
-    .right-front {
-      width: 30px;
-      height: 30px;
-      border-radius: 50% 50% 50% 0%;
-      background-color: #4c9beb;
-      display: inline-block;
-      margin-left: -15px;
+    /* Text Glowing Effect */
+    .app-item h3 {
+      font-size: 1.6rem;
+      color: #00f1ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.5);
+      transition: text-shadow 0.3s ease;
     }
 
-    .left-front {
-      width: 45px;
-      height: 45px;
-      border-radius: 50% 50% 0% 50%;
-      background-color: #4c9beb;
-      display: inline-block;
+    .app-item:hover h3 {
+      text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 50px rgba(0, 255, 255, 0.5);
     }
-
-    .right-back {
-      width: 35px;
-      height: 35px;
-      border-radius: 50% 50% 50% 0%;
-      background-color: #4c9beb;
-      display: inline-block;
-      margin-left: -10px;
-    }
-
-    .left-back {
-      width: 20px;
-      height: 20px;
-      border-radius: 50% 50% 0% 50%;
-      background-color: #4c9beb;
-      display: inline-block;
-    }
-
-    @keyframes clouds {
-      0% {
-        transform: translateX(10px);
-      }
-
-      50% {
-        transform: translateX(0px);
-      }
-
-      100% {
-        transform: translateX(10px);
-      }
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- Apps Showcase Section -->
-  <section id="apps">
-    <div class="container">
-      <h2 class="section-title">High-Performance Custom Apps</h2>
-      <p class="section-description">We specialize in developing scalable, efficient, and user-friendly applications that meet your business goals. Our solutions are crafted with precision to ensure optimal performance and seamless integration into your existing systems.</p>
+  <section class="apps-section">
+    <!-- Background Animation: AI-inspired effect -->
+    <div class="background-animation"></div>
 
-      <div class="apps-grid">
-        <!-- App 1 -->
-        <div class="app-card">
-          <div class="app-image">
-            <img src="WEATHER.png" alt="App 1" />
-          </div>
-          <div class="app-info">
-            <h3 class="app-title">South Africa Weather App</h3>
-            <p class="app-description">Real-time weather data with fast, reliable updates and an intuitive user interface.</p>
-            <a href="[app_link]" class="cta-btn">Try It Now</a>
-          </div>
-        </div>
+    <!-- Section Title and Description -->
+    <div class="section-header">
+      <h2>AI-Powered Apps</h2>
+      <p>Explore the next generation of applications built with intelligence, precision, and cutting-edge technology.</p>
+    </div>
 
-        <!-- App 2 -->
-        <div class="app-card">
-          <div class="app-image">
-            <img src="quranknowledgquiz.png" alt="App 2" />
-          </div>
-          <div class="app-info">
-            <h3 class="app-title">Quran Knowledge Quiz</h3>
-            <p class="app-description">An engaging quiz designed to test and expand your knowledge of the Holy Quran.</p>
-            <a href="[app_link]" class="cta-btn">Start Using</a>
-          </div>
+    <!-- App Showcase -->
+    <div class="apps-container">
+      <div class="app-item" data-title="App 1" data-description="A smart task management system with AI-powered suggestions">
+        <div class="app-image">
+          <img src="https://via.placeholder.com/250x350?text=App+1" alt="App 1">
         </div>
-
-        <!-- App 3 -->
-        <div class="app-card">
-          <div class="app-image">
-            <img src="CALCULATOR.png" alt="App 3" />
-          </div>
-          <div class="app-info">
-            <h3 class="app-title">Investment Calculator</h3>
-            <p class="app-description">Easily calculate the future value of investments with intuitive input and clear results.</p>
-            <a href="[app_link]" class="cta-btn">Learn More</a>
-          </div>
-        </div>
+        <h3>TaskMaster</h3>
       </div>
 
-      <!-- Updated CTA Section -->
-      <div class="cta-section">
-        <h3>Ready to Innovate?</h3>
-        <p>Transform your business with high-performance, custom-built applications. Let's discuss how we can deliver the perfect solution for you.</p>
-        <a href="[contact_link]" class="cta-btn primary">Get Started</a>
+      <div class="app-item" data-title="App 2" data-description="An intelligent budgeting assistant that learns your spending habits">
+        <div class="app-image">
+          <img src="https://via.placeholder.com/250x350?text=App+2" alt="App 2">
+        </div>
+        <h3>BudgetBot</h3>
+      </div>
+
+      <div class="app-item" data-title="App 3" data-description="A powerful brainstorming app that uses AI to generate ideas">
+        <div class="app-image">
+          <img src="https://via.placeholder.com/250x350?text=App+3" alt="App 3">
+        </div>
+        <h3>BrainStormer</h3>
       </div>
     </div>
   </section>
-
-  <!-- Cloud Section (Under Weather Image) -->
-  <div class="cloud-container">
-    <div class="cloud">
-      <div class="front">
-        <div class="left-front"></div>
-        <div class="right-front"></div>
-      </div>
-      <div class="back">
-        <div class="left-back"></div>
-        <div class="right-back"></div>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
