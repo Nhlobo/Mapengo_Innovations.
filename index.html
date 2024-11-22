@@ -37,20 +37,19 @@
             overflow: hidden; /* Hide overflow content */
         }
 
-        /* Testimonials Container - Use flex for alignment */
+        /* Testimonials Container */
         .testimonials-container {
             display: flex;
-            flex-wrap: nowrap;
-            animation: slide 30s linear infinite; /* Infinite scrolling */
+            animation: scrollTestimonials 20s linear infinite; /* Continuous scroll animation */
         }
 
-        /* Circular Infinite Loop Animation */
-        @keyframes slide {
+        /* Keyframes for smooth continuous scroll */
+        @keyframes scrollTestimonials {
             0% {
-                transform: translateX(0); /* Start at the initial position */
+                transform: translateX(0); /* Start at the beginning */
             }
             100% {
-                transform: translateX(-100%); /* Move fully to the left */
+                transform: translateX(-100%); /* Move to the left */
             }
         }
 
@@ -63,9 +62,8 @@
             text-align: center;
             max-width: 230px;
             margin-right: 50px; /* Space between cards */
-            flex-shrink: 0; /* Prevent cards from shrinking */
+            flex-shrink: 0; /* Prevent shrinking */
             transition: all 0.3s ease;
-            position: relative;
         }
 
         /* Hover effect for cards */
@@ -137,31 +135,6 @@
             </div>
 
             <!-- Testimonial 4 -->
-            <div class="testimonial-card">
-                <img src="michael-johnson.jpg" alt="Michael Johnson">
-                <p>"Mapengo's team delivered on every aspect of our project. Highly professional and committed to excellence!"</p>
-                <h4>- Michael Johnson, Director of WebWorks</h4>
-            </div>
-
-            <!-- Repeat testimonials for seamless loop -->
-            <div class="testimonial-card">
-                <img src="john-doe.jpg" alt="John Doe">
-                <p>"Mapengo Innovations provided an exceptional app solution, tailored to our needs. We highly recommend their services!"</p>
-                <h4>- Tinyiko, CEO of Mzansi Taste Kitchen</h4>
-            </div>
-
-            <div class="testimonial-card">
-                <img src="jane-smith.jpg" alt="Jane Smith">
-                <p>"The website Mapengo created for us is perfect. It's not just functional, but visually stunning too!"</p>
-                <h4>- Mvelo, Owner of Mvelo Livestock Co.</h4>
-            </div>
-
-            <div class="testimonial-card">
-                <img src="alice-brown.jpg" alt="Alice Brown">
-                <p>"Working with Mapengo was an absolute pleasure. Their customer service and attention to detail are second to none."</p>
-                <h4>- Alice Brown, Founder of InnovateTech</h4>
-            </div>
-
             <div class="testimonial-card">
                 <img src="michael-johnson.jpg" alt="Michael Johnson">
                 <p>"Mapengo's team delivered on every aspect of our project. Highly professional and committed to excellence!"</p>
