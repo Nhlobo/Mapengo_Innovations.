@@ -86,22 +86,49 @@
       color: #333;
     }
 
-    /* New Small, Minimalistic Arrow */
+    /* New Modern Arrow Style */
     .arrow {
       margin-top: 8px;
-      display: block;
-      width: 14px;
-      height: 14px;
-      border-top: 2px solid #333;
-      border-right: 2px solid #333;
-      transform: rotate(45deg);
-      margin: 0 auto;
-      transition: transform 0.3s ease;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(45deg, #00bcd4, #00796b);
+      border-radius: 50%;
+      position: relative;
+      transition: transform 0.3s ease, background-color 0.3s ease;
       cursor: pointer;
     }
 
-    .arrow.rotate {
-      transform: rotate(-135deg);
+    .arrow:before,
+    .arrow:after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 4px;
+      width: 12px;
+      height: 2px;
+      background-color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .arrow:after {
+      top: 12px;
+      transform: rotate(90deg);
+    }
+
+    .arrow.rotate:before {
+      transform: rotate(45deg);
+      top: 6px;
+    }
+
+    .arrow.rotate:after {
+      transform: rotate(-45deg);
+      top: 6px;
+    }
+
+    /* Hover effect */
+    .arrow:hover {
+      background-color: #00796b;
+      transform: scale(1.1);
     }
 
     /* Animation for FAQ items */
@@ -171,4 +198,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
