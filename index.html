@@ -162,7 +162,7 @@
       margin-right: 10px; /* Space between avatar and message */
     }
 
-    .avatar img {
+    .message .avatar-img {
       width: 100%; /* Make it fill the parent container */
       height: 100%; /* Ensure it's always a circle */
       border-radius: 50%; /* Round the image */
@@ -171,28 +171,12 @@
       max-height: 40px; /* Ensure the image doesn't exceed a certain size */
     }
 
-    /* User message text */
-    .message .message-text {
-      background: white; /* White background for conversation */
-      color: black; /* Black text */
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 14px;
-      max-width: 220px;
-      word-wrap: break-word;
-      border: 1px solid #ddd;
-    }
-
-    .message.bot-message .message-text {
-      background: white; /* White background for bot messages */
-      color: black; /* Black text */
-      border-color: #ccc;
-    }
-
-    .message.user-message .message-text {
-      background: white; /* White background for user messages */
-      color: black; /* Black text */
-      border-color: #ccc;
+    /* Ensure the image is responsive */
+    @media (max-width: 600px) {
+      .avatar {
+        width: 35px; /* Slightly smaller on mobile */
+        height: 35px; /* Slightly smaller on mobile */
+      }
     }
 
     /* Input area */
@@ -258,11 +242,6 @@
         height: 60px;
         font-size: 32px;
       }
-
-      .avatar {
-        width: 35px; /* Slightly smaller on mobile */
-        height: 35px; /* Slightly smaller on mobile */
-      }
     }
   </style>
 </head>
@@ -271,26 +250,7 @@
   <section id="faq" class="faq-section">
     <h2 class="section-title">Frequently Asked Questions</h2>
     <div class="faq-container">
-      <div class="faq-item">
-        <h3>What services do you offer?</h3>
-        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How much do your services cost?</h3>
-        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How long does a project take?</h3>
-        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How can I contact your team?</h3>
-        <p>You can contact us via the contact form on our website or directly via email at support@company.com.</p>
-        <div class="arrow"></div>
-      </div>
+      <!-- FAQ Items here -->
     </div>
   </section>
 
@@ -298,55 +258,52 @@
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
   <!-- Chat Popup -->
-  <div class="chat-popup">
-    <div class="close-chat-button" onclick="toggleChatPopup()">X</div>
-
-    <!-- Chat Message (Bot) -->
+  <div class="chat-popup" id="chatPopup">
     <div class="message bot-message">
       <div class="avatar">
-        <img src="IMG-20241015-WA0023.png" alt="Tomie Avatar" class="avatar-img">
+        <!-- Replace the below src with your image path -->
+        <img src="images/tomie-avatar.jpg" alt="Tomie's Avatar" class="avatar-img">
       </div>
       <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
     </div>
-
-    <!-- User input and Send button -->
-    <input type="text" id="user-input" placeholder="Type your question...">
+    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
     <button onclick="sendMessage()">Send</button>
+    <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
   </div>
 
   <script>
-    // Toggle FAQ active state
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('active');
-        item.querySelector('.arrow').classList.toggle('rotate');
-      });
-    });
-
-    // Toggle chat popup visibility
+    // Function to toggle chat popup
     function toggleChatPopup() {
-      const chatPopup = document.querySelector('.chat-popup');
+      const chatPopup = document.getElementById('chatPopup');
+      const closeButton = document.getElementById('closeChatButton');
       chatPopup.classList.toggle('active');
-      document.querySelector('.close-chat-button').classList.toggle('active');
+      closeButton.classList.toggle('active');
     }
 
-    // Send message
+    // Function to send user message (will be enhanced later)
     function sendMessage() {
-      const userInput = document.getElementById('user-input').value;
-      if (userInput.trim() === "") return;
+      const userMessageInput = document.getElementById('userMessage');
+      const messageText = userMessageInput.value.trim();
+      if (messageText) {
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('message', 'user-message');
+        userMessageDiv.innerHTML = `
+          <div class="avatar">
+            <img src="images/tomie-avatar.jpg" alt="User's Avatar" class="avatar-img">
+          </div>
+          <div class="message-text">${messageText}</div>
+        `;
+        document.querySelector('.chat-popup').appendChild(userMessageDiv);
+        userMessageInput.value = ''; // Clear input after sending
+      }
+    }
 
-      const userMessage = `
-        <div class="message user-message">
-          <div class="message-text">${userInput}</div>
-        </div>
-      `;
-      document.querySelector('.chat-popup').insertAdjacentHTML('beforeend', userMessage);
-
-      // Clear input
-      document.getElementById('user-input').value = "";
-
-      // Scroll to bottom
-      document.querySelector('.chat-popup').scrollTop = document.querySelector('.chat-popup').scrollHeight;
+    // Function to close chat popup
+    function closeChat() {
+      const chatPopup = document.getElementById('chatPopup');
+      const closeButton = document.getElementById('closeChatButton');
+      chatPopup.classList.remove('active');
+      closeButton.classList.remove('active');
     }
   </script>
 </body>
