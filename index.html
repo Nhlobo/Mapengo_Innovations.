@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ Section</title>
+  <title>FAQ Section with Popup</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -13,10 +12,12 @@
       background: #f4f4f4;
       color: #333;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       text-align: center;
+      overflow-x: hidden;
     }
 
     .faq-section {
@@ -36,7 +37,6 @@
       text-transform: uppercase;
     }
 
-    /* FAQ Item Styles */
     .faq-container {
       display: flex;
       flex-direction: column;
@@ -86,7 +86,6 @@
       color: #333;
     }
 
-    /* New Small, Minimalistic Arrow */
     .arrow {
       margin-top: 8px;
       display: block;
@@ -104,13 +103,11 @@
       transform: rotate(-135deg);
     }
 
-    /* Animation for FAQ items */
     @keyframes fadeInItem {
       0% { opacity: 0; transform: translateY(10px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Responsive Design */
     @media (max-width: 600px) {
       .faq-section {
         padding: 15px;
@@ -128,10 +125,76 @@
         font-size: 0.95rem;
       }
     }
+
+    .popup-btn {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 20px;
+      background: #00bcd4;
+      color: #fff;
+      font-size: 1rem;
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      z-index: 100;
+      display: none;
+    }
+
+    .popup-btn:hover {
+      background: #0097a7;
+      transform: scale(1.1);
+    }
+
+    .popup-btn:active {
+      background: #00838f;
+      transform: scale(1);
+    }
+
+    #contact-form {
+      margin-top: 50px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+      display: none;
+    }
+
+    .contact-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #00bcd4;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+    }
   </style>
 </head>
 <body>
-  <!-- FAQ Section -->
   <section id="faq" class="faq-section">
     <h2 class="section-title">Frequently Asked Questions</h2>
     <div class="faq-container">
@@ -158,17 +221,284 @@
     </div>
   </section>
 
+  <section id="contact-form">
+    <h2 class="contact-title">Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <div class="popup-btn" id="popup-btn">
+    Ask too!
+  </div>
+
   <script>
-    // FAQ Toggle Logic
     document.querySelectorAll('.faq-item').forEach((faq) => {
       const arrow = faq.querySelector('.arrow');
       faq.addEventListener('click', () => {
-        // Toggle the answer visibility
         faq.classList.toggle('active');
-        // Toggle the arrow rotation
         arrow.classList.toggle('rotate');
       });
     });
+
+    document.getElementById('popup-btn').addEventListener('click', () => {
+      document.getElementById('contact-form').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      document.getElementById('popup-btn').style.display = 'none';
+    });
+
+    window.addEventListener('scroll', () => {
+      const faqSection = document.getElementById('faq');
+      const faqPosition = faqSection.getBoundingClientRect();
+      const popupBtn = document.getElementById('popup-btn');
+
+      if (faqPosition.top <= 0 && faqPosition.bottom >= 0) {
+        popupBtn.style.display = 'block';
+      } else {
+        popupBtn.style.display = 'none';
+      }
+    });
   </script>
+  <!--================= CONTACT ================ -->
+<section class="contact" id="contact">
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+        <form action="https://formspree.io/f/xwpkkvnk" class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required minlength="2" maxlength="50" 
+                    pattern="[a-zA-Z ]+" aria-label="Name field" title="Please enter a valid name (letters and spaces only)">
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required aria-label="Email field" title="Please enter a valid email address">
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500"
+                    aria-label="Message field" title="Message should be between 10 and 500 characters"></textarea>
+            </div>
+
+            <!-- Privacy Policy and Communication Checkboxes -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+                <label for="privacyPolicy">
+                    I agree to the <a href="privacy.html" style="color: #00bcd4;">Privacy Policy</a> .
+                </label>
+            </div>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="communicationOptIn" name="communicationOptIn">
+                <label for="communicationOptIn">
+                    I would like to receive updates and promotional communications.
+                </label>
+            </div>
+
+            <button type="submit" class="button contact-button">Send Message</button>
+        </form>
+
+        <!-- Loader and Response -->
+        <div id="loader" style="display:none;" aria-live="polite">
+            <img src="loader.gif" alt="Loading..." />
+        </div>
+        <div id="response" style="display:none;" aria-live="polite"></div>
+    </div>
+</section>
+
+<style>
+/* General Body Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Contact Section */
+.contact {
+  max-width: 800px;
+  margin: 20px;
+  padding: 30px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.contact-container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #00bcd4;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-align: left;
+  color: #bbb;
+  letter-spacing: 0.5px;
+}
+
+input, textarea {
+  padding: 15px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #fff;
+  background: #222;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.7);
+  background: #333;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.checkbox-group input {
+  width: auto;
+  transform: scale(1.2);
+}
+
+button {
+  background-color: #00bcd4;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 30px;
+  box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+}
+
+button:hover {
+  background-color: #0097a7;
+  transform: translateY(-3px);
+}
+
+button:active {
+  background-color: #00838f;
+  transform: translateY(2px);
+}
+
+/* Loader and Response */
+#loader {
+  display: none;
+  text-align: center;
+}
+
+#response {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #00bcd4;
+  font-weight: 500;
+}
+
+/* AI-style glowing effect on the form labels */
+.form-group label {
+  position: relative;
+}
+
+.form-group label::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #00bcd4;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+input:focus ~ label::after, textarea:focus ~ label::after {
+  transform: scaleX(1);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 20px;
+  }
+
+  .contact-container h1 {
+    font-size: 1.6rem;
+  }
+
+  button {
+    padding: 10px 15px;
+  }
+
+  .checkbox-group {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container h1 {
+    font-size: 1.3rem;
+  }
+
+  input, textarea {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 0.9rem;
+  }
+}
+                  </style>
 </body>
-  </html>
+</html>
