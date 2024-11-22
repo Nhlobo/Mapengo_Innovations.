@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ Section</title>
+  <title>FAQ Section with AI Chat</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
       background: #f4f4f4;
-      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
+    /* General FAQ Section Styles */
     .faq-section {
-      max-width: 600px;
+      max-width: 800px;
       margin: 20px;
       padding: 20px;
       background: #fff;
@@ -49,16 +49,12 @@
       padding: 16px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       border: 1px solid #ddd;
-      transition: all 0.3s ease;
       cursor: pointer;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInItem 0.3s ease-in-out forwards;
+      transition: all 0.3s ease;
     }
 
     .faq-item:hover {
-      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);  /* Subtle blue glow */
-      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
     }
 
     .faq-item h3 {
@@ -86,65 +82,134 @@
       color: #333;
     }
 
-    /* New Rounded Arrow Design with Light Sky Blue */
-    .arrow {
-      position: relative;
-      width: 20px;
-      height: 20px;
+    /* Chat button */
+    .chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #00bcd4, #1de9b6);
+      color: white;
+      border: none;
       border-radius: 50%;
-      background: linear-gradient(135deg, #87CEFA, #00BFFF);  /* Light Sky Blue Gradient */
+      width: 70px;
+      height: 70px;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    .chat-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 188, 212, 0.4);
+    }
+
+    /* Chat popup */
+    .chat-popup {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 350px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .chat-popup.active {
+      display: flex;
+    }
+
+    .message {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Message user style */
+    .message.user-message {
+      justify-content: flex-end;
+    }
+
+    .message .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #00796b;
+      object-fit: cover;
+    }
+
+    .message .message-text {
+      background: linear-gradient(135deg, #00bcd4, #1de9b6);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      max-width: 220px;
+      word-wrap: break-word;
+    }
+
+    .message.bot-message .message-text {
+      background: #00bcd4;
+    }
+
+    .message.user-message .message-text {
+      background: #80deea;
+    }
+
+    /* Input area */
+    .chat-popup input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .chat-popup input[type="text"]:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    }
+
+    .chat-popup button {
+      background: linear-gradient(135deg, #00bcd4, #1de9b6);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 12px;
+      width: 100%;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-top: 8px;
     }
 
-    .arrow::before {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-left: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-      transform: rotate(45deg);
-      transition: transform 0.3s ease;
+    .chat-popup button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
     }
 
-    .arrow.rotate::before {
-      transform: rotate(-135deg);
-    }
-
-    .arrow:hover {
-      transform: scale(1.2);
-      box-shadow: 0 0 8px rgba(0, 191, 255, 0.7);  /* Lighter blue glow on hover */
-    }
-
-    /* Animation for FAQ items */
-    @keyframes fadeInItem {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive Design */
     @media (max-width: 600px) {
-      .faq-section {
-        padding: 15px;
+      .chat-popup {
+        width: 280px;
       }
 
-      .section-title {
-        font-size: 1.3rem;
-      }
-
-      .faq-item h3 {
-        font-size: 1rem;
-      }
-
-      .faq-item p {
-        font-size: 0.95rem;
+      .chat-button {
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
       }
     }
+
   </style>
 </head>
 <body>
@@ -155,37 +220,79 @@
       <div class="faq-item">
         <h3>What services do you offer?</h3>
         <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
-        <div class="arrow"></div>
       </div>
       <div class="faq-item">
         <h3>How much do your services cost?</h3>
         <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
-        <div class="arrow"></div>
       </div>
       <div class="faq-item">
         <h3>How long does a project take?</h3>
         <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
-        <div class="arrow"></div>
       </div>
       <div class="faq-item">
         <h3>Do you offer support after the project is completed?</h3>
         <p>Yes, we offer maintenance and support packages to ensure your website or app continues to perform optimally.</p>
-        <div class="arrow"></div>
       </div>
     </div>
   </section>
 
+  <!-- Chat Button -->
+  <button class="chat-button" onclick="toggleChatPopup()">💬</button>
+
+  <!-- Chat Popup -->
+  <div class="chat-popup" id="chatPopup">
+    <div class="message bot-message">
+      <div class="avatar"></div>
+      <div class="message-text">Hi, I'm Tomie! Ask me anything.</div>
+    </div>
+    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
   <script>
     // FAQ Toggle Logic
     document.querySelectorAll('.faq-item').forEach((faq) => {
-      const arrow = faq.querySelector('.arrow');
       faq.addEventListener('click', () => {
-        // Toggle the answer visibility
         faq.classList.toggle('active');
-        // Toggle the arrow rotation
-        arrow.classList.toggle('rotate');
       });
     });
+
+    // Toggle chat popup visibility
+    function toggleChatPopup() {
+      const chatPopup = document.getElementById('chatPopup');
+      chatPopup.classList.toggle('active');
+    }
+
+    // Function to send message
+    function sendMessage() {
+      const userMessage = document.getElementById('userMessage').value;
+      if (userMessage.trim()) {
+        // Create and display the user's message
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message', 'user-message');
+        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${userMessage}</div>`;
+
+        const chatPopup = document.getElementById('chatPopup');
+        chatPopup.appendChild(userMessageElement);
+
+        // Clear the input field after sending
+        document.getElementById('userMessage').value = '';
+
+        // Scroll to the bottom
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Simulate bot reply after a small delay
+        setTimeout(() => {
+          const botMessage = document.createElement('div');
+          botMessage.classList.add('message', 'bot-message');
+          botMessage.innerHTML = `<div class="avatar"></div><div class="message-text">Thanks for reaching out! We'll get back to you shortly.</div>`;
+          chatPopup.appendChild(botMessage);
+
+          // Scroll to the bottom
+          chatPopup.scrollTop = chatPopup.scrollHeight;
+        }, 1500); // Bot responds after 1.5 seconds
+      }
+    }
   </script>
 </body>
 </html>
