@@ -282,121 +282,115 @@
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
   <!-- Chat Popup -->
-  <div id="chatPopup" class="chat-popup">
-    <div id="typingMessage" class="message bot-message">
+  <div class="chat-popup" id="chatPopup">
+    <div class="message bot-message">
       <div class="avatar"></div>
-      <div class="message-text"></div>
+      <div class="message-text" id="typingMessage">Hi! I’m Tomie, let me help you send your question without filling the contact form</div>
     </div>
-    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+    <button class="close-chat-button" onclick="toggleChatPopup()">Close</button>
+    <div id="chat-history"></div>
+    <input type="text" id="user-message" placeholder="Type your message..." onfocus="clearTypingMessage()">
     <button onclick="sendMessage()">Send</button>
   </div>
 
-  <!-- Close Chat Button -->
-  <button class="close-chat-button" id="closeChatButton" onclick="closeChat()">Close Chat</button>
-
   <script>
+    // Variables
+    const chatPopup = document.querySelector('.chat-popup');
+    const closeChatButton = document.querySelector('.close-chat-button');
+    const userMessageInput = document.querySelector('#user-message');
+    const chatHistory = document.querySelector('#chat-history');
     const chatButton = document.querySelector('.chat-button');
-    const chatPopup = document.getElementById('chatPopup');
-    const closeChatButton = document.getElementById('closeChatButton');
-    const typingMessageElement = document.getElementById('typingMessage');
-    let typingMessageIndex = 0;
-    const typingSpeed = 100;
-    let lastActivityTime = Date.now();
+    const typingMessage = document.querySelector('#typingMessage');
 
-    // Clear the chat when opening
-    function clearChat() {
-      chatPopup.innerHTML = ''; // Clear all previous messages
-      typingMessageIndex = 0;
-    }
+    let inactivityTimer;
 
+    // Function to toggle chat popup visibility
     function toggleChatPopup() {
-      clearChat();
+      console.log("Chat button clicked!");
       chatPopup.classList.toggle('active');
-      closeChatButton.classList.add('active');
-      lastActivityTime = Date.now();
-      startInactivityTimer(); // Restart inactivity timer when chat is opened
-      typeBotMessage("Hi! I’m Tomie, let me help you send your question without filling the contact form.");
-    }
+      closeChatButton.classList.toggle('active');
 
-    function closeChat() {
-      chatPopup.classList.remove('active');
-      closeChatButton.classList.remove('active');
-      document.getElementById('userMessage').value = ''; // Clear chat input
-      clearTimeout(inactivityTimer); // Clear any running inactivity timer
-    }
-
-    function sendMessage() {
-      let message = document.getElementById('userMessage').value;
-
-      if (message.trim()) {
-        // Display user message
-        const userMessageElement = document.createElement('div');
-        userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-        chatPopup.appendChild(userMessageElement);
-
-        // Clear input field
-        document.getElementById('userMessage').value = '';
-
-        // Scroll to the bottom of the chat
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Bot reply (typing simulation)
-        typingMessageIndex = 0;
-        const botMessageElement = document.createElement('div');
-        botMessageElement.classList.add('message', 'bot-message');
-        botMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text"></div>`;
-        chatPopup.appendChild(botMessageElement);
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Simulate typing for Tomie's message
-        function typeBotMessage(messageText) {
-          const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = messageText;
-          if (typingMessageIndex < text.length) {
-            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-            typingMessageIndex++;
-            setTimeout(() => typeBotMessage(messageText), typingSpeed);
-          } else {
-            setTimeout(() => {
-              closeChat();
-            }, 5000); // Close chat after 5 seconds once message is typed
-          }
-        }
-
-        typeBotMessage("Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.");
+      // Clear chat history when opening
+      if (chatPopup.classList.contains('active')) {
+        clearChatHistory();
+        startInactivityTimer();
+      } else {
+        clearTimeout(inactivityTimer); // Stop inactivity timer when closing chat
       }
     }
 
-    // Inactivity timer to close the chat after 1 minute of inactivity
-    let inactivityTimer;
+    // Function to clear chat history
+    function clearChatHistory() {
+      chatHistory.innerHTML = '';
+    }
+
+    // Function to clear the typing message when the user interacts
+    function clearTypingMessage() {
+      typingMessage.style.display = 'none';
+    }
+
+    // Function to type bot message with delay
+    function typeBotMessage(message) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', 'bot-message');
+      messageElement.innerHTML = `
+        <div class="avatar"></div>
+        <div class="message-text">${message}</div>
+      `;
+      chatHistory.appendChild(messageElement);
+
+      // Simulate typing effect
+      const messageText = messageElement.querySelector('.message-text');
+      messageText.innerHTML = '';
+      let i = 0;
+      const typingInterval = setInterval(() => {
+        messageText.innerHTML += message[i];
+        i++;
+        if (i >= message.length) {
+          clearInterval(typingInterval);
+        }
+      }, 50); // Adjust typing speed here
+    }
+
+    // Function to send user message
+    function sendMessage() {
+      const userMessage = userMessageInput.value.trim();
+      if (userMessage === '') return;
+
+      // Display user message with typing effect
+      const userMessageElement = document.createElement('div');
+      userMessageElement.classList.add('message', 'user-message');
+      userMessageElement.innerHTML = `
+        <div class="avatar"></div>
+        <div class="message-text">${userMessage}</div>
+      `;
+      chatHistory.appendChild(userMessageElement);
+      userMessageInput.value = ''; // Clear input field
+
+      // Bot reply simulation
+      setTimeout(() => {
+        typeBotMessage("Thank you for your message!");
+      }, 1000);
+    }
+
+    // Inactivity timer function
     function startInactivityTimer() {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
-        closeChat();
-      }, 60000); // Close chat after 1 minute
+        alert('Chat closed due to inactivity');
+        toggleChatPopup();
+      }, 30000); // Close chat after 30 seconds of inactivity
     }
 
-    // FAQ Toggle Logic (Arrows and answers)
-    document.querySelectorAll('.faq-item').forEach((faq) => {
-      const arrow = faq.querySelector('.arrow');
-      faq.addEventListener('click', () => {
-        document.querySelectorAll('.faq-item').forEach((item) => {
-          if (item !== faq) {
-            item.classList.remove('active');
-            item.querySelector('.arrow').classList.remove('rotate');
-          }
-        });
-        faq.classList.toggle('active');
-        arrow.classList.toggle('rotate');
-      });
-    });
+    // Event listener for input field
+    userMessageInput.addEventListener('input', startInactivityTimer);
 
-    // Close the chat if clicking outside
-    window.addEventListener('click', function(event) {
-      if (!chatPopup.contains(event.target) && !chatButton.contains(event.target)) {
-        closeChat();
-      }
+    // FAQ toggle function
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+        item.querySelector('.arrow').classList.toggle('rotate');
+      });
     });
   </script>
 </body>
