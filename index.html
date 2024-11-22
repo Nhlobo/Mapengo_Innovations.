@@ -18,13 +18,119 @@
       overflow: hidden;
     }
 
-    /* Chat Popup */
+    /* General FAQ Section Styles */
+    .faq-section {
+      max-width: 800px;
+      margin: 20px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    /* FAQ Item Styles */
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+    }
+
+    .faq-item h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
+      text-align: left;
+      margin: 0;
+      padding-left: 15px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-item p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #555;
+      display: none;
+      text-align: left;
+      padding-left: 15px;
+    }
+
+    .faq-item.active p {
+      display: block;
+      color: #333;
+    }
+
+    .arrow {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid #333;
+      border-right: 2px solid #333;
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.rotate {
+      transform: rotate(-135deg);
+    }
+
+    /* Chat button */
+    .chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #87ceeb; /* Light Sky Blue */
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    .chat-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Chat Popup (White background, FAQ color for buttons) */
     .chat-popup {
       position: fixed;
       bottom: 100px;
       right: 30px;
       width: 350px;
-      background: white;
+      background: white; /* Clean White */
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -64,14 +170,26 @@
     }
 
     .message .message-text {
-      background: white;
-      color: black;
+      background: white; /* White background for conversation */
+      color: black; /* Black text */
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
       max-width: 220px;
       word-wrap: break-word;
       border: 1px solid #ddd;
+    }
+
+    .message.bot-message .message-text {
+      background: white; /* White background for bot messages */
+      color: black; /* Black text */
+      border-color: #ccc;
+    }
+
+    .message.user-message .message-text {
+      background: white; /* White background for user messages */
+      color: black; /* Black text */
+      border-color: #ccc;
     }
 
     /* Input area */
@@ -82,10 +200,17 @@
       border-radius: 25px;
       font-size: 16px;
       margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .chat-popup input[type="text"]:focus {
+      outline: none;
+      border-color: #3498db;
     }
 
     .chat-popup button {
-      background: #87ceeb;
+      background: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 25px;
@@ -99,30 +224,6 @@
       background: #2980b9;
       transform: scale(1.05);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .chat-button {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #87ceeb;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      font-size: 36px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
-    }
-
-    .chat-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     /* Close Chat Button */
@@ -144,9 +245,46 @@
       display: inline-block;
     }
 
+    @media (max-width: 600px) {
+      .chat-popup {
+        width: 280px;
+      }
+
+      .chat-button {
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <h3>What services do you offer?</h3>
+        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>How much do your services cost?</h3>
+        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>How long does a project take?</h3>
+        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>Can I see your previous work?</h3>
+        <p>Yes! You can view our portfolio <a href="portfolio.html">here</a>.</p>
+        <div class="arrow"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- Chat Button -->
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
@@ -165,6 +303,31 @@
   </div>
 
   <script>
+    // FAQ Accordion - Ensure only one item opens at a time
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const activeItem = document.querySelector('.faq-item.active');
+        if (activeItem && activeItem !== item) {
+          activeItem.classList.remove('active');
+          activeItem.querySelector('.arrow').classList.remove('rotate');
+        }
+        item.classList.toggle('active');
+        item.querySelector('.arrow').classList.toggle('rotate');
+      });
+    });
+
+    // Chat Popup Toggle
+    function toggleChatPopup() {
+      document.getElementById('chatPopup').classList.toggle('active');
+      document.getElementById('closeChatButton').classList.toggle('active');
+      welcomeMessageTypingEffect();
+    }
+
+    function closeChat() {
+      document.getElementById('chatPopup').classList.remove('active');
+      document.getElementById('closeChatButton').classList.remove('active');
+    }
+
     // Typing effect for welcome message
     function welcomeMessageTypingEffect() {
       const message = "Hi! I’m Tomie, let me help you send your question without filling the contact form.";
@@ -182,40 +345,7 @@
       }, 100);
     }
 
-    // Chat Popup Toggle
-    function toggleChatPopup() {
-      const chatPopup = document.getElementById('chatPopup');
-      chatPopup.classList.toggle('active');
-      document.getElementById('closeChatButton').classList.toggle('active');
-
-      if (chatPopup.classList.contains('active')) {
-        clearChat();
-        welcomeMessageTypingEffect();
-      }
-    }
-
-    // Close chat and clear messages
-    function closeChat() {
-      const chatPopup = document.getElementById('chatPopup');
-      chatPopup.classList.remove('active');
-      document.getElementById('closeChatButton').classList.remove('active');
-      clearChat();
-    }
-
-    // Clear chat conversation
-    function clearChat() {
-      const chatPopup = document.getElementById('chatPopup');
-      chatPopup.innerHTML = `
-        <div class="message bot-message">
-          <div class="avatar">
-            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-          </div>
-          <div id="welcomeMessage" class="message-text"></div>
-        </div>
-      `;
-    }
-
-    // Send message & bot response with typing effect
+    // Send Message & Bot Response
     function sendMessage() {
       const messageInput = document.getElementById('userMessage');
       const userMessage = messageInput.value.trim();
@@ -223,8 +353,10 @@
         // User message
         const userMessageElement = document.createElement('div');
         userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="message-text">${userMessage}</div>`;
-        document.querySelector('#chatPopup').appendChild(userMessageElement);
+        userMessageElement.innerHTML = `
+          <div class="message-text">${userMessage}</div>
+        `;
+        document.querySelector('.chat-popup').appendChild(userMessageElement);
 
         // Bot response
         setTimeout(() => {
@@ -236,23 +368,11 @@
             </div>
             <div class="message-text">Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.</div>
           `;
-          document.querySelector('#chatPopup').appendChild(botResponseElement);
+          document.querySelector('.chat-popup').appendChild(botResponseElement);
           messageInput.value = ''; // Clear input field
-        }, 1000); // Simulate bot typing delay
+        }, 1000); // Simulate a bot typing delay
       }
     }
-
-    // Automatically close the chat popup after 5 seconds of inactivity
-    setInterval(() => {
-      if (document.getElementById('chatPopup').classList.contains('active')) {
-        const lastMessage = document.querySelector('#chatPopup .message:last-child');
-        if (lastMessage && lastMessage.classList.contains('bot-message')) {
-          setTimeout(() => {
-            closeChat();
-          }, 5000); // Close chat after 5 seconds
-        }
-      }
-    }, 5000);
   </script>
 </body>
 </html>
