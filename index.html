@@ -41,13 +41,23 @@
         .testimonials-container {
             display: flex;
             position: relative;
-            animation: slide 20s linear infinite;
+            animation: slide 30s linear infinite;
+            margin-left: -100%; /* Create initial off-screen effect */
         }
 
         /* Sliding Effect - Cars passing animation */
         @keyframes slide {
             0% {
                 transform: translateX(100%); /* Start from the right */
+            }
+            25% {
+                transform: translateX(60%); /* Elevation and slowdown */
+            }
+            50% {
+                transform: translateX(0%); /* Middle point */
+            }
+            75% {
+                transform: translateX(-60%); /* Continue elevation */
             }
             100% {
                 transform: translateX(-100%); /* End at the left */
@@ -65,12 +75,27 @@
             margin-right: 30px; /* Spacing between cards */
             flex-shrink: 0; /* Prevent cards from shrinking */
             transition: all 0.3s ease;
+            position: relative;
+            animation: move 5s linear infinite; /* For card motion */
         }
 
         /* Hover effect for cards */
         .testimonial-card:hover {
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-            transform: translateY(-5px);
+            transform: translateY(-10px); /* More elevation */
+        }
+
+        /* Subtle upward motion for cards */
+        @keyframes move {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px); /* Slight upward motion */
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .testimonial-card img {
