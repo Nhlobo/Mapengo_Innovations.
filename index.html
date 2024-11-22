@@ -14,81 +14,89 @@
 
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #fafafa;
             overflow: hidden;
+            padding: 2rem;
         }
 
-        /* Container for Testimonials */
+        /* Testimonials Section */
         #testimonials {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
-            padding: 3rem 2rem;
             text-align: center;
+            padding: 2rem;
             background: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1.5s ease-out;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            animation: fadeIn 1.5s ease-out;
         }
 
+        /* Title Styling */
         .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #333;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #111;
             margin-bottom: 2rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
             animation: textGlow 1.5s infinite alternate;
         }
 
-        /* Parallax Effect */
+        /* Testimonials Container */
         .testimonials-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
-            padding: 0;
+            justify-content: center;
             transition: transform 0.3s ease;
-            perspective: 1000px;
         }
 
         .testimonials-container:hover {
             transform: scale(1.02);
         }
 
-        /* Testimonial Card Styling */
+        /* Testimonial Card */
         .card {
             background: #ffffff;
             border-radius: 20px;
             padding: 2rem;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             overflow: hidden;
             will-change: transform, box-shadow;
-            perspective: 1000px;
+            background-color: #f9f9f9;
         }
 
         /* Hover Effects: 3D Flip */
         .card:hover {
-            transform: rotateY(15deg) translateY(-20px);
-            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.25);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Testimonial Image */
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-top: 15px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
         .card:hover .testimonial-img {
             transform: scale(1.1);
         }
 
-        /* Dynamic Lighting Effects on Hover */
-        .card:hover {
-            background: linear-gradient(45deg, #ff6f61, #ffcc00);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-        }
-
+        /* Rating System */
         .rating {
             position: absolute;
             top: 10px;
@@ -96,7 +104,6 @@
             display: flex;
             gap: 5px;
             z-index: 10;
-            transition: all 0.2s ease;
         }
 
         .rating label {
@@ -114,33 +121,25 @@
             color: #ff9800;
         }
 
-        .testimonial-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            margin-top: 15px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
+        /* Title inside Cards */
         .title {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-style: italic;
             color: #555;
-            margin: 1rem 0;
-            animation: fadeInText 1.5s ease-out;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
 
+        /* Hover glow and focus effect */
         h4 {
             font-size: 1rem;
             color: #333;
             opacity: 0;
-            animation: fadeInText 2s ease-out forwards;
+            animation: fadeInText 1.5s ease-out forwards;
         }
 
         /* Keyframes */
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             0% {
                 opacity: 0;
                 transform: translateY(30px);
@@ -183,11 +182,10 @@
             }
 
             .testimonial-img {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -237,6 +235,7 @@
             <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
             <h4>- Alice Brown, Founder of InnovateTech</h4>
         </div>
+
     </div>
 </section>
 
