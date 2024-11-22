@@ -6,11 +6,11 @@
   <title>FAQ Section with Clean Chat</title>
 <style>
 <style>
-    /* Import Clean, Modern, AI-Inspired Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;600&family=Lato:wght@400;500;700&family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
+    /* Importing modern, professional, and smooth fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;500;700&display=swap');
 
     body {
-      font-family: 'Roboto', sans-serif; /* Clean, modern, professional */
+      font-family: 'Roboto', sans-serif; /* Smooth, modern, and professional font */
       margin: 0;
       padding: 0;
       background: #f4f4f4;
@@ -20,7 +20,6 @@
       height: 100vh;
       text-align: center;
       overflow: hidden;
-      color: #333;
     }
 
     /* General FAQ Section Styles */
@@ -29,48 +28,50 @@
       margin: 20px;
       padding: 20px;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-      font-family: 'Lato', sans-serif; /* Smooth, professional font */
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
     .section-title {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 20px;
-      color: #222;
+      color: #333;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-family: 'Montserrat', sans-serif; /* Geometric, modern font */
+      font-family: 'Open Sans', sans-serif; /* Clean and modern font */
     }
 
     /* FAQ Item Styles */
     .faq-container {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
     }
 
     .faq-item {
       background: #fff;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       border: 1px solid #ddd;
       cursor: pointer;
       position: relative;
-      font-family: 'Inter', sans-serif; /* Digital interface-inspired font */
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
     }
 
     .faq-item h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #444;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
       text-align: left;
       margin: 0;
       padding-left: 15px;
       cursor: pointer;
       position: relative;
+      font-family: 'Lato', sans-serif; /* Smooth and readable font */
     }
 
     .faq-item p {
@@ -87,12 +88,28 @@
       color: #333;
     }
 
+    .arrow {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid #333;
+      border-right: 2px solid #333;
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.rotate {
+      transform: rotate(-135deg);
+    }
+
     /* Chat button */
     .chat-button {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background-color: #00c0ff; /* Electric Cyan */
+      background-color: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 50%;
@@ -103,11 +120,17 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       z-index: 9999;
-      font-family: 'Roboto', sans-serif; /* Professional and clean */
     }
 
+    .chat-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Chat Popup (White background, FAQ color for buttons) */
     .chat-popup {
       position: fixed;
       bottom: 100px;
@@ -122,7 +145,6 @@
       gap: 15px;
       max-height: 400px;
       overflow-y: auto;
-      font-family: 'Inter', sans-serif; /* Clean, smooth font for tech interfaces */
     }
 
     .chat-popup.active {
@@ -154,8 +176,8 @@
     }
 
     .message .message-text {
-      background: #f8f8f8; /* Light background for conversation */
-      color: #444; /* Darker text */
+      background: white; /* White background for conversation */
+      color: black; /* Black text */
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
@@ -165,15 +187,15 @@
     }
 
     .message.bot-message .message-text {
-      background: #f8f8f8;
-      color: #444;
+      background: white; /* White background for bot messages */
+      color: black; /* Black text */
       border-color: #ccc;
     }
 
     .message.user-message .message-text {
-      background: #e0f7fa; /* Light cyan for user messages */
-      color: black;
-      border-color: #00c0ff;
+      background: white; /* White background for user messages */
+      color: black; /* Black text */
+      border-color: #ccc;
     }
 
     /* Input area */
@@ -185,15 +207,16 @@
       font-size: 16px;
       margin-top: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
 
     .chat-popup input[type="text"]:focus {
       outline: none;
-      border-color: #00c0ff; /* Cyan focus border */
+      border-color: #3498db;
     }
 
     .chat-popup button {
-      background: #00c0ff; /* Cyan for buttons */
+      background: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 25px;
@@ -203,12 +226,18 @@
       font-size: 16px;
     }
 
+    .chat-popup button:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
     /* Close Chat Button */
     .close-chat-button {
       position: absolute;
       top: -50px;
       right: 10px;
-      background-color: #00c0ff;
+      background-color: #87ceeb;
       color: #fff;
       border: none;
       border-radius: 20px;
@@ -233,7 +262,7 @@
         font-size: 32px;
       }
     }
-  </style>
+</style>
 </head>
 <body>
 </head>
