@@ -36,22 +36,25 @@
             margin-top: 40px;
         }
 
-        /* Testimonials Grid */
+        /* Testimonials Horizontal Layout */
         .testimonials-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            justify-content: center;
             gap: 30px;
-            justify-items: center;
+            overflow-x: auto;
+            scroll-behavior: smooth;
         }
 
         .testimonial-card {
             background-color: #f9f9f9;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
             text-align: center;
-            max-width: 320px;
+            max-width: 250px;
             transition: all 0.3s ease;
+            flex-shrink: 0;
+            width: 230px;
         }
 
         .testimonial-card:hover {
@@ -60,8 +63,8 @@
         }
 
         .testimonial-card img {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 15px;
@@ -70,13 +73,13 @@
         }
 
         .testimonial-card p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #555;
             margin-bottom: 20px;
         }
 
         .testimonial-card h4 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #333;
             font-weight: 600;
         }
@@ -84,10 +87,12 @@
         /* Responsive */
         @media (max-width: 768px) {
             .testimonial-card {
-                padding: 20px;
+                width: 180px;
+                padding: 15px;
             }
+
             .testimonial-card h4 {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -119,6 +124,12 @@
                 <h4>- Alice Brown, Founder of InnovateTech</h4>
             </div>
 
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card">
+                <img src="michael-johnson.jpg" alt="Michael Johnson">
+                <p>"Mapengo's team delivered on every aspect of our project. Highly professional and committed to excellence!"</p>
+                <h4>- Michael Johnson, Director of WebWorks</h4>
+            </div>
         </div>
     </section>
 
