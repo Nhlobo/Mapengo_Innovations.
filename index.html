@@ -124,14 +124,14 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Chat popup */
+    /* Clean White Chat Popup */
     .chat-popup {
       position: fixed;
       bottom: 100px;
       right: 30px;
       width: 350px;
       background: #fff;
-      border-radius: 20px;
+      border-radius: 15px;
       padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
       display: none;
@@ -296,7 +296,7 @@
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
-    
+
     function toggleChatPopup() {
       chatPopup.classList.toggle('active');
       closeChatButton.classList.add('active');
@@ -305,6 +305,7 @@
     function closeChat() {
       chatPopup.classList.remove('active');
       closeChatButton.classList.remove('active');
+      document.getElementById('userMessage').value = ''; // Clear chat input
     }
 
     function sendMessage() {
@@ -332,11 +333,11 @@
 
           // Scroll to the bottom of the chat
           chatPopup.scrollTop = chatPopup.scrollHeight;
-          
-          // Close chat after 2 seconds
+
+          // Close chat after 3 seconds
           setTimeout(() => {
             closeChat();
-          }, 2000); // 2 second delay for smooth closing
+          }, 3000); // 3 second delay for smooth closing
         }, 1500);
       }
     }
