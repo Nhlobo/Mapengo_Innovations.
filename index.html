@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ Section with AI Chat</title>
+  <title>FAQ Section with Clean Chat</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -44,13 +44,13 @@
     }
 
     .faq-item {
-      background: #f9f9f9;
+      background: #fff;
       border-radius: 8px;
       padding: 16px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       border: 1px solid #ddd;
       cursor: pointer;
-      transition: all 0.3s ease;
+      position: relative;
     }
 
     .faq-item:hover {
@@ -82,12 +82,28 @@
       color: #333;
     }
 
+    .arrow {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid #333;
+      border-right: 2px solid #333;
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.rotate {
+      transform: rotate(-135deg);
+    }
+
     /* Chat button */
     .chat-button {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: linear-gradient(135deg, #00bcd4, #1de9b6);
+      background-color: #3498db;
       color: white;
       border: none;
       border-radius: 50%;
@@ -105,7 +121,7 @@
 
     .chat-button:hover {
       transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 188, 212, 0.4);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     /* Chat popup */
@@ -144,13 +160,13 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background-color: #00796b;
+      background-color: #7f8c8d;
       object-fit: cover;
     }
 
     .message .message-text {
-      background: linear-gradient(135deg, #00bcd4, #1de9b6);
-      color: white;
+      background: #ecf0f1;
+      color: #2c3e50;
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
@@ -159,18 +175,18 @@
     }
 
     .message.bot-message .message-text {
-      background: #00bcd4;
+      background: #bdc3c7;
     }
 
     .message.user-message .message-text {
-      background: #80deea;
+      background: #aab7b8;
     }
 
     /* Input area */
     .chat-popup input[type="text"] {
       width: 100%;
       padding: 12px 15px;
-      border: none;
+      border: 1px solid #ddd;
       border-radius: 25px;
       font-size: 16px;
       margin-top: 10px;
@@ -180,22 +196,24 @@
 
     .chat-popup input[type="text"]:focus {
       outline: none;
-      box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+      border-color: #3498db;
     }
 
     .chat-popup button {
-      background: linear-gradient(135deg, #00bcd4, #1de9b6);
+      background: #3498db;
       color: white;
       border: none;
       border-radius: 25px;
       padding: 12px;
       width: 100%;
       cursor: pointer;
+      font-size: 16px;
     }
 
     .chat-popup button:hover {
+      background: #2980b9;
       transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
 
     /* Close Chat Button */
@@ -203,7 +221,7 @@
       position: absolute;
       top: -50px;
       right: 10px;
-      background-color: #1de9b6;
+      background-color: #3498db;
       color: #fff;
       border: none;
       border-radius: 20px;
@@ -256,16 +274,13 @@
         <div class="arrow"></div>
       </div>
     </div>
-
-    <!-- Close Chat Button (Initially hidden) -->
-    <button class="close-chat-button" id="closeChatButton" onclick="closeChat()">Hi, I'm Tomie! Let me help you send your question without filling the contact form</button>
   </section>
 
   <!-- Chat Button -->
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
   <!-- Chat Popup -->
-  <div id="chatPopup" class="chat-popup">
+  <div class="chat-popup" id="chatPopup">
     <div class="message bot-message">
       <div class="avatar"></div>
       <div class="message-text">Hi, I'm Tomie! Let me help you send your question without filling the contact form.</div>
@@ -274,28 +289,22 @@
     <button onclick="sendMessage()">Send</button>
   </div>
 
+  <!-- Close Chat Button -->
+  <button class="close-chat-button" id="closeChatButton" onclick="closeChat()">Close Chat</button>
+
   <script>
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
     
     function toggleChatPopup() {
-      // Clear chat history when popup opens
-      chatPopup.innerHTML = `
-        <div class="message bot-message">
-          <div class="avatar"></div>
-          <div class="message-text">Hi, I'm Tomie! Let me help you send your question without filling the contact form.</div>
-        </div>
-        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-        <button onclick="sendMessage()">Send</button>
-      `;
       chatPopup.classList.toggle('active');
-      closeChatButton.classList.add('active'); // Show the close button when chat is active
+      closeChatButton.classList.add('active');
     }
 
     function closeChat() {
       chatPopup.classList.remove('active');
-      closeChatButton.classList.remove('active'); // Hide the close button when chat is closed
+      closeChatButton.classList.remove('active');
     }
 
     function sendMessage() {
@@ -324,10 +333,10 @@
           // Scroll to the bottom of the chat
           chatPopup.scrollTop = chatPopup.scrollHeight;
           
-          // Close chat after 1 second (slower than 0.3s)
+          // Close chat after 2 seconds
           setTimeout(() => {
             closeChat();
-          }, 1000); // 1 second delay
+          }, 2000); // 2 second delay for smooth closing
         }, 1500);
       }
     }
@@ -336,6 +345,12 @@
     document.querySelectorAll('.faq-item').forEach((faq) => {
       const arrow = faq.querySelector('.arrow');
       faq.addEventListener('click', () => {
+        document.querySelectorAll('.faq-item').forEach((item) => {
+          if (item !== faq) {
+            item.classList.remove('active');
+            item.querySelector('.arrow').classList.remove('rotate');
+          }
+        });
         faq.classList.toggle('active');
         arrow.classList.toggle('rotate');
       });
