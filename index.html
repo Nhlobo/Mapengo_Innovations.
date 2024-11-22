@@ -1,491 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ Section with Clean Chat</title>
-  <style>
-    body{
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Testimonials</title>
+    <style>
+        /* ================= TESTIMONIALS ================= */
+        #testimonials {
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-    /* General FAQ Section Styles */
-    .faq-section {
-      max-width: 800px;
-      margin: 20px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    }
+        .testimonials-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            scroll-snap-type: x mandatory;
+            padding: 0 10px;
+            margin: 0 auto;
+            max-width: 90%;
+        }
 
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #333;
-      text-transform: uppercase;
-    }
+        .card {
+            background: #ffffff;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            flex-shrink: 0;
+            width: 270px;
+            margin: 1.5rem;
+            color: #111827;
+            position: relative;
+        }
 
-    /* FAQ Item Styles */
-    .faq-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+        .rating {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
 
-    .faq-item {
-      background: #fff;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border: 1px solid #ddd;
-      cursor: pointer;
-      position: relative;
-    }
+        .rating label {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+        }
 
-    .faq-item:hover {
-      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
-    }
+        .rating label:hover {
+            color: #ff9800;
+        }
 
-    .faq-item h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #333;
-      text-align: left;
-      margin: 0;
-      padding-left: 15px;
-      cursor: pointer;
-      position: relative;
-    }
+        .rating label:nth-child(-n+5) {
+            color: #ff9800;
+        }
 
-    .faq-item p {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: #555;
-      display: none;
-      text-align: left;
-      padding-left: 15px;
-    }
+        .testimonial-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-top: 10px;
+            object-fit: cover;
+        }
 
-    .faq-item.active p {
-      display: block;
-      color: #333;
-    }
+        .title {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
 
-    .arrow {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      width: 12px;
-      height: 12px;
-      border-top: 2px solid #333;
-      border-right: 2px solid #333;
-      transform: rotate(45deg);
-      transition: transform 0.3s ease;
-    }
+        @media (min-width: 768px) {
+            .testimonials-container {
+                gap: 1rem;
+            }
+        }
 
-    .arrow.rotate {
-      transform: rotate(-135deg);
-    }
-
-    /* Chat button */
-    .chat-button {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #87ceeb; /* Light Sky Blue */
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      font-size: 36px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 9999;
-    }
-
-    .chat-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Chat Popup (White background, FAQ color for buttons) */
-    .chat-popup {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      width: 350px;
-      background: white; /* Clean White */
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .chat-popup.active {
-      display: flex;
-    }
-
-    .message {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* User message styles */
-    .message.user-message {
-      justify-content: flex-end;
-    }
-
-    .message .avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      overflow: hidden;
-      object-fit: cover;
-    }
-
-    .message .avatar-img {
-      width: 100%;
-      height: 100%;
-    }
-
-    .message .message-text {
-      background: white; /* White background for conversation */
-      color: black; /* Black text */
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 14px;
-      max-width: 220px;
-      word-wrap: break-word;
-      border: 1px solid #ddd;
-    }
-
-    .message.bot-message .message-text {
-      background: white; /* White background for bot messages */
-      color: black; /* Black text */
-      border-color: #ccc;
-    }
-
-    .message.user-message .message-text {
-      background: white; /* White background for user messages */
-      color: black; /* Black text */
-      border-color: #ccc;
-    }
-
-    /* Input area */
-    .chat-popup input[type="text"] {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 25px;
-      font-size: 16px;
-      margin-top: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .chat-popup input[type="text"]:focus {
-      outline: none;
-      border-color: #3498db;
-    }
-
-    .chat-popup button {
-      background: #87ceeb; /* Light Sky Blue */
-      color: white;
-      border: none;
-      border-radius: 25px;
-      padding: 12px;
-      width: 100%;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .chat-popup button:hover {
-      background: #2980b9;
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Close Chat Button */
-    .close-chat-button {
-      position: absolute;
-      top: -50px;
-      right: 10px;
-      background-color: #87ceeb;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 15px;
-      font-size: 12px;
-      cursor: pointer;
-      display: none;
-    }
-
-    .close-chat-button.active {
-      display: inline-block;
-    }
-
-    @media (max-width: 600px) {
-      .chat-popup {
-        width: 280px;
-      }
-
-      .chat-button {
-        width: 60px;
-        height: 60px;
-        font-size: 32px;
-      }
-    }
-  </style>
+    </style>
 </head>
 <body>
-  <!-- FAQ Section -->
-  <section id="faq" class="faq-section">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <h3>What services do you offer?</h3>
-        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How much do your services cost?</h3>
-        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How long does a project take?</h3>
-        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>Do you offer ongoing support?</h3>
-        <p>Yes, we offer maintenance and support packages to ensure the continued success of your project post-launch.</p>
-        <div class="arrow"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Chat Button -->
-  <button class="chat-button" onclick="toggleChatPopup()">💬</button>
-
-  <!-- Chat Popup -->
-  <div class="chat-popup" id="chatPopup">
-    <div class="message bot-message">
-      <div class="avatar">
-        <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-      </div>
-      <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
-    </div>
-    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-    <button onclick="sendMessage()">Send</button>
-    <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
-  </div>
-
-  <script>
-    const chatButton = document.querySelector('.chat-button');
-    const chatPopup = document.getElementById('chatPopup');
-    const closeChatButton = document.getElementById('closeChatButton');
-    let typingMessageIndex = 0;
-    const typingSpeed = 100;
-    let lastActivityTime = Date.now();
-    let inactivityTimer;
-
-    function toggleChatPopup() {
-      chatPopup.classList.toggle('active');
-      closeChatButton.classList.add('active');
-      if (chatPopup.classList.contains('active')) {
-        lastActivityTime = Date.now();
-        startInactivityTimer(); // Restart inactivity timer when chat is opened
-        clearChat(); // Clear any previous messages or input
-      }
-    }
-
-    // Close chat when the close button is clicked
-    function closeChat() {
-      chatPopup.classList.remove('active');
-      closeChatButton.classList.remove('active');
-      document.getElementById('userMessage').value = ''; // Clear chat input
-      clearTimeout(inactivityTimer); // Clear any running inactivity timer
-    }
-
-    // Clear the chat history and reset input when reopening chat
-    function clearChat() {
-      chatPopup.innerHTML = `
-        <div class="message bot-message">
-          <div class="avatar">
-            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-          </div>
-          <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials" class="container">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonials-container">
+        <div class="card">
+            <div class="rating">
+                <!-- 5/5 rating (all stars gold) -->
+                <label for="star1-1">&#9733;</label>
+                <label for="star2-1">&#9733;</label>
+                <label for="star3-1">&#9733;</label>
+                <label for="star4-1">&#9733;</label>
+                <label for="star5-1">&#9733;</label>
+            </div>
+            <img src="john-doe.jpg" alt="John Doe" class="testimonial-img">
+            <p class="title">"Mapengo Innovations delivered a top-notch app for our business. Their professionalism and attention to detail were exceptional!"</p>
+            <h4>- Tinyiko, CEO of Mzansi Taste Kitchen</h4>
         </div>
-        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-        <button onclick="sendMessage()">Send</button>
-      `;
-    }
 
-    // Send a message
-    function sendMessage() {
-      let message = document.getElementById('userMessage').value;
+        <div class="card">
+            <div class="rating">
+                <!-- 4/5 rating (4 stars gold) -->
+                <label for="star1-2">&#9733;</label>
+                <label for="star2-2">&#9733;</label>
+                <label for="star3-2">&#9733;</label>
+                <label for="star4-2">&#9733;</label>
+                <label for="star5-2">&#9734;</label> <!-- Empty star -->
+            </div>
+            <img src="jane-smith.jpg" alt="Jane Smith" class="testimonial-img">
+            <p class="title">"The website they developed for us is exactly what we needed. Affordable and high-quality service!"</p>
+            <h4>- Mvelo, Owner of Mvelo Livestock Co.</h4>
+        </div>
 
-      if (message.trim()) {
-        // Display user message
-        const userMessageElement = document.createElement('div');
-        userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-        chatPopup.appendChild(userMessageElement);
+        <div class="card">
+            <div class="rating">
+                <!-- 3/5 rating (3 stars gold) -->
+                <label for="star1-3">&#9733;</label>
+                <label for="star2-3">&#9733;</label>
+                <label for="star3-3">&#9733;</label>
+                <label for="star4-3">&#9734;</label> <!-- Empty star -->
+                <label for="star5-3">&#9734;</label> <!-- Empty star -->
+            </div>
+            <img src="alice-brown.jpg" alt="Alice Brown" class="testimonial-img">
+            <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
+            <h4>- Alice Brown, Founder of InnovateTech</h4>
+        </div>
 
-        // Clear input field
-        document.getElementById('userMessage').value = '';
+        <div class="card">
+            <div class="rating">
+                <!-- 2/5 rating (2 stars gold) -->
+                <label for="star1-4">&#9733;</label>
+                <label for="star2-4">&#9733;</label>
+                <label for="star3-4">&#9734;</label> <!-- Empty star -->
+                <label for="star4-4">&#9734;</label> <!-- Empty star -->
+                <label for="star5-4">&#9734;</label> <!-- Empty star -->
+            </div>
+            <img src="michael-johnson.jpg" alt="Michael Johnson" class="testimonial-img">
+            <p class="title">"Fast, reliable, and exceptional quality work. We couldn't be happier with the result!"</p>
+            <h4>- Michael Johnson, Director of WebWorks</h4>
+        </div>
+    </div>
+</section>
 
-        // Scroll to the bottom of the chat
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Bot reply (typing simulation)
-        typingMessageIndex = 0;
-        const botMessageElement = document.createElement('div');
-        botMessageElement.classList.add('message', 'bot-message');
-        botMessageElement.innerHTML = `
-          <div class="avatar">
-            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-          </div>
-          <div class="message-text"></div>`;
-        chatPopup.appendChild(botMessageElement);
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Simulate typing
-        function typeBotMessage() {
-          const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
-          if (typingMessageIndex < text.length) {
-            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-            typingMessageIndex++;
-            setTimeout(typeBotMessage, typingSpeed);
-          } else {
-            setTimeout(() => {
-              closeChat();
-            }, 60000); // 5 seconds after message appears
-          }
-        }
-        typeBotMessage();
-      }
-    }
-
-    // Inactivity timer to close the chat after 1 minute of inactivity
-    function startInactivityTimer() {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
-        closeChat();
-      }, 5000); // Close chat after 1 minute
-    }
-
-    // FAQ Toggle Logic (Arrows and answers)
-    document.querySelectorAll('.faq-item').forEach((faq) => {
-      const arrow = faq.querySelector('.arrow');
-      faq.addEventListener('click', () => {
-        document.querySelectorAll('.faq-item').forEach((item) => {
-          if (item !== faq) {
-            item.classList.remove('active');
-            item.querySelector('.arrow').classList.remove('rotate');
-          }
-        });
-        faq.classList.toggle('active');
-        arrow.classList.toggle('rotate');
-      });
-    });
-
-    // Close the chat if the user clicks outside of the popup
-    document.addEventListener('click', (event) => {
-      const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
-      if (!isClickInside) {
-        closeChat(); // Close the chat if the click is outside the popup
-      }
-    });
-    // Send a message
-    function sendMessage() {
-      let message = document.getElementById('userMessage').value;
-
-      if (message.trim()) {
-        // Display user message
-        const userMessageElement = document.createElement('div');
-        userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-        chatPopup.appendChild(userMessageElement);
-
-        // Clear input field
-        document.getElementById('userMessage').value = '';
-
-        // Scroll to the bottom of the chat
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Bot reply (typing simulation)
-        typingMessageIndex = 0;
-        const botMessageElement = document.createElement('div');
-        botMessageElement.classList.add('message', 'bot-message');
-        botMessageElement.innerHTML = `
-          <div class="avatar">
-            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-          </div>
-          <div class="message-text"></div>`;
-        chatPopup.appendChild(botMessageElement);
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Simulate typing
-        function typeBotMessage() {
-          const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
-          if (typingMessageIndex < text.length) {
-            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-            typingMessageIndex++;
-            setTimeout(typeBotMessage, typingSpeed);
-          } else {
-            setTimeout(() => {
-              closeChat();
-            }, 60000); // Close chat after 1 minute of inactivity following bot reply
-          }
-        }
-        typeBotMessage();
-      }
-
-      // Reset the inactivity timer after sending a message
-      resetInactivityTimer();
-    }
-
-    // Inactivity timer to close the chat after 1 minute of inactivity
-    function startInactivityTimer() {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
-        closeChat();
-      }, 60000); // Close chat after 1 minute of inactivity
-    }
-
-    // Reset inactivity timer (called after each user interaction like sending a message)
-    function resetInactivityTimer() {
-      clearTimeout(inactivityTimer);
-      startInactivityTimer(); // Restart inactivity timer
-    }
-
-
-    
-  </script>
 </body>
 </html>
