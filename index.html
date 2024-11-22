@@ -17,6 +17,10 @@
       background-color: #141414;
       color: #fff;
       overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       position: relative;
     }
 
@@ -49,151 +53,37 @@
       }
     }
 
-    /* Apps Section */
-    .apps-section {
-      padding: 60px 20px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 50px;
-      flex-wrap: wrap;
-    }
-
-    .section-header h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .section-header p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      color: #ccc;
-    }
-
-    /* CloudySky App Animation */
-    .cloud-app {
+    /* Phone Frame */
+    .phone-frame {
+      width: 375px;
+      height: 700px;
+      background-color: #fff;
+      border-radius: 36px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       position: relative;
-      width: 400px;
-      height: 350px;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-      animation: cloud-move 8s infinite ease-in-out;
+      padding: 20px;
+      overflow: hidden;
+      background-color: #141414;
     }
 
-    /* CloudySky Animation */
-    .cloud-app .cloud {
-      width: 250px;
-    }
-
-    .cloud-app .front {
-      padding-top: 45px;
-      margin-left: 25px;
-      display: inline;
+    .phone-frame::before {
+      content: "";
       position: absolute;
-      z-index: 11;
-      animation: clouds 8s infinite ease-in-out;
-    }
-
-    .cloud-app .back {
-      margin-top: -30px;
-      margin-left: 150px;
-      z-index: 12;
-      animation: clouds 12s infinite ease-in-out;
-    }
-
-    .cloud-app .right-front {
-      width: 45px;
-      height: 45px;
-      border-radius: 50% 50% 50% 0%;
-      background-color: #4c9beb;
-      display: inline-block;
-      margin-left: -25px;
-      z-index: 5;
-    }
-
-    .cloud-app .left-front {
-      width: 65px;
-      height: 65px;
-      border-radius: 50% 50% 0% 50%;
-      background-color: #4c9beb;
-      display: inline-block;
-      z-index: 5;
-    }
-
-    .cloud-app .right-back {
-      width: 50px;
-      height: 50px;
-      border-radius: 50% 50% 50% 0%;
-      background-color: #4c9beb;
-      display: inline-block;
-      margin-left: -20px;
-      z-index: 5;
-    }
-
-    .cloud-app .left-back {
-      width: 30px;
-      height: 30px;
-      border-radius: 50% 50% 0% 50%;
-      background-color: #4c9beb;
-      display: inline-block;
-      z-index: 5;
-    }
-
-    .cloud-app .sun {
-      width: 120px;
-      height: 120px;
-      background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
-      background: linear-gradient(to right, #fcbb04, #fffc00);
-      border-radius: 60px;
-      display: inline;
-      position: absolute;
-    }
-
-    .cloud-app .sunshine {
-      animation: sunshines 2s infinite;
-    }
-
-    @keyframes clouds {
-      0% {
-        transform: translateX(15px);
-      }
-
-      50% {
-        transform: translateX(0px);
-      }
-
-      100% {
-        transform: translateX(15px);
-      }
-    }
-
-    @keyframes sunshines {
-      0% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-
-      100% {
-        transform: scale(1.4);
-        opacity: 0;
-      }
+      top: 10px;
+      left: 50%;
+      width: 60px;
+      height: 5px;
+      background-color: #ddd;
+      border-radius: 5px;
+      transform: translateX(-50%);
     }
 
     /* Investment Calculator Styles */
     .container {
-      max-width: 800px;
-      margin: 50px auto;
-      background-color: rgba(0, 0, 0, 0.8);
+      max-width: 100%;
+      margin: 0 auto;
       padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
       z-index: 10;
@@ -254,6 +144,29 @@
     footer p {
       font-size: 1rem;
     }
+
+    /* Apps Section */
+    .apps-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .section-header h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
@@ -266,7 +179,7 @@
       <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <!-- CloudySky App -->
+    <!-- CloudySky App Placeholder -->
     <div class="cloud-app">
       <div class="container">
         <div class="cloud front">
@@ -283,48 +196,50 @@
     </div>
     <h3>CloudySky</h3>
 
-    <!-- Investment Calculator -->
-    <div class="container">
-      <h1>Investment Calculator</h1>
+    <!-- Investment Calculator within Phone Frame -->
+    <div class="phone-frame">
+      <div class="container">
+        <h1>Investment Calculator</h1>
 
-      <!-- Investment Form -->
-      <div class="input-group">
-        <label for="principal">Initial Investment Amount (ZAR):</label>
-        <input type="number" id="principal" placeholder="Enter initial amount">
+        <!-- Investment Form -->
+        <div class="input-group">
+          <label for="principal">Initial Investment Amount (ZAR):</label>
+          <input type="number" id="principal" placeholder="Enter initial amount">
+        </div>
+
+        <div class="input-group">
+          <label for="rate">Annual Interest Rate (%):</label>
+          <input type="number" id="rate" placeholder="Enter annual interest rate">
+        </div>
+
+        <div class="input-group">
+          <label for="period">Investment Period (years):</label>
+          <input type="number" id="period" placeholder="Enter investment period in years">
+        </div>
+
+        <div class="input-group">
+          <label for="type">Interest Type:</label>
+          <select id="type">
+            <option value="simple">Simple Interest</option>
+            <option value="compound">Compound Interest</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="frequency">Interest Compounding Frequency:</label>
+          <select id="frequency">
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+
+        <!-- Calculate Button -->
+        <button onclick="calculate()">Calculate</button>
+
+        <!-- Result Output -->
+        <div id="result"></div>
       </div>
-
-      <div class="input-group">
-        <label for="rate">Annual Interest Rate (%):</label>
-        <input type="number" id="rate" placeholder="Enter annual interest rate">
-      </div>
-
-      <div class="input-group">
-        <label for="period">Investment Period (years):</label>
-        <input type="number" id="period" placeholder="Enter investment period in years">
-      </div>
-
-      <div class="input-group">
-        <label for="type">Interest Type:</label>
-        <select id="type">
-          <option value="simple">Simple Interest</option>
-          <option value="compound">Compound Interest</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label for="frequency">Interest Compounding Frequency:</label>
-        <select id="frequency">
-          <option value="monthly">Monthly</option>
-          <option value="quarterly">Quarterly</option>
-          <option value="yearly">Yearly</option>
-        </select>
-      </div>
-
-      <!-- Calculate Button -->
-      <button onclick="calculate()">Calculate</button>
-
-      <!-- Result Output -->
-      <div id="result"></div>
     </div>
   </section>
 
@@ -370,6 +285,5 @@
       document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately ZAR " + totalAmount + ".";
     }
   </script>
-
 </body>
 </html>
