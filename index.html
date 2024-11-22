@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Driven Testimonials</title>
+    <title>Innovative Web & App Development</title>
     <style>
         /* General Styling */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #fff;
-            color: #333;
             margin: 0;
             padding: 0;
+            background: #f2f2f2;
+            color: #333;
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
         /* Section Title */
         h2.section-title {
             text-align: center;
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 30px;
             color: #00e5ff; /* Neon blue */
             text-transform: uppercase;
-            letter-spacing: 2px;
             font-weight: 600;
             position: relative;
+            letter-spacing: 3px;
             text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
         }
 
@@ -33,77 +34,76 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
+            width: 70px;
             height: 3px;
-            background-color: #00e5ff; /* Accent underline */
+            background-color: #00e5ff;
             border-radius: 3px;
         }
 
-        /* Testimonials Container */
+        /* Gradient background */
         .testimonials-container {
             display: flex;
             justify-content: center;
             gap: 30px;
-            padding: 0 20px;
-            margin-top: 60px;
             flex-wrap: wrap;
-            background: linear-gradient(45deg, rgba(0, 229, 255, 0.1), rgba(0, 0, 0, 0.05));
-            border-radius: 15px;
-            padding: 50px 30px;
+            padding: 60px 20px;
+            background: linear-gradient(45deg, rgba(0, 229, 255, 0.2), rgba(0, 0, 0, 0.2));
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .testimonials-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('circuit-pattern.png') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: -1;
         }
 
         /* Testimonial Cards */
         .card {
-            background-color: #f9f9f9;
-            border-radius: 12px;
+            background-color: #fff;
+            border-radius: 15px;
+            width: 280px;
             padding: 25px;
-            max-width: 280px;
-            width: 100%;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
             border: 2px solid transparent;
             background-clip: padding-box;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             border-color: #00e5ff;
-        }
-
-        /* Testimonial Rating */
-        .rating {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.6rem;
-            color: #ffcc00; /* Gold stars */
-        }
-
-        .rating label {
-            cursor: pointer;
         }
 
         /* Testimonial Image */
         .testimonial-img {
             border-radius: 50%;
-            width: 90px;
-            height: 90px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             margin-bottom: 20px;
-            border: 3px solid #00e5ff; /* Neon blue border */
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            border: 3px solid #00e5ff;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+            transition: transform 0.3s ease;
         }
 
         .testimonial-img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+            transform: scale(1.15);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
         }
 
-        /* Testimonial Text */
+        /* Testimonial Content */
         .title {
             font-size: 1.1rem;
             margin: 20px 0;
@@ -113,29 +113,68 @@
         }
 
         h4 {
-            font-size: 1rem;
-            color: #555;
+            font-size: 1.2rem;
             font-weight: 500;
+            color: #555;
             letter-spacing: 1px;
             text-transform: capitalize;
         }
 
-        /* Responsive Design */
+        /* Rating Stars */
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            color: #ffcc00;
+        }
+
+        .rating label {
+            cursor: pointer;
+        }
+
+        /* Light/Dark Mode */
+        body.dark-mode {
+            background-color: #222;
+            color: #ddd;
+        }
+
+        body.dark-mode .testimonials-container {
+            background: linear-gradient(45deg, rgba(0, 229, 255, 0.05), rgba(0, 0, 0, 0.4));
+        }
+
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .testimonials-container {
                 flex-direction: column;
                 align-items: center;
-                padding: 40px 20px;
             }
+        }
 
-            .card {
-                max-width: 320px;
-            }
+        /* Button Styling */
+        .toggle-button {
+            background: #00e5ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .toggle-button:hover {
+            background-color: #00b0c7;
         }
 
     </style>
 </head>
 <body>
+
+    <!-- Light/Dark Mode Toggle -->
+    <button class="toggle-button" onclick="toggleMode()">Toggle Light/Dark Mode</button>
 
     <!-- ================= TESTIMONIALS ================= -->
     <section id="testimonials">
@@ -199,6 +238,13 @@
 
         </div>
     </section>
+
+    <script>
+        // Light/Dark Mode Toggle Functionality
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 
 </body>
 </html>
