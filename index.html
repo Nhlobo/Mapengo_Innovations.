@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Section with Clean Chat</title>
-  <style>
+<style>
+    /* Import Google Fonts for AI-Inspired Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Exo+2:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@400;600&display=swap');
+
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Space Grotesk', sans-serif; /* Modern, tech-driven font */
       margin: 0;
       padding: 0;
       background: #f4f4f4;
@@ -16,6 +20,7 @@
       height: 100vh;
       text-align: center;
       overflow: hidden;
+      color: #333;
     }
 
     /* General FAQ Section Styles */
@@ -24,48 +29,49 @@
       margin: 20px;
       padding: 20px;
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      font-family: 'Exo 2', sans-serif;
     }
 
     .section-title {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: 600;
       margin-bottom: 20px;
-      color: #333;
+      color: #222;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Orbitron', sans-serif; /* High-tech font for section titles */
     }
 
     /* FAQ Item Styles */
     .faq-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 15px;
     }
 
     .faq-item {
       background: #fff;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       border: 1px solid #ddd;
       cursor: pointer;
       position: relative;
-    }
-
-    .faq-item:hover {
-      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+      font-family: 'Exo 2', sans-serif; /* Slightly futuristic font for FAQ content */
     }
 
     .faq-item h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #333;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #444;
       text-align: left;
       margin: 0;
       padding-left: 15px;
       cursor: pointer;
       position: relative;
+      font-family: 'Audiowide', sans-serif; /* Bold, unique, AI-inspired font */
     }
 
     .faq-item p {
@@ -82,28 +88,12 @@
       color: #333;
     }
 
-    .arrow {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      width: 12px;
-      height: 12px;
-      border-top: 2px solid #333;
-      border-right: 2px solid #333;
-      transform: rotate(45deg);
-      transition: transform 0.3s ease;
-    }
-
-    .arrow.rotate {
-      transform: rotate(-135deg);
-    }
-
     /* Chat button */
     .chat-button {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background-color: #87ceeb; /* Light Sky Blue */
+      background-color: #00c0ff; /* Electric Cyan */
       color: white;
       border: none;
       border-radius: 50%;
@@ -114,17 +104,11 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
       z-index: 9999;
+      font-family: 'Orbitron', sans-serif; /* AI-inspired font */
     }
 
-    .chat-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Chat Popup (White background, FAQ color for buttons) */
     .chat-popup {
       position: fixed;
       bottom: 100px;
@@ -139,6 +123,7 @@
       gap: 15px;
       max-height: 400px;
       overflow-y: auto;
+      font-family: 'Exo 2', sans-serif;
     }
 
     .chat-popup.active {
@@ -170,8 +155,8 @@
     }
 
     .message .message-text {
-      background: white; /* White background for conversation */
-      color: black; /* Black text */
+      background: #f8f8f8; /* Light background for conversation */
+      color: #444; /* Darker text */
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 14px;
@@ -181,15 +166,15 @@
     }
 
     .message.bot-message .message-text {
-      background: white; /* White background for bot messages */
-      color: black; /* Black text */
+      background: #f8f8f8;
+      color: #444;
       border-color: #ccc;
     }
 
     .message.user-message .message-text {
-      background: white; /* White background for user messages */
-      color: black; /* Black text */
-      border-color: #ccc;
+      background: #e0f7fa; /* Light cyan for user messages */
+      color: black;
+      border-color: #00c0ff;
     }
 
     /* Input area */
@@ -201,16 +186,15 @@
       font-size: 16px;
       margin-top: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
     }
 
     .chat-popup input[type="text"]:focus {
       outline: none;
-      border-color: #3498db;
+      border-color: #00c0ff; /* Cyan focus border */
     }
 
     .chat-popup button {
-      background: #87ceeb; /* Light Sky Blue */
+      background: #00c0ff; /* Cyan for buttons */
       color: white;
       border: none;
       border-radius: 25px;
@@ -218,12 +202,7 @@
       width: 100%;
       cursor: pointer;
       font-size: 16px;
-    }
-
-    .chat-popup button:hover {
-      background: #2980b9;
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      font-family: 'Orbitron', sans-serif;
     }
 
     /* Close Chat Button */
@@ -231,7 +210,7 @@
       position: absolute;
       top: -50px;
       right: 10px;
-      background-color: #87ceeb;
+      background-color: #00c0ff;
       color: #fff;
       border: none;
       border-radius: 20px;
