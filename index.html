@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Section with Clean Chat</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -19,6 +18,7 @@
       overflow: hidden;
     }
 
+    /* General FAQ Section Styles */
     .faq-section {
       max-width: 800px;
       margin: 20px;
@@ -28,6 +28,15 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    /* FAQ Item Styles */
     .faq-container {
       display: flex;
       flex-direction: column;
@@ -42,6 +51,35 @@
       border: 1px solid #ddd;
       cursor: pointer;
       position: relative;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+    }
+
+    .faq-item h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
+      text-align: left;
+      margin: 0;
+      padding-left: 15px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-item p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #555;
+      display: none;
+      text-align: left;
+      padding-left: 15px;
+    }
+
+    .faq-item.active p {
+      display: block;
+      color: #333;
     }
 
     .arrow {
@@ -65,7 +103,7 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background-color: #87ceeb;
+      background-color: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 50%;
@@ -86,13 +124,13 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Chat Popup */
+    /* Chat Popup (White background, FAQ color for buttons) */
     .chat-popup {
       position: fixed;
       bottom: 100px;
       right: 30px;
       width: 350px;
-      background: white;
+      background: white; /* Clean White */
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -123,6 +161,7 @@
       height: 30px;
       border-radius: 50%;
       background-color: #7f8c8d;
+      object-fit: cover;
     }
 
     .message .message-text {
@@ -136,6 +175,15 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
+    .message.bot-message .message-text {
+      background: #fff;
+      color: #000;
+    }
+
+    .message.user-message .message-text {
+      background: #fff;
+    }
+
     /* Input area */
     .chat-popup input[type="text"] {
       width: 100%;
@@ -145,6 +193,7 @@
       font-size: 16px;
       margin-top: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
 
     .chat-popup input[type="text"]:focus {
@@ -153,7 +202,7 @@
     }
 
     .chat-popup button {
-      background: #87ceeb;
+      background: #87ceeb; /* Light Sky Blue */
       color: white;
       border: none;
       border-radius: 25px;
@@ -161,6 +210,12 @@
       width: 100%;
       cursor: pointer;
       font-size: 16px;
+    }
+
+    .chat-popup button:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
 
     /* Close Chat Button */
@@ -180,6 +235,18 @@
 
     .close-chat-button.active {
       display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      .chat-popup {
+        width: 280px;
+      }
+
+      .chat-button {
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
+      }
     }
   </style>
 </head>
@@ -215,10 +282,10 @@
   <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
   <!-- Chat Popup -->
-  <div id="chatPopup" class="chat-popup">
-    <div id="typingMessage" class="message bot-message">
+  <div class="chat-popup" id="chatPopup">
+    <div class="message bot-message">
       <div class="avatar"></div>
-      <div class="message-text"></div>
+      <div class="message-text" id="typingMessage"></div>
     </div>
     <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
     <button onclick="sendMessage()">Send</button>
@@ -234,7 +301,7 @@
     const typingMessageElement = document.getElementById('typingMessage');
     let typingMessageIndex = 0;
     const typingSpeed = 100;
-    let inactivityTimer;
+    let lastActivityTime = Date.now();
 
     // Clear the chat when opening
     function clearChat() {
@@ -246,7 +313,8 @@
       clearChat();
       chatPopup.classList.toggle('active');
       closeChatButton.classList.add('active');
-      startInactivityTimer(); // Start inactivity timer when chat is opened
+      lastActivityTime = Date.now();
+      startInactivityTimer(); // Restart inactivity timer when chat is opened
       typeBotMessage("Hi! I’m Tomie, let me help you send your question without filling the contact form.");
     }
 
@@ -254,46 +322,74 @@
       chatPopup.classList.remove('active');
       closeChatButton.classList.remove('active');
       document.getElementById('userMessage').value = ''; // Clear chat input
-      clearTimeout(inactivityTimer); // Clear inactivity timer
+      clearTimeout(inactivityTimer); // Clear any running inactivity timer
     }
 
     function sendMessage() {
-      let message = document.getElementById('userMessage').value.trim();
-      if (message) {
-        addUserMessage(message);
+      let message = document.getElementById('userMessage').value;
+
+      if (message.trim()) {
+        // Display user message
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message', 'user-message');
+        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
+        chatPopup.appendChild(userMessageElement);
+
+        // Clear input field
         document.getElementById('userMessage').value = '';
-        typeBotMessage("Thanks for your question, we'll get back to you soon.");
+
+        // Scroll to the bottom of the chat
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Bot reply (typing simulation)
+        typingMessageIndex = 0;
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('message', 'bot-message');
+        botMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text"></div>`;
+        chatPopup.appendChild(botMessageElement);
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Simulate typing
+        function typeBotMessage(messageText) {
+          const botMessageTextElement = botMessageElement.querySelector('.message-text');
+          const text = messageText;
+          if (typingMessageIndex < text.length) {
+            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
+            typingMessageIndex++;
+            setTimeout(() => typeBotMessage(messageText), typingSpeed);
+          } else {
+            setTimeout(() => {
+              closeChat();
+            }, 5000); // Close chat after 5 seconds once message is typed
+          }
+        }
+        typeBotMessage("Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.");
       }
     }
 
-    function addUserMessage(message) {
-      const messageElement = document.createElement('div');
-      messageElement.classList.add('message', 'user-message');
-      messageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-      chatPopup.appendChild(messageElement);
-    }
-
-    function typeBotMessage(message) {
-      typingMessageElement.querySelector('.message-text').innerHTML = '';
-      typingMessageElement.style.display = 'flex';
-      let interval = setInterval(() => {
-        typingMessageElement.querySelector('.message-text').innerHTML += message[typingMessageIndex];
-        typingMessageIndex++;
-        if (typingMessageIndex >= message.length) {
-          clearInterval(interval);
-          typingMessageElement.style.display = 'none'; // Hide typing message after complete
-        }
-      }, typingSpeed);
-    }
-
+    // Inactivity timer to close the chat after 1 minute of inactivity
+    let inactivityTimer;
     function startInactivityTimer() {
       clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(closeChat, 60000); // Close chat after 60 seconds of inactivity
+      inactivityTimer = setTimeout(() => {
+        closeChat();
+      }, 60000); // Close chat after 1 minute
     }
 
-    // Reset inactivity timer on user interaction with the chat
-    document.getElementById('userMessage').addEventListener('input', startInactivityTimer);
-    document.querySelector('.chat-popup').addEventListener('click', startInactivityTimer);
+    // FAQ Toggle Logic (Arrows and answers)
+    document.querySelectorAll('.faq-item').forEach((faq) => {
+      const arrow = faq.querySelector('.arrow');
+      faq.addEventListener('click', () => {
+        document.querySelectorAll('.faq-item').forEach((item) => {
+          if (item !== faq) {
+            item.classList.remove('active');
+            item.querySelector('.arrow').classList.remove('rotate');
+          }
+        });
+        faq.classList.toggle('active');
+        arrow.classList.toggle('rotate');
+      });
+    });
   </script>
 </body>
 </html>
