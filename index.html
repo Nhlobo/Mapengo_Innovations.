@@ -1,223 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South Africa Weather Forecast</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Enhanced Apps</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: url('https://www.example.com/clouds.jpg') no-repeat center center fixed; /* Replace with actual cloud image URL */
-            background-size: cover;
-            color: #fff;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #141414;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-top: 30px;
-            color: #fff;
-        }
+    h2, h3, p {
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
+    /* AI-inspired Background Animation */
+    .background-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.5));
+      animation: float 15s ease-in-out infinite;
+      z-index: -1;
+    }
 
-        .input-group {
-            margin-bottom: 15px;
-        }
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(15px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
 
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #00f1ff;
-            background-color: #222;
-            color: #fff;
-            border-radius: 5px;
-        }
+    /* Apps Section */
+    .apps-section {
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px 20px;
-            background-color: #00f1ff;
-            border-radius: 10px;
-            border: none;
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
+    .section-header h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-        button:hover {
-            background-color: #00b3d9;
-        }
+    .section-header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      color: #ccc;
+    }
 
-        #weather-info, #forecast-info {
-            margin-top: 30px;
-            color: #fff;
-        }
+    /* CloudySky App Animation */
+    .cloud-app, .investment-calculator {
+      position: relative;
+      width: 400px;
+      height: 350px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      animation: cloud-move 8s infinite ease-in-out;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #fff;
-        }
+    .cloud-app .container, .investment-calculator .container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        footer p {
-            font-size: 1rem;
-        }
+    /* CloudySky Animation */
+    .cloud-app .cloud {
+      width: 250px;
+    }
 
-        /* Ads Styling */
-        .ads-container {
-            text-align: center;
-            margin-top: 30px;
-        }
+    .cloud-app .front {
+      padding-top: 45px;
+      margin-left: 25px;
+      display: inline;
+      position: absolute;
+      z-index: 11;
+      animation: clouds 8s infinite ease-in-out;
+    }
 
-        /* Chart Styling */
-        .chart-container {
-            margin-top: 20px;
-        }
+    .cloud-app .back {
+      margin-top: -30px;
+      margin-left: 150px;
+      z-index: 12;
+      animation: clouds 12s infinite ease-in-out;
+    }
 
-        canvas {
-            width: 100% !important;
-            height: 400px !important;
-        }
+    .cloud-app .right-front {
+      width: 45px;
+      height: 45px;
+      border-radius: 50% 50% 50% 0%;
+      background-color: #4c9beb;
+      display: inline-block;
+      margin-left: -25px;
+      z-index: 5;
+    }
 
-    </style>
+    .cloud-app .left-front {
+      width: 65px;
+      height: 65px;
+      border-radius: 50% 50% 0% 50%;
+      background-color: #4c9beb;
+      display: inline-block;
+      z-index: 5;
+    }
+
+    .cloud-app .right-back {
+      width: 50px;
+      height: 50px;
+      border-radius: 50% 50% 50% 0%;
+      background-color: #4c9beb;
+      display: inline-block;
+      margin-left: -20px;
+      z-index: 5;
+    }
+
+    .cloud-app .left-back {
+      width: 30px;
+      height: 30px;
+      border-radius: 50% 50% 0% 50%;
+      background-color: #4c9beb;
+      display: inline-block;
+      z-index: 5;
+    }
+
+    .cloud-app .sun {
+      width: 120px;
+      height: 120px;
+      background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
+      background: linear-gradient(to right, #fcbb04, #fffc00);
+      border-radius: 60px;
+      display: inline;
+      position: absolute;
+    }
+
+    .cloud-app .sunshine {
+      animation: sunshines 2s infinite;
+    }
+
+    @keyframes clouds {
+      0% {
+        transform: translateX(15px);
+      }
+
+      50% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(15px);
+      }
+    }
+
+    @keyframes sunshines {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Investment Calculator */
+    .investment-calculator .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .investment-calculator input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      border: 2px solid #00f1ff;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .investment-calculator button {
+      background-color: #00f1ff;
+      padding: 12px 30px;
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .investment-calculator button:hover {
+      background-color: #00b3d9;
+    }
+
+    .investment-calculator .result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #00f1ff;
+    }
+  </style>
 </head>
 <body>
+  <div class="background-animation"></div>
 
-    <div class="container">
-        <h1>South Africa Weather Forecast</h1>
-        <div class="input-group">
-            <input type="text" id="location-input" placeholder="Enter South African city">
-        </div>
-        <button id="search-button">Search</button>
-
-        <div id="weather-info">
-            <!-- Current weather data will be displayed here -->
-        </div>
-        <div id="forecast-info">
-            <!-- 5-day forecast data will be displayed here -->
-        </div>
+  <!-- Apps Section -->
+  <section class="apps-section">
+    <div class="section-header">
+      <h2>Our AI-powered Apps</h2>
+      <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Mapengo Innovations. All rights reserved</p>
-    </footer>
-
-    <!-- Ads Section -->
-    <div class="ads-container">
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-2364061825619418"
-            data-ad-slot="4168297600"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+    <!-- CloudySky App -->
+    <div class="cloud-app">
+      <div class="container">
+        <div class="cloud front">
+          <span class="left-front"></span>
+          <span class="right-front"></span>
+        </div>
+        <span class="sun sunshine"></span>
+        <span class="sun"></span>
+        <div class="cloud back">
+          <span class="left-back"></span>
+          <span class="right-back"></span>
+        </div>
+      </div>
     </div>
+    <h3>CloudySky</h3>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2364061825619418"
-            crossorigin="anonymous"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2364061825619418"
-            crossorigin="anonymous"></script>
+    <!-- Investment Calculator -->
+    <div class="investment-calculator">
+      <div class="container">
+        <input type="number" id="initialAmount" placeholder="Initial Amount ($)">
+        <input type="number" id="interestRate" placeholder="Interest Rate (%)">
+        <input type="number" id="timePeriod" placeholder="Time Period (Years)">
+        <button onclick="calculateInvestment()">Calculate</button>
+        <div class="result" id="result">Final Value: $0</div>
+      </div>
+    </div>
+    <h3>Investment Calculator</h3>
+  </section>
 
-    <script>
-        document.getElementById('search-button').addEventListener('click', getWeather);
+  <script>
+    function calculateInvestment() {
+      const initialAmount = parseFloat(document.getElementById('initialAmount').value);
+      const interestRate = parseFloat(document.getElementById('interestRate').value);
+      const timePeriod = parseFloat(document.getElementById('timePeriod').value);
 
-        async function getWeather() {
-            const location = document.getElementById('location-input').value;
-            const apiKey = '27590cdf19ad5bc53ef27ac7ec78ae64'; // Your OpenWeatherMap API key
-            const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location},ZA&appid=${apiKey}&units=metric`;
-            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location},ZA&appid=${apiKey}&units=metric`;
+      if (!initialAmount || !interestRate || !timePeriod) {
+        alert("Please fill in all fields");
+        return;
+      }
 
-            try {
-                const [currentResponse, forecastResponse] = await Promise.all([
-                    fetch(currentWeatherUrl),
-                    fetch(forecastUrl)
-                ]);
-                const currentData = await currentResponse.json();
-                const forecastData = await forecastResponse.json();
-
-                displayCurrentWeather(currentData);
-                displayForecast(forecastData);
-            } catch (error) {
-                console.error('Error fetching weather data:', error);
-            }
-        }
-
-        function displayCurrentWeather(data) {
-            const weatherInfo = document.getElementById('weather-info');
-            const temp = data.main.temp;
-            const weatherCondition = temp <= 15 ? 'Cold' : temp <= 25 ? 'Warm' : 'Hot';
-
-            weatherInfo.innerHTML = `
-                <h2>${data.name}</h2>
-                <p>Temperature: ${temp} °C</p>
-                <p>Weather: ${data.weather[0].description}</p>
-                <p>Condition: ${weatherCondition}</p>
-            `;
-        }
-
-        function displayForecast(data) {
-            const forecastInfo = document.getElementById('forecast-info');
-            forecastInfo.innerHTML = `
-                <h3>5-Day Forecast</h3>
-                <div class="chart-container">
-                    <canvas id="forecastChart"></canvas>
-                </div>
-            `;
-
-            const labels = data.list.filter((item, index) => index % 8 === 0).map(item => item.dt_txt.split(' ')[0]);
-            const temps = data.list.filter((item, index) => index % 8 === 0).map(item => item.main.temp);
-
-            const ctx = document.getElementById('forecastChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Temperature (°C)',
-                        data: temps,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-    </script>
-
+      const finalValue = initialAmount * Math.pow(1 + (interestRate / 100), timePeriod);
+      document.getElementById('result').textContent = `Final Value: $${finalValue.toFixed(2)}`;
+    }
+  </script>
 </body>
 </html>
