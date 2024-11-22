@@ -3,264 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Powered Apps & Web Solutions</title>
+  <title>Portfolio</title>
   <style>
-    /* Global Styles */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
+      background-color: #181818;
+      color: #fff;
     }
 
+    /* Container Styling */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 40px;
     }
 
-    /* Section Titles */
+    /* Section Title */
     .section-title {
-      font-size: 2.5rem;
+      text-align: center;
+      font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .section-description {
-      font-size: 1.2rem;
-      color: #666;
-      text-align: center;
+      color: #00b3b3;
       margin-bottom: 40px;
+      text-transform: uppercase;
     }
 
-    /* Grid Layout */
-    .grid {
+    /* Portfolio Grid */
+    .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
     }
 
-    /* Cards Styling */
-    .card {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+    .portfolio-item {
+      background: linear-gradient(135deg, rgba(0, 183, 179, 0.8), rgba(0, 183, 179, 0.3));
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      color: white;
+      text-align: center;
     }
 
-    .card:hover {
+    .portfolio-item:hover {
       transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .card-image img {
+    .portfolio-item img {
       width: 100%;
       height: auto;
-      border-bottom: 3px solid #ddd;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
     }
 
-    .card-info {
-      padding: 20px;
+    .portfolio-item img:hover {
+      transform: scale(1.05);
     }
 
-    .card-title {
-      font-size: 1.75rem;
+    .portfolio-item h4 {
+      font-size: 1.6rem;
+      margin: 15px 0;
       font-weight: 600;
-      color: #333;
-      margin-bottom: 15px;
+      color: #fff;
     }
 
-    .card-description {
-      font-size: 1.125rem;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
-    .card-features {
-      list-style-type: none;
-      padding: 0;
-      margin-bottom: 20px;
-    }
-
-    .card-features li {
-      font-size: 1rem;
-      color: #777;
-      margin-bottom: 10px;
-    }
-
-    .cta-btn {
+    .button {
       display: inline-block;
-      font-size: 1.125rem;
-      padding: 12px 20px;
       background-color: #00b3b3;
-      color: white;
-      border-radius: 5px;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
       text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       transition: background-color 0.3s ease;
     }
 
-    .cta-btn:hover {
+    .button:hover {
       background-color: #009999;
-    }
-
-    /* Call to Action Section */
-    .cta-section {
-      text-align: center;
-      margin-top: 60px;
-    }
-
-    .cta-section h3 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .cta-section p {
-      font-size: 1.125rem;
-      color: #444;
-      margin-bottom: 30px;
-    }
-
-    .cta-btn.primary {
-      background-color: #28a745;
-    }
-
-    .cta-btn.primary:hover {
-      background-color: #218838;
     }
   </style>
 </head>
 <body>
 
-  <!-- Apps Showcase Section -->
-  <section id="apps">
-    <div class="container">
-      <h2 class="section-title">Discover Our Live AI Apps</h2>
-      <p class="section-description">Our AI-powered apps are designed to help you solve real-world problems with cutting-edge technology. Explore each one and see how they can enhance your business operations.</p>
+  <!-- Portfolio Section -->
+  <div class="container">
+    <h2 class="section-title">Discover Our Live Apps and Websites</h2>
 
-      <div class="grid">
-        <!-- App 1 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="App 1" />
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">App 1</h3>
-            <p class="card-description">AI-powered to revolutionize [specific task or business process].</p>
-            <ul class="card-features">
-              <li>Real-time data analysis</li>
-              <li>Customizable AI models</li>
-              <li>Seamless integration with existing tools</li>
-            </ul>
-            <a href="[app1_link]" class="cta-btn">Try It Now</a>
-          </div>
-        </div>
-
-        <!-- App 2 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="App 2" />
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">App 2</h3>
-            <p class="card-description">AI-driven insights and automated workflows for enhanced productivity.</p>
-            <ul class="card-features">
-              <li>Smart automation</li>
-              <li>Scalable solutions</li>
-              <li>Optimized for cloud integration</li>
-            </ul>
-            <a href="[app2_link]" class="cta-btn">Start Using</a>
-          </div>
-        </div>
-
-        <!-- App 3 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="App 3" />
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">App 3</h3>
-            <p class="card-description">Enhance customer experiences with AI-powered analytics.</p>
-            <ul class="card-features">
-              <li>Predictive analytics</li>
-              <li>Automated reports</li>
-              <li>Enhanced personalization</li>
-            </ul>
-            <a href="[app3_link]" class="cta-btn">Get Started</a>
-          </div>
-        </div>
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid">
+      
+      <!-- Websites Section -->
+      <div class="portfolio-item websites">
+        <img src="assets/img/projects/Calculator.png" alt="Calculator">
+        <h4>Calculator</h4>
+        <a href="https://nhlobo.github.io/calculator/" class="button" target="_blank">View Project</a>
       </div>
-    </div>
-  </section>
 
-  <!-- Websites Showcase Section -->
-  <section id="websites" style="background-color: #fafafa;">
-    <div class="container">
-      <h2 class="section-title">Explore Our AI-Powered Websites</h2>
-      <p class="section-description">Our websites are built with AI integration to offer high-performance, engaging, and efficient solutions for your business. See how our web services can transform your digital presence.</p>
-
-      <div class="grid">
-        <!-- Website 1 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="Website 1" />
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Website 1</h3>
-            <p class="card-description">Explore our AI-powered website that delivers high-performance solutions for your business.</p>
-            <ul class="card-features">
-              <li>Responsive design</li>
-              <li>Optimized for SEO</li>
-              <li>Easy content management</li>
-            </ul>
-            <a href="[website1_link]" class="cta-btn">Visit Website</a>
-          </div>
-        </div>
-
-        <!-- Website 2 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="Website 2" />
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Website 2</h3>
-            <p class="card-description">A web platform for businesses looking to enhance their online presence.</p>
-            <ul class="card-features">
-              <li>AI-driven design</li>
-              <li>Integrated e-commerce</li>
-              <li>High-speed performance</li>
-            </ul>
-            <a href="[website2_link]" class="cta-btn">Explore Now</a>
-          </div>
-        </div>
-
-        <!-- Website 3 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="Website 3" />
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Website 3</h3>
-            <p class="card-description">Create an engaging experience for users with our AI-powered web solutions.</p>
-            <ul class="card-features">
-              <li>Mobile-friendly</li>
-              <li>Customizable templates</li>
-              <li>AI-based personalization</li>
-            </ul>
-            <a href="[website3_link]" class="cta-btn">Visit Now</a>
-          </div>
-        </div>
+      <div class="portfolio-item websites">
+        <img src="assets/img/projects/Weather Forecast App.png" alt="Weather Forecast App">
+        <h4>Weather Forecast App</h4>
+        <a href="https://weather-ebon-beta.vercel.app/" class="button" target="_blank">View Project</a>
       </div>
-    </div>
-  </section>
 
-  <!-- Call to Action Section -->
-  <div class="cta-section">
-    <h3>Ready to Innovate with AI?</h3>
-    <p>All of our apps and services are live and ready to take your business to the next level. Get in touch with us today to start your journey!</p>
-    <a href="#contact" class="cta-btn primary">Contact Us</a>
+      <!-- Apps Section -->
+      <div class="portfolio-item apps">
+        <img src="assets/img/projects/Calendar App.png" alt="Calendar App">
+        <h4>Calendar App</h4>
+        <a href="https://test2-4-dxs5.onrender.com" class="button" target="_blank">View Project</a>
+      </div>
+
+      <div class="portfolio-item apps">
+        <img src="assets/img/projects/Quran Knowledge Quiz.png" alt="Quran Knowledge Quiz">
+        <h4>Quran Knowledge Quiz</h4>
+        <a href="https://nhlobo.github.io/quran-knowledge-quiz/" class="button" target="_blank">View Project</a>
+      </div>
+
+    </div>
   </div>
 
 </body>
