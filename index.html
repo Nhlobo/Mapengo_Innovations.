@@ -285,7 +285,7 @@
   <div class="chat-popup" id="chatPopup">
     <div class="message bot-message">
       <div class="avatar"></div>
-      <div class="message-text" id="typingMessage"></div>
+      <div class="message-text" id="typingMessage">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
     </div>
     <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
     <button onclick="sendMessage()">Send</button>
@@ -298,19 +298,11 @@
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
-    const typingMessageElement = document.getElementById('typingMessage');
     let typingMessageIndex = 0;
     const typingSpeed = 100;
     let lastActivityTime = Date.now();
 
-    // Clear the chat when opening
-    function clearChat() {
-      chatPopup.innerHTML = ''; // Clear all previous messages
-      typingMessageIndex = 0;
-    }
-
     function toggleChatPopup() {
-      clearChat();
       chatPopup.classList.toggle('active');
       closeChatButton.classList.add('active');
       lastActivityTime = Date.now();
