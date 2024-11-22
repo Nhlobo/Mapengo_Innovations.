@@ -17,6 +17,7 @@
       background-color: #141414;
       color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
 
     h2, h3, p {
@@ -50,11 +51,10 @@
 
     /* Apps Section */
     .apps-section {
-      padding: 80px 20px;
+      padding: 60px 20px;
       text-align: center;
-      position: relative;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       gap: 50px;
       flex-wrap: wrap;
@@ -196,6 +196,8 @@
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+      position: relative;
     }
 
     .input-group {
@@ -241,6 +243,16 @@
       font-size: 1.5rem;
       color: #00f1ff;
       text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #fff;
+    }
+
+    footer p {
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -355,7 +367,7 @@
       }
 
       totalAmount = totalAmount.toFixed(2);
-      document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately R " + totalAmount + ".";
+      document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately ZAR " + totalAmount + ".";
     }
   </script>
 
