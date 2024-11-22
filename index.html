@@ -420,6 +420,72 @@
         closeChat(); // Close the chat if the click is outside the popup
       }
     });
+    // Send a message
+    function sendMessage() {
+      let message = document.getElementById('userMessage').value;
+
+      if (message.trim()) {
+        // Display user message
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message', 'user-message');
+        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
+        chatPopup.appendChild(userMessageElement);
+
+        // Clear input field
+        document.getElementById('userMessage').value = '';
+
+        // Scroll to the bottom of the chat
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Bot reply (typing simulation)
+        typingMessageIndex = 0;
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('message', 'bot-message');
+        botMessageElement.innerHTML = `
+          <div class="avatar">
+            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
+          </div>
+          <div class="message-text"></div>`;
+        chatPopup.appendChild(botMessageElement);
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Simulate typing
+        function typeBotMessage() {
+          const botMessageTextElement = botMessageElement.querySelector('.message-text');
+          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
+          if (typingMessageIndex < text.length) {
+            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
+            typingMessageIndex++;
+            setTimeout(typeBotMessage, typingSpeed);
+          } else {
+            setTimeout(() => {
+              closeChat();
+            }, 60000); // Close chat after 1 minute of inactivity following bot reply
+          }
+        }
+        typeBotMessage();
+      }
+
+      // Reset the inactivity timer after sending a message
+      resetInactivityTimer();
+    }
+
+    // Inactivity timer to close the chat after 1 minute of inactivity
+    function startInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        closeChat();
+      }, 60000); // Close chat after 1 minute of inactivity
+    }
+
+    // Reset inactivity timer (called after each user interaction like sending a message)
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      startInactivityTimer(); // Restart inactivity timer
+    }
+
+
+    
   </script>
 </body>
 </html>
