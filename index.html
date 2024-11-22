@@ -3,149 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Powered Apps</title>
+  <title>AI-Powered Apps & Web Solutions</title>
   <style>
-    /* Global Styles */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff; /* White background */
-      color: #000; /* Text color set to black for contrast */
+    /* Hero Section Styles */
+    #hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 5%;
+      background: linear-gradient(135deg, #1c1c1c, #4a4a4a);
+      color: #fff;
+      border-radius: 10px;
+    }
+
+    .hero-content {
+      max-width: 50%;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      color: #ddd;
+      max-width: 400px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .cta-btn {
+      font-size: 1.125rem;
+      padding: 15px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
+
+    .primary {
+      background-color: #00b3b3;
+      color: white;
+    }
+
+    .primary:hover {
+      background-color: #009999;
+    }
+
+    .secondary {
+      background-color: #ff6f61;
+      color: white;
+    }
+
+    .secondary:hover {
+      background-color: #e2574d;
+    }
+
+    .hero-image img {
+      max-width: 600px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Apps Showcase Section */
+    #apps {
+      padding: 80px 5%;
+      background-color: #fafafa;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
     }
 
-    /* Section Titles */
     .section-title {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 700;
-      color: #1A237E; /* Updated to Navy Blue */
+      margin-bottom: 20px;
       text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 40px;
     }
 
     .section-description {
-      font-size: 1.4rem;
-      color: #333; /* Adjusted text color for contrast on white background */
+      font-size: 1.2rem;
+      color: #666;
       text-align: center;
       margin-bottom: 40px;
     }
 
-    /* Grid Layout */
-    .grid {
+    .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
     }
 
-    /* Card Styling */
-    .card {
-      background: linear-gradient(135deg, rgba(26, 35, 126, 0.7), rgba(26, 35, 126, 0.2)); /* Navy blue gradient */
-      border-radius: 20px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      color: #fff;
-      padding: 30px;
-    }
-
-    .card:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-image img {
-      width: 100%;
+    .app-card {
+      background-color: #fff;
       border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
+      overflow: hidden;
     }
 
-    .card-image img:hover {
-      transform: scale(1.05);
+    .app-card:hover {
+      transform: translateY(-10px);
     }
 
-    .card-info {
-      padding: 20px 0;
+    .app-image img {
+      width: 100%;
+      height: auto;
+      border-bottom: 3px solid #ddd;
     }
 
-    .card-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1A237E; /* Updated to Navy Blue */
+    .app-info {
+      padding: 20px;
+    }
+
+    .app-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #333;
       margin-bottom: 15px;
-      text-transform: capitalize;
     }
 
-    .card-description {
+    .app-description {
       font-size: 1.125rem;
+      color: #555;
       margin-bottom: 20px;
-      color: #ddd;
     }
 
-    .card-features {
+    .app-features {
       list-style-type: none;
       padding: 0;
       margin-bottom: 20px;
     }
 
-    .card-features li {
+    .app-features li {
       font-size: 1rem;
-      color: #bbb;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-    }
-
-    .card-features li:before {
-      content: '•';
-      color: #1A237E; /* Updated to Navy Blue */
-      margin-right: 10px;
+      color: #777;
+      margin-bottom: 10px;
     }
 
     .cta-btn {
       display: inline-block;
-      font-size: 1.2rem;
-      padding: 12px 24px;
-      background-color: #1A237E; /* Updated to Navy Blue */
+      font-size: 1.125rem;
+      padding: 12px 20px;
+      background-color: #00b3b3;
       color: white;
-      border-radius: 50px;
+      border-radius: 5px;
       text-decoration: none;
-      letter-spacing: 1px;
-      text-transform: uppercase;
       transition: background-color 0.3s ease;
     }
 
     .cta-btn:hover {
-      background-color: #0D47A1; /* Slightly darker navy for hover */
+      background-color: #009999;
     }
 
-    /* Call to Action Section */
     .cta-section {
       text-align: center;
       margin-top: 60px;
-      background: linear-gradient(135deg, rgba(26, 35, 126, 0.7), rgba(26, 35, 126, 0.2)); /* Navy blue gradient */
-      padding: 40px 20px;
-      border-radius: 10px;
     }
 
     .cta-section h3 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
       margin-bottom: 20px;
-      color: #fff;
     }
 
     .cta-section p {
-      font-size: 1.3rem;
-      color: #ddd;
+      font-size: 1.125rem;
+      color: #444;
       margin-bottom: 30px;
     }
 
@@ -160,72 +193,87 @@
 </head>
 <body>
 
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Empowering Your Business with Cutting-Edge AI Solutions</h1>
+      <p class="hero-description">Unlock the full potential of AI-powered apps and web platforms. Our solutions are live now, transforming businesses and delivering next-gen experiences.</p>
+      <div class="cta-buttons">
+        <a href="#apps" class="cta-btn primary">Explore Our Apps</a>
+        <a href="#contact" class="cta-btn secondary">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="IMG-20241015-WA0023.png" alt="AI-powered app solutions" />
+    </div>
+  </section>
+
   <!-- Apps Showcase Section -->
   <section id="apps">
     <div class="container">
-      <h2 class="section-title">Discover Our Live AI Apps</h2>
-      <p class="section-description">Each of our apps is designed with cutting-edge AI technology to help your business grow. Take a look at the features and see how we can empower you with automation and smart insights.</p>
+      <h2 class="section-title">Discover Our Live AI Apps & Web Solutions</h2>
+      <p class="section-description">All our applications are live, AI-powered, and ready to help you transform your business. Explore each app and see how they can work for you.</p>
 
-      <div class="grid">
+      <div class="apps-grid">
         <!-- App 1 -->
-        <div class="card">
-          <div class="card-image">
+        <div class="app-card">
+          <div class="app-image">
             <img src="IMG-20241015-WA0023.png" alt="App 1" />
           </div>
-          <div class="card-info">
-            <h3 class="card-title">App 1</h3>
-            <p class="card-description">AI-powered to revolutionize [specific task or business process].</p>
-            <ul class="card-features">
+          <div class="app-info">
+            <h3 class="app-title">[App Name 1]</h3>
+            <p class="app-description">AI-powered to revolutionize [specific task or business process].</p>
+            <ul class="app-features">
               <li>Real-time data analysis</li>
               <li>Customizable AI models</li>
               <li>Seamless integration with existing tools</li>
             </ul>
-            <a href="[app1_link]" class="cta-btn">Try It Now</a>
+            <a href="[app_link]" class="cta-btn">Try It Now</a>
           </div>
         </div>
 
         <!-- App 2 -->
-        <div class="card">
-          <div class="card-image">
+        <div class="app-card">
+          <div class="app-image">
             <img src="IMG-20241015-WA0023.png" alt="App 2" />
           </div>
-          <div class="card-info">
-            <h3 class="card-title">App 2</h3>
-            <p class="card-description">AI-driven insights and automated workflows for enhanced productivity.</p>
-            <ul class="card-features">
+          <div class="app-info">
+            <h3 class="app-title">[App Name 2]</h3>
+            <p class="app-description">AI-driven insights and automated workflows for enhanced productivity.</p>
+            <ul class="app-features">
               <li>Smart automation</li>
               <li>Scalable solutions</li>
               <li>Optimized for cloud integration</li>
             </ul>
-            <a href="[app2_link]" class="cta-btn">Start Using</a>
+            <a href="[app_link]" class="cta-btn">Start Using</a>
           </div>
         </div>
 
-        <!-- App 3 -->
-        <div class="card">
-          <div class="card-image">
-            <img src="IMG-20241015-WA0023.png" alt="App 3" />
+        <!-- Web Service -->
+        <div class="app-card">
+          <div class="app-image">
+            <img src="path_to_web_service_image.jpg" alt="Web Service" />
           </div>
-          <div class="card-info">
-            <h3 class="card-title">App 3</h3>
-            <p class="card-description">Enhance customer experiences with AI-powered analytics.</p>
-            <ul class="card-features">
-              <li>Predictive analytics</li>
-              <li>Automated reports</li>
-              <li>Enhanced personalization</li>
+          <div class="app-info">
+            <h3 class="app-title">[Web Service Name]</h3>
+            <p class="app-description">Transform your business with our secure, scalable, and AI-enhanced platform.</p>
+            <ul class="app-features">
+              <li>AI-based web performance</li>
+              <li>Responsive and user-friendly</li>
+              <li>Enterprise-ready solutions</li>
             </ul>
-            <a href="[app3_link]" class="cta-btn">Get Started</a>
+            <a href="[service_link]" class="cta-btn">Learn More</a>
           </div>
         </div>
       </div>
+
+      <div class="cta-section">
+        <h3>Ready to Innovate with AI?</h3>
+        <p>All of our apps and services are live and ready to take your business to the next level. Get in touch with us today to start your journey!</p>
+        <a href="#contact" class="cta-btn primary">Contact Us</a>
+      </div>
     </div>
   </section>
-
-  <!-- Call to Action Section -->
-  <div class="cta-section">
-    <h3>Ready to Transform Your Business with AI?</h3>
-    <p>All of our apps are live and ready to take your business to the next level. Start your AI-powered journey now!</p>
-  </div>
 
 </body>
 </html>
