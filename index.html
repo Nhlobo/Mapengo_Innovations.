@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Testimonials - AI Powered</title>
+    <title>Client Testimonials - Glassmorphism AI</title>
     <style>
         /* General reset and body styling */
         * {
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #ffffff;
+            background: #ffffff;
             color: #333;
             display: flex;
             justify-content: center;
@@ -48,52 +48,82 @@
             animation: textGlow 1.5s infinite alternate;
         }
 
-        /* Testimonials Container */
+        /* Testimonials Container with Flexbox */
         .testimonials-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
             justify-content: center;
-            transition: transform 0.3s ease;
+            padding: 1rem;
         }
 
-        .testimonials-container:hover {
-            transform: scale(1.02);
-        }
-
-        /* Testimonial Card */
+        /* Glassmorphism effect for cards */
         .card {
-            background: #ffffff;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 2rem;
-            position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             overflow: hidden;
             will-change: transform, box-shadow;
-            background-color: #f9f9f9;
+            backdrop-filter: blur(20px);
+            color: white;
+            animation: fallDown 0.8s ease-out;
         }
 
-        /* Hover Effects: 3D Flip */
         .card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
-        /* Testimonial Image */
-        .testimonial-img {
+        /* Flip effect on hover */
+        .card:hover .testimonial-img {
+            transform: scale(1.1);
+        }
+
+        .card .testimonial-img {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            border: 2px solid #fff;
-            margin-top: 15px;
+            border: 3px solid #fff;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
 
-        .card:hover .testimonial-img {
-            transform: scale(1.1);
+        /* Title inside Cards */
+        .title {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #f5f5f5;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations for Falling and Flipping */
+        @keyframes fallDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                color: #333;
+            }
+            50% {
+                color: #ff6f61;
+            }
+            100% {
+                color: #ff9800;
+            }
         }
 
         /* Rating System */
@@ -121,47 +151,15 @@
             color: #ff9800;
         }
 
-        /* Title inside Cards */
-        .title {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: #555;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Hover glow and focus effect */
+        /* Text Fade In */
         h4 {
             font-size: 1rem;
-            color: #333;
+            color: #f5f5f5;
             opacity: 0;
             animation: fadeInText 1.5s ease-out forwards;
         }
 
-        /* Keyframes */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes textGlow {
-            0% {
-                color: #333;
-            }
-            50% {
-                color: #ff6f61;
-            }
-            100% {
-                color: #ff9800;
-            }
-        }
-
+        /* Keyframe for Fade-in effect */
         @keyframes fadeInText {
             0% {
                 opacity: 0;
@@ -234,6 +232,20 @@
             <img src="alice-brown.jpg" alt="Alice Brown" class="testimonial-img">
             <p class="title">"Excellent customer service and a product that exceeds expectations! Highly recommended!"</p>
             <h4>- Alice Brown, Founder of InnovateTech</h4>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="card">
+            <div class="rating">
+                <label for="star1">&#9733;</label>
+                <label for="star2">&#9733;</label>
+                <label for="star3">&#9734;</label>
+                <label for="star4">&#9734;</label>
+                <label for="star5">&#9734;</label>
+            </div>
+            <img src="michael-johnson.jpg" alt="Michael Johnson" class="testimonial-img">
+            <p class="title">"Fast, reliable, and exceptional quality work. We couldn't be happier with the result!"</p>
+            <h4>- Michael Johnson, Director of WebWorks</h4>
         </div>
 
     </div>
