@@ -111,107 +111,72 @@
       background-color: #218838;
     }
 
-    /* Cloud container under Weather image */
-    .container {
-      width: 150px;  /* Reduced size for smaller cloud display */
-      height: 150px; /* Reduced size for smaller cloud display */
-      padding: 15px;
+    /* Cloud section styling (below Weather image) */
+    .cloud-container {
+      width: 150px;
+      height: 150px;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      margin: 20px auto;
     }
 
     .cloud {
-      width: 150px;  /* Reduced size for smaller cloud display */
+      width: 150px;
+      position: relative;
     }
 
     .front {
-      padding-top: 35px;  /* Adjusted padding for better alignment */
-      margin-left: 15px;  /* Adjusted margin for better alignment */
-      display: inline;
+      display: inline-block;
       position: absolute;
+      animation: clouds 8s infinite ease-in-out;
       z-index: 11;
-      animation: clouds 8s infinite;
-      animation-timing-function: ease-in-out;
     }
 
     .back {
-      margin-top: -20px;  /* Adjusted margin for better positioning */
-      margin-left: 100px;  /* Adjusted margin for better positioning */
+      display: inline-block;
+      position: absolute;
+      animation: clouds 12s infinite ease-in-out;
       z-index: 12;
-      animation: clouds 12s infinite;
-      animation-timing-function: ease-in-out;
     }
 
     .right-front {
-      width: 30px;  /* Reduced size for smaller cloud element */
-      height: 30px; /* Reduced size for smaller cloud element */
+      width: 30px;
+      height: 30px;
       border-radius: 50% 50% 50% 0%;
       background-color: #4c9beb;
       display: inline-block;
-      margin-left: -15px;  /* Adjusted margin for better positioning */
-      z-index: 5;
+      margin-left: -15px;
     }
 
     .left-front {
-      width: 45px;  /* Reduced size for smaller cloud element */
-      height: 45px; /* Reduced size for smaller cloud element */
+      width: 45px;
+      height: 45px;
       border-radius: 50% 50% 0% 50%;
       background-color: #4c9beb;
       display: inline-block;
-      z-index: 5;
     }
 
     .right-back {
-      width: 35px;  /* Reduced size for smaller cloud element */
-      height: 35px; /* Reduced size for smaller cloud element */
+      width: 35px;
+      height: 35px;
       border-radius: 50% 50% 50% 0%;
       background-color: #4c9beb;
       display: inline-block;
-      margin-left: -10px;  /* Adjusted margin for better positioning */
-      z-index: 5;
+      margin-left: -10px;
     }
 
     .left-back {
-      width: 20px;  /* Reduced size for smaller cloud element */
-      height: 20px; /* Reduced size for smaller cloud element */
+      width: 20px;
+      height: 20px;
       border-radius: 50% 50% 0% 50%;
       background-color: #4c9beb;
       display: inline-block;
-      z-index: 5;
     }
 
-    /* Sun styling */
-    .sun {
-      width: 80px;  /* Reduced size for smaller sun */
-      height: 80px; /* Reduced size for smaller sun */
-      background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
-      background: linear-gradient(to right, #fcbb04, #fffc00);
-      border-radius: 60px;
-      display: inline;
-      position: absolute;
-    }
-
-    .sunshine {
-      animation: sunshines 2s infinite;
-    }
-
-    @keyframes sunshines {
-      0% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-
-      100% {
-        transform: scale(1.4);
-        opacity: 0;
-      }
-    }
-
-    /* Cloud animation keyframes */
     @keyframes clouds {
       0% {
-        transform: translateX(10px);  /* Reduced cloud movement */
+        transform: translateX(10px);
       }
 
       50% {
@@ -219,9 +184,10 @@
       }
 
       100% {
-        transform: translateX(10px);  /* Reduced cloud movement */
+        transform: translateX(10px);
       }
     }
+
   </style>
 </head>
 <body>
@@ -279,8 +245,8 @@
     </div>
   </section>
 
-  <!-- Cloud Section (under Weather Image) -->
-  <div class="container">
+  <!-- Cloud Section (Under Weather Image) -->
+  <div class="cloud-container">
     <div class="cloud">
       <div class="front">
         <div class="left-front"></div>
@@ -290,9 +256,6 @@
         <div class="left-back"></div>
         <div class="right-back"></div>
       </div>
-    </div>
-    <div class="sunshine">
-      <div class="sun"></div>
     </div>
   </div>
 
