@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>AI-Powered Apps</title>
   <style>
+    /* Global Styles */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -13,118 +14,218 @@
       color: #fff;
     }
 
-    /* Container Styling */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px;
+      padding: 20px;
     }
 
-    /* Section Title */
+    /* Section Titles */
     .section-title {
-      text-align: center;
       font-size: 3rem;
       font-weight: 700;
       color: #00b3b3;
-      margin-bottom: 40px;
+      text-align: center;
       text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
     }
 
-    /* Portfolio Grid */
-    .portfolio-grid {
+    .section-description {
+      font-size: 1.4rem;
+      color: #ddd;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* Grid Layout */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
     }
 
-    .portfolio-item {
-      background: linear-gradient(135deg, rgba(0, 183, 179, 0.8), rgba(0, 183, 179, 0.3));
-      padding: 20px;
+    /* Card Styling */
+    .card {
+      background: linear-gradient(135deg, rgba(0, 183, 179, 0.7), rgba(0, 183, 179, 0.2));
       border-radius: 20px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       overflow: hidden;
       backdrop-filter: blur(10px);
-      color: white;
-      text-align: center;
+      color: #fff;
+      padding: 30px;
     }
 
-    .portfolio-item:hover {
-      transform: translateY(-10px);
+    .card:hover {
+      transform: translateY(-15px);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .portfolio-item img {
+    .card-image img {
       width: 100%;
-      height: auto;
       border-radius: 12px;
       transition: transform 0.3s ease;
     }
 
-    .portfolio-item img:hover {
+    .card-image img:hover {
       transform: scale(1.05);
     }
 
-    .portfolio-item h4 {
-      font-size: 1.6rem;
-      margin: 15px 0;
-      font-weight: 600;
-      color: #fff;
+    .card-info {
+      padding: 20px 0;
     }
 
-    .button {
+    .card-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #00b3b3;
+      margin-bottom: 15px;
+      text-transform: capitalize;
+    }
+
+    .card-description {
+      font-size: 1.125rem;
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+
+    .card-features {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .card-features li {
+      font-size: 1rem;
+      color: #bbb;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-features li:before {
+      content: '•';
+      color: #00b3b3;
+      margin-right: 10px;
+    }
+
+    .cta-btn {
       display: inline-block;
-      background-color: #00b3b3;
-      color: #fff;
+      font-size: 1.2rem;
       padding: 12px 24px;
+      background-color: #00b3b3;
+      color: white;
       border-radius: 50px;
       text-decoration: none;
-      text-transform: uppercase;
       letter-spacing: 1px;
+      text-transform: uppercase;
       transition: background-color 0.3s ease;
     }
 
-    .button:hover {
+    .cta-btn:hover {
       background-color: #009999;
+    }
+
+    /* Call to Action Section */
+    .cta-section {
+      text-align: center;
+      margin-top: 60px;
+      background: linear-gradient(135deg, rgba(0, 183, 179, 0.7), rgba(0, 183, 179, 0.2));
+      padding: 40px 20px;
+      border-radius: 10px;
+    }
+
+    .cta-section h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .cta-section p {
+      font-size: 1.3rem;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+
+    .cta-btn.primary {
+      background-color: #28a745;
+    }
+
+    .cta-btn.primary:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
 
-  <!-- Portfolio Section -->
-  <div class="container">
-    <h2 class="section-title">Discover Our Live Apps and Websites</h2>
+  <!-- Apps Showcase Section -->
+  <section id="apps">
+    <div class="container">
+      <h2 class="section-title">Discover Our Live AI Apps</h2>
+      <p class="section-description">Each of our apps is designed with cutting-edge AI technology to help your business grow. Take a look at the features and see how we can empower you with automation and smart insights.</p>
 
-    <!-- Portfolio Grid -->
-    <div class="portfolio-grid">
-      
-      <!-- Websites Section -->
-      <div class="portfolio-item websites">
-        <img src="assets/img/projects/Calculator.png" alt="Calculator">
-        <h4>Calculator</h4>
-        <a href="https://nhlobo.github.io/calculator/" class="button" target="_blank">View Project</a>
+      <div class="grid">
+        <!-- App 1 -->
+        <div class="card">
+          <div class="card-image">
+            <img src="path_to_app1_image.jpg" alt="App 1" />
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">App 1</h3>
+            <p class="card-description">AI-powered to revolutionize [specific task or business process].</p>
+            <ul class="card-features">
+              <li>Real-time data analysis</li>
+              <li>Customizable AI models</li>
+              <li>Seamless integration with existing tools</li>
+            </ul>
+            <a href="[app1_link]" class="cta-btn">Try It Now</a>
+          </div>
+        </div>
+
+        <!-- App 2 -->
+        <div class="card">
+          <div class="card-image">
+            <img src="path_to_app2_image.jpg" alt="App 2" />
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">App 2</h3>
+            <p class="card-description">AI-driven insights and automated workflows for enhanced productivity.</p>
+            <ul class="card-features">
+              <li>Smart automation</li>
+              <li>Scalable solutions</li>
+              <li>Optimized for cloud integration</li>
+            </ul>
+            <a href="[app2_link]" class="cta-btn">Start Using</a>
+          </div>
+        </div>
+
+        <!-- App 3 -->
+        <div class="card">
+          <div class="card-image">
+            <img src="path_to_app3_image.jpg" alt="App 3" />
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">App 3</h3>
+            <p class="card-description">Enhance customer experiences with AI-powered analytics.</p>
+            <ul class="card-features">
+              <li>Predictive analytics</li>
+              <li>Automated reports</li>
+              <li>Enhanced personalization</li>
+            </ul>
+            <a href="[app3_link]" class="cta-btn">Get Started</a>
+          </div>
+        </div>
       </div>
-
-      <div class="portfolio-item websites">
-        <img src="assets/img/projects/Weather Forecast App.png" alt="Weather Forecast App">
-        <h4>Weather Forecast App</h4>
-        <a href="https://weather-ebon-beta.vercel.app/" class="button" target="_blank">View Project</a>
-      </div>
-
-      <!-- Apps Section -->
-      <div class="portfolio-item apps">
-        <img src="assets/img/projects/Calendar App.png" alt="Calendar App">
-        <h4>Calendar App</h4>
-        <a href="https://test2-4-dxs5.onrender.com" class="button" target="_blank">View Project</a>
-      </div>
-
-      <div class="portfolio-item apps">
-        <img src="assets/img/projects/Quran Knowledge Quiz.png" alt="Quran Knowledge Quiz">
-        <h4>Quran Knowledge Quiz</h4>
-        <a href="https://nhlobo.github.io/quran-knowledge-quiz/" class="button" target="_blank">View Project</a>
-      </div>
-
     </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <div class="cta-section">
+    <h3>Ready to Transform Your Business with AI?</h3>
+    <p>All of our apps are live and ready to take your business to the next level. Start your AI-powered journey now!</p>
+    <a href="#contact" class="cta-btn primary">Contact Us</a>
   </div>
 
 </body>
