@@ -86,28 +86,39 @@
       color: #333;
     }
 
-    /* New Smaller Modern Arrow */
+    /* New Rounded Arrow Design */
     .arrow {
-      width: 18px;
-      height: 18px;
-      border: 2px solid transparent;
-      border-top-color: #00796b;
-      border-right-color: #00796b;
-      transform: rotate(45deg);
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00796b, #00bcd4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       margin-top: 8px;
-      display: inline-block;
     }
 
-    .arrow.rotate {
+    .arrow::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.rotate::before {
       transform: rotate(-135deg);
     }
 
     .arrow:hover {
-      border-top-color: #00bcd4;
-      border-right-color: #00bcd4;
-      transform: scale(1.2) rotate(45deg);
+      transform: scale(1.2);
+      box-shadow: 0 0 8px rgba(0, 188, 212, 0.7);
     }
 
     /* Animation for FAQ items */
