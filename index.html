@@ -3,295 +3,427 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Enhanced Apps</title>
+  <title>FAQ Section with Clean Chat</title>
   <style>
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #141414;
-      color: #fff;
-      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      position: relative;
-      padding: 20px;
-    }
-
-    h2, h3, p {
-      font-family: 'Arial', sans-serif;
-      color: #fff;
-    }
-
-    /* AI-inspired Background Animation */
-    .background-animation {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.5));
-      animation: float 15s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(15px);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    /* Phone Frame */
-    .phone-frame {
-      width: 375px;
-      height: 700px;
-      background-color: #141414;
-      border-radius: 36px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      position: relative;
-      padding: 20px;
+      text-align: center;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
 
-    .phone-frame::before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      width: 60px;
-      height: 5px;
-      background-color: #ddd;
-      border-radius: 5px;
-      transform: translateX(-50%);
+    /* General FAQ Section Styles */
+    .faq-section {
+      max-width: 800px;
+      margin: 20px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* Investment Calculator Styles */
-    .container {
-      flex-grow: 1;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-      position: relative;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .input-group {
-      margin-bottom: 12px;
-    }
-
-    .input-group label {
-      display: block;
-      color: #ccc;
-      font-size: 0.9rem;
-      margin-bottom: 5px;
-    }
-
-    .input-group input, .input-group select {
-      width: 100%;
-      padding: 8px;
-      font-size: 0.9rem;
-      border: 1px solid #00f1ff;
-      background-color: #222;
-      color: #fff;
-      border-radius: 5px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #00f1ff;
-      border-radius: 10px;
-      border: none;
-      color: #fff;
-      font-size: 1.1rem;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #00b3d9;
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #00f1ff;
-      text-align: center;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 30px;
-      color: #fff;
-    }
-
-    footer p {
-      font-size: 0.9rem;
-    }
-
-    /* Apps Section */
-    .apps-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .section-header h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      letter-spacing: 2px;
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
       text-transform: uppercase;
     }
 
-    .section-header p {
-      font-size: 1rem;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      color: #ccc;
+    /* FAQ Item Styles */
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
+    .faq-item {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+    }
+
+    .faq-item h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
+      text-align: left;
+      margin: 0;
+      padding-left: 15px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-item p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #555;
+      display: none;
+      text-align: left;
+      padding-left: 15px;
+    }
+
+    .faq-item.active p {
+      display: block;
+      color: #333;
+    }
+
+    .arrow {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid #333;
+      border-right: 2px solid #333;
+      transform: rotate(45deg);
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.rotate {
+      transform: rotate(-135deg);
+    }
+
+    /* Chat button */
+    .chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #87ceeb; /* Light Sky Blue */
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    .chat-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Chat Popup (White background, FAQ color for buttons) */
+    .chat-popup {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 350px;
+      background: white; /* Clean White */
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .chat-popup.active {
+      display: flex;
+    }
+
+    .message {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* User message styles */
+    .message.user-message {
+      justify-content: flex-end;
+    }
+
+    .message .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      overflow: hidden;
+      object-fit: cover;
+    }
+
+    .message .avatar-img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .message .message-text {
+      background: white; /* White background for conversation */
+      color: black; /* Black text */
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      max-width: 220px;
+      word-wrap: break-word;
+      border: 1px solid #ddd;
+    }
+
+    .message.bot-message .message-text {
+      background: white; /* White background for bot messages */
+      color: black; /* Black text */
+      border-color: #ccc;
+    }
+
+    .message.user-message .message-text {
+      background: white; /* White background for user messages */
+      color: black; /* Black text */
+      border-color: #ccc;
+    }
+
+    /* Input area */
+    .chat-popup input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 16px;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .chat-popup input[type="text"]:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    .chat-popup button {
+      background: #87ceeb; /* Light Sky Blue */
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .chat-popup button:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Close Chat Button */
+    .close-chat-button {
+      position: absolute;
+      top: -50px;
+      right: 10px;
+      background-color: #87ceeb;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 12px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .close-chat-button.active {
+      display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      .chat-popup {
+        width: 280px;
+      }
+
+      .chat-button {
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="background-animation"></div>
-
-  <!-- Apps Section -->
-  <section class="apps-section">
-    <div class="section-header">
-      <h2>Our AI-powered Apps</h2>
-      <p>Explore our innovative applications designed to simplify your life using cutting-edge AI technology.</p>
-    </div>
-
-    <!-- CloudySky App Placeholder -->
-    <div class="cloud-app">
-      <div class="container">
-        <div class="cloud front">
-          <span class="left-front"></span>
-          <span class="right-front"></span>
-        </div>
-        <span class="sun sunshine"></span>
-        <span class="sun"></span>
-        <div class="cloud back">
-          <span class="left-back"></span>
-          <span class="right-back"></span>
-        </div>
+</head>
+<body><head>
+</head>
+<body>
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <h3>What services do you offer?</h3>
+        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
+        <div class="arrow"></div>
       </div>
-    </div>
-    <h3>CloudySky</h3>
-
-    <!-- Investment Calculator within Phone Frame -->
-    <div class="phone-frame">
-      <div class="container">
-        <h1>Investment Calculator</h1>
-
-        <!-- Investment Form -->
-        <div class="input-group">
-          <label for="principal">Initial Investment Amount (ZAR):</label>
-          <input type="number" id="principal" placeholder="Enter initial amount">
-        </div>
-
-        <div class="input-group">
-          <label for="rate">Annual Interest Rate (%):</label>
-          <input type="number" id="rate" placeholder="Enter annual interest rate">
-        </div>
-
-        <div class="input-group">
-          <label for="period">Investment Period (years):</label>
-          <input type="number" id="period" placeholder="Enter investment period in years">
-        </div>
-
-        <div class="input-group">
-          <label for="type">Interest Type:</label>
-          <select id="type">
-            <option value="simple">Simple Interest</option>
-            <option value="compound">Compound Interest</option>
-          </select>
-        </div>
-
-        <div class="input-group">
-          <label for="frequency">Interest Compounding Frequency:</label>
-          <select id="frequency">
-            <option value="monthly">Monthly</option>
-            <option value="quarterly">Quarterly</option>
-            <option value="yearly">Yearly</option>
-          </select>
-        </div>
-
-        <!-- Calculate Button -->
-        <button onclick="calculate()">Calculate</button>
-
-        <!-- Result Output -->
-        <div id="result"></div>
+      <div class="faq-item">
+        <h3>How much do your services cost?</h3>
+        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>How long does a project take?</h3>
+        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
+        <div class="arrow"></div>
+      </div>
+      <div class="faq-item">
+        <h3>Do you offer ongoing support?</h3>
+        <p>Yes, we offer maintenance and support packages to ensure the continued success of your project post-launch.</p>
+        <div class="arrow"></div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <p>© 2024 Mapengo Innovations. All rights reserved</p>
-  </footer>
+  <!-- Chat Button -->
+  <button class="chat-button" onclick="toggleChatPopup()">💬</button>
+
+  <!-- Chat Popup -->
+  <div class="chat-popup" id="chatPopup">
+    <div class="message bot-message">
+      <div class="avatar">
+        <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
+      </div>
+      <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
+    </div>
+    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+    <button onclick="sendMessage()">Send</button>
+    <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
+  </div>
 
   <script>
-    function calculate() {
-      var principal = parseFloat(document.getElementById('principal').value);
-      var rate = parseFloat(document.getElementById('rate').value);
-      var period = parseFloat(document.getElementById('period').value);
-      var type = document.getElementById('type').value;
-      var frequency = document.getElementById('frequency').value;
+    const chatButton = document.querySelector('.chat-button');
+    const chatPopup = document.getElementById('chatPopup');
+    const closeChatButton = document.getElementById('closeChatButton');
+    let typingMessageIndex = 0;
+    const typingSpeed = 100;
+    let lastActivityTime = Date.now();
+    let inactivityTimer;
 
-      if (isNaN(principal) || isNaN(rate) || isNaN(period)) {
-        document.getElementById('result').innerHTML = "Please enter valid numbers.";
-        return;
+    function toggleChatPopup() {
+      chatPopup.classList.toggle('active');
+      closeChatButton.classList.add('active');
+      if (chatPopup.classList.contains('active')) {
+        lastActivityTime = Date.now();
+        startInactivityTimer(); // Restart inactivity timer when chat is opened
+        clearChat(); // Clear any previous messages or input
       }
-
-      if (principal <= 0 || rate <= 0 || period <= 0) {
-        document.getElementById('result').innerHTML = "Please enter positive numbers for principal, rate, and period.";
-        return;
-      }
-
-      var n = 1;
-      if (frequency === 'monthly') {
-        n = 12;
-      } else if (frequency === 'quarterly') {
-        n = 4;
-      }
-
-      var effectiveRate = rate / 100;
-      var totalAmount;
-
-      if (type === 'simple') {
-        totalAmount = principal * (1 + effectiveRate * period);
-      } else {
-        totalAmount = principal * Math.pow(1 + effectiveRate / n, n * period);
-      }
-
-      totalAmount = totalAmount.toFixed(2);
-      document.getElementById('result').innerHTML = "After " + period + " years, your investment will be approximately ZAR " + totalAmount + ".";
     }
+
+    // Close chat when the close button is clicked
+    function closeChat() {
+      chatPopup.classList.remove('active');
+      closeChatButton.classList.remove('active');
+      document.getElementById('userMessage').value = ''; // Clear chat input
+      clearTimeout(inactivityTimer); // Clear any running inactivity timer
+    }
+
+    // Clear the chat history and reset input when reopening chat
+    function clearChat() {
+      chatPopup.innerHTML = `
+        <div class="message bot-message">
+          <div class="avatar">
+            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
+          </div>
+          <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
+        </div>
+        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+        <button onclick="sendMessage()">Send</button>
+      `;
+    }
+
+    // Send a message
+    function sendMessage() {
+      let message = document.getElementById('userMessage').value;
+
+      if (message.trim()) {
+        // Display user message
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message', 'user-message');
+        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
+        chatPopup.appendChild(userMessageElement);
+
+        // Clear input field
+        document.getElementById('userMessage').value = '';
+
+        // Scroll to the bottom of the chat
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Bot reply (typing simulation)
+        typingMessageIndex = 0;
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('message', 'bot-message');
+        botMessageElement.innerHTML = `
+          <div class="avatar">
+            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
+          </div>
+          <div class="message-text"></div>`;
+        chatPopup.appendChild(botMessageElement);
+        chatPopup.scrollTop = chatPopup.scrollHeight;
+
+        // Simulate typing
+        function typeBotMessage() {
+          const botMessageTextElement = botMessageElement.querySelector('.message-text');
+          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
+          if (typingMessageIndex < text.length) {
+            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
+            typingMessageIndex++;
+            setTimeout(typeBotMessage, typingSpeed);
+          } else {
+            setTimeout(() => {
+              closeChat();
+            }, 5000); // 5 seconds after message appears
+          }
+        }
+        typeBotMessage();
+      }
+    }
+
+    // Inactivity timer to close the chat after 1 minute of inactivity
+    function startInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        closeChat();
+      }, 5000); // Close chat after 1 minute
+    }
+
+    // FAQ Toggle Logic (Arrows and answers)
+    document.querySelectorAll('.faq-item').forEach((faq) => {
+      const arrow = faq.querySelector('.arrow');
+      faq.addEventListener('click', () => {
+        document.querySelectorAll('.faq-item').forEach((item) => {
+          if (item !== faq) {
+            item.classList.remove('active');
+            item.querySelector('.arrow').classList.remove('rotate');
+          }
+        });
+        faq.classList.toggle('active');
+        arrow.classList.toggle('rotate');
+      });
+    });
+
+    // Close the chat if the user clicks outside of the popup
+    document.addEventListener('click', (event) => {
+      const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
+      if (!isClickInside) {
+        closeChat(); // Close the chat if the click is outside the popup
+      }
+    });
   </script>
 </body>
-</html>
+  </html>
