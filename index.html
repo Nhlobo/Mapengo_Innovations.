@@ -259,10 +259,6 @@
   </style>
 </head>
 <body>
-</head>
-<body><head>
-</head>
-<body>
   <!-- FAQ Section -->
   <section id="faq" class="faq-section">
     <h2 class="section-title">Frequently Asked Questions</h2>
@@ -310,18 +306,12 @@
     const chatButton = document.querySelector('.chat-button');
     const chatPopup = document.getElementById('chatPopup');
     const closeChatButton = document.getElementById('closeChatButton');
-    let typingMessageIndex = 0;
-    const typingSpeed = 100;
-    let lastActivityTime = Date.now();
-    let inactivityTimer;
 
     function toggleChatPopup() {
       chatPopup.classList.toggle('active');
       closeChatButton.classList.add('active');
       if (chatPopup.classList.contains('active')) {
-        lastActivityTime = Date.now();
-        startInactivityTimer(); // Restart inactivity timer when chat is opened
-        clearChat(); // Clear any previous messages or input
+        clearChat(); // Clear any previous messages or input when opening chat
       }
     }
 
@@ -330,7 +320,6 @@
       chatPopup.classList.remove('active');
       closeChatButton.classList.remove('active');
       document.getElementById('userMessage').value = ''; // Clear chat input
-      clearTimeout(inactivityTimer); // Clear any running inactivity timer
     }
 
     // Clear the chat history and reset input when reopening chat
@@ -365,41 +354,16 @@
         chatPopup.scrollTop = chatPopup.scrollHeight;
 
         // Bot reply (typing simulation)
-        typingMessageIndex = 0;
         const botMessageElement = document.createElement('div');
         botMessageElement.classList.add('message', 'bot-message');
         botMessageElement.innerHTML = `
           <div class="avatar">
             <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
           </div>
-          <div class="message-text"></div>`;
+          <div class="message-text">Thanks for reaching out! I’ll help answer your questions shortly.</div>`;
         chatPopup.appendChild(botMessageElement);
         chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Simulate typing
-        function typeBotMessage() {
-          const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
-          if (typingMessageIndex < text.length) {
-            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-            typingMessageIndex++;
-            setTimeout(typeBotMessage, typingSpeed);
-          } else {
-            setTimeout(() => {
-              closeChat();
-            }, 5000); // 5 seconds after message appears
-          }
-        }
-        typeBotMessage();
       }
-    }
-
-    // Inactivity timer to close the chat after 1 minute of inactivity
-    function startInactivityTimer() {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
-        closeChat();
-      }, 5000); // Close chat after 1 minute
     }
 
     // FAQ Toggle Logic (Arrows and answers)
@@ -416,14 +380,7 @@
         arrow.classList.toggle('rotate');
       });
     });
-
-    // Close the chat if the user clicks outside of the popup
-    document.addEventListener('click', (event) => {
-      const isClickInside = chatPopup.contains(event.target) || chatButton.contains(event.target);
-      if (!isClickInside) {
-        closeChat(); // Close the chat if the click is outside the popup
-      }
-    });
   </script>
 </body>
-  </html>
+        </html>
+        
