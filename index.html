@@ -1,475 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ Section with Clean Chat</title>
- <style>
- body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    /* General FAQ Section Styles */
-    .faq-section {
-      max-width: 800px;
-      margin: 20px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #333;
-      text-transform: uppercase;
-    }
-
-    /* FAQ Item Styles */
-    .faq-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .faq-item {
-      background: #fff;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border: 1px solid #ddd;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .faq-item:hover {
-      box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
-    }
-
-    .faq-item h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #333;
-      text-align: left;
-      margin: 0;
-      padding-left: 15px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .faq-item p {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: #555;
-      display: none;
-      text-align: left;
-      padding-left: 15px;
-    }
-
-    .faq-item.active p {
-      display: block;
-      color: #333;
-    }
-
-    .arrow {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      width: 12px;
-      height: 12px;
-      border-top: 2px solid #333;
-      border-right: 2px solid #333;
-      transform: rotate(45deg);
-      transition: transform 0.3s ease;
-    }
-
-    .arrow.rotate {
-      transform: rotate(-135deg);
-    }
-
-    /* Chat button */
-    .chat-button {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #87ceeb; /* Light Sky Blue */
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      font-size: 36px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 9999;
-    }
-
-    .chat-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Chat Popup (White background, FAQ color for buttons) */
-    .chat-popup {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      width: 350px;
-      background: white; /* Clean White */
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .chat-popup.active {
-      display: flex;
-    }
-
-    .message {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* User message styles */
-    .message.user-message {
-      justify-content: flex-end;
-    }
-
-    .message .avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      overflow: hidden;
-      object-fit: cover;
-    }
-
-    .message .avatar-img {
-      width: 100%;
-      height: 100%;
-    }
-
-    .message .message-text {
-      background: white; /* White background for conversation */
-      color: black; /* Black text */
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 14px;
-      max-width: 220px;
-      word-wrap: break-word;
-      border: 1px solid #ddd;
-    }
-
-    .message.bot-message .message-text {
-      background: white; /* White background for bot messages */
-      color: black; /* Black text */
-      border-color: #ccc;
-    }
-
-    .message.user-message .message-text {
-      background: white; /* White background for user messages */
-      color: black; /* Black text */
-      border-color: #ccc;
-    }
-
-    /* Input area */
-    .chat-popup input[type="text"] {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 25px;
-      font-size: 16px;
-      margin-top: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .chat-popup input[type="text"]:focus {
-      outline: none;
-      border-color: #3498db;
-    }
-
-    .chat-popup button {
-      background: #87ceeb; /* Light Sky Blue */
-      color: white;
-      border: none;
-      border-radius: 25px;
-      padding: 12px;
-      width: 100%;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .chat-popup button:hover {
-      background: #2980b9;
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Close Chat Button */
-    .close-chat-button {
-      position: absolute;
-      top: -50px;
-      right: 10px;
-      background-color: #87ceeb;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 15px;
-      font-size: 12px;
-      cursor: pointer;
-      display: none;
-    }
-
-    .close-chat-button.active {
-      display: inline-block;
-    }
-
-    @media (max-width: 600px) {
-      .chat-popup {
-        width: 280px;
-      }
-
-      .chat-button {
-        width: 60px;
-        height: 60px;
-        font-size: 32px;
-      }
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomie - Smart Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #chatbox {
+            background: white;
+            width: 300px;
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .chat-log {
+            overflow-y: auto;
+            max-height: 70%;
+            margin-bottom: 10px;
+        }
+        .chat-log div {
+            padding: 5px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .options button {
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            background-color: #0056b3;
+        }
+        .chat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .chat-header img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        #botButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <!-- FAQ Section -->
-  <section id="faq" class="faq-section">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <h3>What services do you offer?</h3>
-        <p>We offer web development, mobile app development, maintenance & support, and consulting services to help your business thrive.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How much do your services cost?</h3>
-        <p>Our pricing is competitive and tailored to meet the needs of businesses in South Africa. Please visit our <a href="pricing.html">Pricing Page</a> for more details.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>How long does a project take?</h3>
-        <p>Project timelines vary based on the complexity and requirements. We provide estimated timelines during the consultation phase.</p>
-        <div class="arrow"></div>
-      </div>
-      <div class="faq-item">
-        <h3>Do you offer ongoing support?</h3>
-        <p>Yes, we offer maintenance and support packages to ensure the continued success of your project post-launch.</p>
-        <div class="arrow"></div>
-      </div>
+
+    <div id="chatbox">
+        <div class="chat-header">
+            <img src="tomie-avatar.jpg" alt="Tomie Avatar" id="avatar">
+            <div>Tomie</div>
+        </div>
+        <div class="chat-log" id="chat-log"></div>
+        <div class="options" id="options"></div>
     </div>
-  </section>
 
-  <!-- Chat Button -->
-  <button class="chat-button" onclick="toggleChatPopup()">💬</button>
+    <button id="botButton">💬</button>
 
-  <!-- Chat Popup -->
-  <div class="chat-popup" id="chatPopup">
-    <div class="message bot-message">
-      <div class="avatar">
-        <img src="assets/tomie-avatar.png" alt="Tomie" class="avatar-img">
-      </div>
-      <div class="message-text">Hi! I’m Tomie. Let me help you with your questions regarding websites, apps, pricing, and more—without filling out a contact form!</div>
-    </div>
-    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-    <button onclick="sendMessage()">Send</button>
-    <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
-  </div>
+    <script>
+        let currentStep = 0;
+        let timeoutTimer;
 
-  <script>
-    const chatButton = document.querySelector('.chat-button');
-    const chatPopup = document.getElementById('chatPopup');
-    const closeChatButton = document.getElementById('closeChatButton');
+        const responses = {
+            start: {
+                message: "Hello! I'm Tomie, your smart assistant. How can I assist you today?",
+                options: [
+                    "Learn about our Process",
+                    "See our Pricing Packages",
+                    "Get a Website or App Recommendation",
+                    "Contact Us"
+                ]
+            },
+            process: {
+                message: "Here's our process:\n1. Initial Consultation\n2. Proposal and Quotation\n3. Agreement and Deposit\n4. Development Phase\n5. Testing and Review\n6. Final Delivery and Payment\n7. Ongoing Support",
+                options: ["Back to Main Menu"]
+            },
+            pricing: {
+                message: "Our pricing packages are:\n\n1. Starter Website Package: R3,000 – R5,000\n2. Standard Website Package: R6,000 – R12,000\n3. Premium Website Package: R12,000 – R20,000\n4. E-commerce Website Package: R10,000 – R25,000\n\n1. Starter App Package: R4,000 – R8,000\n2. Standard App Package: R8,000 – R15,000\n3. Premium App Package: R15,000 – R30,000\n4. E-commerce App Package: R12,000 – R25,000",
+                options: ["Back to Main Menu"]
+            },
+            recommend: {
+                message: "Please enter your budget to help us suggest a package for you.",
+                options: [],
+                input: true
+            },
+            contact: {
+                message: "Please visit our contact form [here]. We’ll get back to you shortly.",
+                options: []
+            }
+        };
 
-    // Toggle the chat popup visibility
-    function toggleChatPopup() {
-      chatPopup.classList.toggle('active');
-      closeChatButton.classList.add('active');
-      if (chatPopup.classList.contains('active')) {
-        clearChat(); // Clear any previous messages or input when opening chat
-      }
-    }
-
-    // Close chat when the close button is clicked
-    function closeChat() {
-      chatPopup.classList.remove('active');
-      closeChatButton.classList.remove('active');
-      document.getElementById('userMessage').value = ''; // Clear chat input
-    }
-
-    const responses = {
-      "process": `
-        <strong>Our Process:</strong><br>
-        1. Initial Consultation: Understand your needs.<br>
-        2. Proposal: Provide cost and timeline estimates.<br>
-        3. Agreement & Deposit: 50% payment to start.<br>
-        4. Development: Regular updates shared.<br>
-        5. Testing & Review: Ensure quality and client approval.<br>
-        6. Final Delivery: Upon receiving the final payment.<br>
-        7. Support: Ongoing support offered optionally.
-      `,
-      "pricing_websites": {
-        "minimum": 3000,
-        "basic": "A basic website starts at R3,000 and includes 1-3 pages with a responsive design, ideal for personal use or small projects.",
-        "standard": "A standard website ranges from R6,000 to R12,000 and includes 4-8 pages, suitable for small businesses with features like SEO and social media integration.",
-        "premium": "A premium website costs R12,000 to R20,000 and is tailored for businesses needing advanced features like blogs, product pages, or portfolio sections.",
-        "ecommerce": "E-commerce websites start at R10,000 and go up to R25,000, including online store setup, payment integration, and product pages."
-      },
-      "pricing_apps": {
-        "minimum": 50000,
-        "basic": "A basic app starts at R50,000 for simple features like login and basic UI.",
-        "standard": "A standard app ranges from R75,000 to R120,000 and includes custom designs, APIs, and in-app messaging.",
-        "premium": "Premium apps start at R120,000, designed for advanced functionality like real-time tracking, admin dashboards, and complex integrations."
-      },
-      "privacy_policy": "For details on how we handle your data, please refer to our <a href='/privacy-policy'>Privacy Policy</a>.",
-      "terms_of_service": "To understand our terms of working, please visit our <a href='/terms-of-service'>Terms of Service</a>.",
-      "unknown": "I'm not sure I understand your question. Please try rephrasing it or visit our <a href='/contact'>Contact Form</a> to speak with a team member."
-    };
-
-    const synonyms = {
-      "process": ["process", "steps", "workflow", "methodology", "how it works", "procedure"],
-      "pricing_websites": ["website pricing", "website cost", "how much for website", "website packages", "website rates"],
-      "pricing_apps": ["app pricing", "app cost", "how much for app", "app packages", "app rates"],
-      "privacy_policy": ["privacy policy", "privacy", "data protection", "personal information", "your data"],
-      "terms_of_service": ["terms of service", "terms", "conditions", "agreement", "contract"]
-    };
-
-    // Fuzzy matching for broken English
-    function fuzzyMatch(input, category) {
-      const keywords = synonyms[category];
-      for (let keyword of keywords) {
-        if (input.includes(keyword)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    // General query processor
-    function getResponse(userInput) {
-      const input = userInput.toLowerCase();
-
-      // Check each category for a match
-      for (let category in synonyms) {
-        if (fuzzyMatch(input, category)) {
-          return responses[category];
-        }
-      }
-
-      return responses.unknown;
-    }
-
-    // Handle specific budget queries
-    function handleBudgetQuery(budget, type) {
-      const pricing = responses[`pricing_${type}`];
-      if (budget < pricing.minimum) {
-        return `Our minimum for a ${type} is R${pricing.minimum}. Unfortunately, we cannot offer anything below this amount. However, you can fill out the <a href='/contact'>Contact Form</a> to speak to our team for negotiation.`;
-      }
-
-      if (type === "websites") {
-        if (budget >= 3000 && budget <= 5000) {
-          return pricing.basic;
-        } else if (budget > 5000 && budget <= 12000) {
-          return pricing.standard;
-        } else if (budget > 12000 && budget <= 20000) {
-          return pricing.premium;
-        } else if (budget > 10000) {
-          return pricing.ecommerce;
-        }
-      } else if (type === "apps") {
-        if (budget >= 50000 && budget <= 75000) {
-          return pricing.basic;
-        } else if (budget > 75000 && budget <= 120000) {
-          return pricing.standard;
-        } else if (budget > 120000) {
-          return pricing.premium;
-        }
-      }
-      return `With a budget of R${budget}, your requirements might exceed our typical packages. Please fill out the <a href='/contact'>Contact Form</a> to discuss your needs further.`;
-    }
-
-    // Process user input
-    function sendMessage() {
-      const userInput = document.getElementById('userMessage').value.trim();
-      if (!userInput) return;
-
-      // Display user input
-      displayMessage(userInput, 'user');
-
-      // Show "bot is thinking" response
-      displayMessage('...Thinking...', 'bot');
-      
-      // Wait 1 second before showing the actual response
-      setTimeout(() => {
-        let response = getResponse(userInput);
-        const budgetMatch = userInput.match(/\b\d+\b/);
-        const type = userInput.includes("website") ? "websites" : userInput.includes("app") ? "apps" : null;
-
-        if (budgetMatch && type) {
-          const budget = parseInt(budgetMatch[0]);
-          response = handleBudgetQuery(budget, type);
+        // Function to display chat message
+        function displayChat(message) {
+            const chatLog = document.getElementById('chat-log');
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        // Remove the "thinking" placeholder and show the response
-        const chatbox = document.getElementById('chatPopup');
-        const lastBotMessage = chatbox.querySelector('.bot-message:last-child');
-        lastBotMessage.innerHTML = response;
-      }, 1000);
+        // Function to display options buttons
+        function displayOptions(options) {
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = "";
+            options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => handleOptionClick(index);
+                optionsDiv.appendChild(button);
+            });
+        }
 
-      // Clear input field
-      document.getElementById('userMessage').value = "";
-    }
+        // Function to handle option click
+        function handleOptionClick(index) {
+            const option = Object.values(responses)[currentStep];
+            const selectedOption = option.options[index];
 
-    // Append messages to chatbox
-    function displayMessage(message, sender) {
-      const chatbox = document.getElementById('chatPopup');
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message', sender === 'bot' ? 'bot-message' : 'user-message');
-      messageDiv.innerHTML = message;
-      chatbox.appendChild(messageDiv);
-      chatbox.scrollTop = chatbox.scrollHeight;
-    }
+            if (selectedOption === "Back to Main Menu") {
+                currentStep = 0;
+                startChat();
+            } else if (selectedOption === "Get a Website or App Recommendation") {
+                currentStep = 'recommend';
+                startChat();
+            } else {
+                currentStep = Object.keys(responses).indexOf(selectedOption.toLowerCase().replace(/\s+/g, ''));
+                startChat();
+            }
+        }
 
-    // FAQ Toggle Logic (Arrows and answers)
-    document.querySelectorAll('.faq-item').forEach((faq) => {
-      const arrow = faq.querySelector('.arrow');
-      faq.addEventListener('click', () => {
-        document.querySelectorAll('.faq-item').forEach((item) => {
-          if (item !== faq) {
-            item.classList.remove('active');
-            item.querySelector('.arrow').classList.remove('rotate');
-          }
-        });
-        faq.classList.toggle('active');
-        arrow.classList.toggle('rotate');
-      });
-    });
-  </script>
+        // Function to handle budget input for recommendation
+        function handleBudgetInput(input) {
+            let message = '';
+            const budget = parseInt(input, 10);
+
+            if (budget >= 3000 && budget <= 5000) {
+                message = "Based on your budget, we recommend our Starter Website or App Package (R3,000 – R5,000). This includes a custom landing page or basic app functionality, fully responsive.";
+            } else if (budget > 5000 && budget <= 12000) {
+                message = "Based on your budget, we recommend our Standard Website or App Package (R6,000 – R12,000). This includes a custom homepage design, a simple app layout, and more features.";
+            } else if (budget > 12000) {
+                message = "Based on your budget, we recommend our Premium Website or App Package (R12,000 – R20,000). This includes advanced functionality, custom features, and integrations.";
+            } else {
+                message = "It seems your budget is a bit low for our packages, but we can still offer the Starter Package for either a website or app. Would you like to proceed with this?";
+            }
+
+            displayChat(message);
+            currentStep = 'contact';
+            startChat();
+        }
+
+        // Start chatbot conversation
+        function startChat() {
+            const currentResponse = responses[Object.keys(responses)[currentStep]];
+
+            if (currentStep === 'recommend') {
+                displayChat(currentResponse.message);
+                displayOptions([]);
+                const inputField = document.createElement('input');
+                inputField.type = 'number';
+                inputField.placeholder = 'Enter your budget';
+                inputField.onblur = () => handleBudgetInput(inputField.value);
+                document.getElementById('options').appendChild(inputField);
+            } else {
+                displayChat(currentResponse.message);
+                displayOptions(currentResponse.options);
+            }
+        }
+
+        // Close chat after 1 minute of inactivity
+        function startTimeout() {
+            clearTimeout(timeoutTimer);
+            timeoutTimer = setTimeout(() => {
+                closeChat();
+            }, 60000);
+        }
+
+        // Open chat when the button is clicked
+        document.getElementById('botButton').onclick = () => {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatbox.style.display === 'none' || chatbox.style.display === '' ? 'flex' : 'none';
+            if (chatbox.style.display === 'flex') {
+                currentStep = 0; // Reset chat every time it's opened
+                startChat();
+            }
+            startTimeout();
+        };
+
+        // Close the chat
+        function closeChat() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = 'none';
+        }
+
+        // Initial call to open the chat
+        startChat();
+    </script>
+
 </body>
-</html>
+  </html>
