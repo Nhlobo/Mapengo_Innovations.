@@ -286,7 +286,7 @@
     </div>
   </section>
 
-  <!-- Chat Button -->
+<!-- Chat Button -->
 <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
 <!-- Chat Popup -->
@@ -434,8 +434,8 @@
     // Display bot response
     displayMessage(response, 'bot');
 
-    // Clear input field
-    document.getElementById('userMessage').value = "";
+    // Keep input field active for further messages
+    document.getElementById('userMessage').value = "";  // Clear input field for next message
   }
 
   // Append messages to chatbox
@@ -453,8 +453,10 @@
   document.getElementById('userMessage').addEventListener('keypress', (e) => {
     if (e.key === "Enter") sendMessage();
   });
-
-  // FAQ Toggle Logic (Arrows and answers)
+  </script>
+  
+<script>
+/ FAQ Toggle Logic (Arrows and answers)
   document.querySelectorAll('.faq-item').forEach((faq) => {
     const arrow = faq.querySelector('.arrow');
     faq.addEventListener('click', () => {
@@ -470,5 +472,5 @@
   });
 </script>
 </body>
-        </html>
-        
+</html>
+      
