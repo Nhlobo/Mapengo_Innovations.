@@ -322,49 +322,138 @@
       document.getElementById('userMessage').value = ''; // Clear chat input
     }
 
-    // Clear the chat history and reset input when reopening chat
-    function clearChat() {
-      chatPopup.innerHTML = `
-        <div class="message bot-message">
-          <div class="avatar">
-            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-          </div>
-          <div class="message-text">Hi! I’m Tomie, let me help you send your question without filling the contact form.</div>
-        </div>
-        <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-        <button onclick="sendMessage()">Send</button>
-      `;
+<script>
+    const responses = {
+        "process": `
+            <strong>Our Process:</strong><br>
+            1. Initial Consultation: Understand your needs.<br>
+            2. Proposal: Provide cost and timeline estimates.<br>
+            3. Agreement & Deposit: 50% payment to start.<br>
+            4. Development: Regular updates shared.<br>
+            5. Testing & Review: Ensure quality and client approval.<br>
+            6. Final Delivery: Upon receiving the final payment.<br>
+            7. Support: Ongoing support offered optionally.
+        `,
+        "pricing_websites": {
+            "minimum": 3000,
+            "basic": "A basic website starts at R3,000 and includes 1-3 pages with a responsive design, ideal for personal use or small projects.",
+            "standard": "A standard website ranges from R6,000 to R12,000 and includes 4-8 pages, suitable for small businesses with features like SEO and social media integration.",
+            "premium": "A premium website costs R12,000 to R20,000 and is tailored for businesses needing advanced features like blogs, product pages, or portfolio sections.",
+            "ecommerce": "E-commerce websites start at R10,000 and go up to R25,000, including online store setup, payment integration, and product pages."
+        },
+        "pricing_apps": {
+            "minimum": 50000,
+            "basic": "A basic app starts at R50,000 for simple features like login and basic UI.",
+            "standard": "A standard app ranges from R75,000 to R120,000 and includes custom designs, APIs, and in-app messaging.",
+            "premium": "Premium apps start at R120,000, designed for advanced functionality like real-time tracking, admin dashboards, and complex integrations."
+        },
+        "privacy_policy": "For details on how we handle your data, please refer to our <a href='/privacy-policy'>Privacy Policy</a>.",
+        "terms_of_service": "To understand our terms of working, please visit our <a href='/terms-of-service'>Terms of Service</a>.",
+        "unknown": "I'm not sure I understand your question. Please try rephrasing it or visit our <a href='/contact'>Contact Form</a> to speak with a team member."
+    };
+
+    const synonyms = {
+        "process": ["process", "steps", "workflow", "methodology", "how it works", "procedure", "steps"],
+        "pricing_websites": ["website pricing", "website cost", "how much for website", "website packages", "website rates"],
+        "pricing_apps": ["app pricing", "app cost", "how much for app", "app packages", "app rates"],
+        "privacy_policy": ["privacy policy", "privacy", "data protection", "personal information", "your data"],
+        "terms_of_service": ["terms of service", "terms", "conditions", "agreement", "contract", "rules"],
+    };
+
+    // Fuzzy matching for broken English
+    function fuzzyMatch(input, category) {
+        const keywords = synonyms[category];
+        for (let keyword of keywords) {
+            if (input.includes(keyword)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    // Send a message
-    function sendMessage() {
-      let message = document.getElementById('userMessage').value;
+    // General query processor
+    function getResponse(userInput) {
+        const input = userInput.toLowerCase();
 
-      if (message.trim()) {
-        // Display user message
-        const userMessageElement = document.createElement('div');
-        userMessageElement.classList.add('message', 'user-message');
-        userMessageElement.innerHTML = `<div class="avatar"></div><div class="message-text">${message}</div>`;
-        chatPopup.appendChild(userMessageElement);
+        // Check each category for a match
+        for (let category in synonyms) {
+            if (fuzzyMatch(input, category)) {
+                return responses[category];
+            }
+        }
+
+        return responses.unknown;
+    }
+
+    // Handle specific budget queries
+    function handleBudgetQuery(budget, type) {
+        const pricing = responses[`pricing_${type}`];
+        if (budget < pricing.minimum) {
+            return `Our minimum for a ${type} is R${pricing.minimum}. Unfortunately, we cannot offer anything below this amount. However, you can fill out the <a href='/contact'>Contact Form</a> to speak to our team for negotiation.`;
+        }
+
+        if (type === "websites") {
+            if (budget >= 3000 && budget <= 5000) {
+                return pricing.basic;
+            } else if (budget > 5000 && budget <= 12000) {
+                return pricing.standard;
+            } else if (budget > 12000 && budget <= 20000) {
+                return pricing.premium;
+            } else if (budget > 10000) {
+                return pricing.ecommerce;
+            }
+        } else if (type === "apps") {
+            if (budget >= 50000 && budget <= 75000) {
+                return pricing.basic;
+            } else if (budget > 75000 && budget <= 120000) {
+                return pricing.standard;
+            } else if (budget > 120000) {
+                return pricing.premium;
+            }
+        }
+        return `With a budget of R${budget}, your requirements might exceed our typical packages. Please fill out the <a href='/contact'>Contact Form</a> to discuss your needs further.`;
+    }
+
+    // Process user input
+    function sendMessage() {
+        const userInput = document.getElementById('user-input').value.trim();
+        if (!userInput) return;
+
+        // Display user input
+        displayMessage(userInput, 'user');
+
+        // Determine bot response
+        let response = getResponse(userInput);
+        const budgetMatch = userInput.match(/\b\d+\b/);
+        const type = userInput.includes("website") ? "websites" : userInput.includes("app") ? "apps" : null;
+
+        if (budgetMatch && type) {
+            const budget = parseInt(budgetMatch[0]);
+            response = handleBudgetQuery(budget, type);
+        }
+
+        // Display bot response
+        displayMessage(response, 'bot');
 
         // Clear input field
-        document.getElementById('userMessage').value = '';
-
-        // Scroll to the bottom of the chat
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-
-        // Bot reply (typing simulation)
-        const botMessageElement = document.createElement('div');
-        botMessageElement.classList.add('message', 'bot-message');
-        botMessageElement.innerHTML = `
-          <div class="avatar">
-            <img src="tomie-avatar.png" alt="Tomie" class="avatar-img">
-          </div>
-          <div class="message-text">Thanks for reaching out! I’ll help answer your questions shortly.</div>`;
-        chatPopup.appendChild(botMessageElement);
-        chatPopup.scrollTop = chatPopup.scrollHeight;
-      }
+        document.getElementById('user-input').value = "";
     }
+
+    // Append messages to chatbox
+    function displayMessage(message, sender) {
+        const chatbox = document.getElementById('chatbox');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender === 'bot' ? 'bot-message' : 'user-message');
+        messageDiv.innerHTML = message;
+        chatbox.appendChild(messageDiv);
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    // Event listeners for chat input
+    document.getElementById('send-button').addEventListener('click', sendMessage);
+    document.getElementById('user-input').addEventListener('keypress', (e) => {
+        if (e.key === "Enter") sendMessage();
+    });
 
     // FAQ Toggle Logic (Arrows and answers)
     document.querySelectorAll('.faq-item').forEach((faq) => {
