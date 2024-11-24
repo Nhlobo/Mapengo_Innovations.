@@ -285,7 +285,6 @@
       </div>
     </div>
   </section>
-
 <!-- Chat Button -->
 <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
@@ -297,8 +296,11 @@
     </div>
     <div class="message-text">Hi! I’m Tomie. Let me help you with your questions regarding websites, apps, pricing, and more—without filling out a contact form!</div>
   </div>
-  <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
-  <button onclick="sendMessage()">Send</button>
+  <div id="chatMessages"></div>
+  <div class="user-input">
+    <input type="text" id="userMessage" placeholder="Type your question..." maxlength="200">
+    <button onclick="sendMessage()">Send</button>
+  </div>
   <button id="closeChatButton" class="close-chat-button" onclick="closeChat()">Close Chat</button>
 </div>
 
@@ -306,6 +308,7 @@
   const chatButton = document.querySelector('.chat-button');
   const chatPopup = document.getElementById('chatPopup');
   const closeChatButton = document.getElementById('closeChatButton');
+  const chatMessages = document.getElementById('chatMessages');
 
   function toggleChatPopup() {
     chatPopup.classList.toggle('active');
@@ -434,18 +437,18 @@
     // Display bot response
     displayMessage(response, 'bot');
 
-    // Keep input field active for further messages
-    document.getElementById('userMessage').value = "";  // Clear input field for next message
+    // Clear input field and keep the chat open for the next message
+    document.getElementById('userMessage').value = "";
+    document.getElementById('userMessage').focus(); // Ensure focus stays on the input box
   }
 
   // Append messages to chatbox
   function displayMessage(message, sender) {
-    const chatbox = document.getElementById('chatPopup');
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender === 'bot' ? 'bot-message' : 'user-message');
     messageDiv.innerHTML = message;
-    chatbox.appendChild(messageDiv);
-    chatbox.scrollTop = chatbox.scrollHeight;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
   // Event listeners for chat input
@@ -453,10 +456,8 @@
   document.getElementById('userMessage').addEventListener('keypress', (e) => {
     if (e.key === "Enter") sendMessage();
   });
-  </script>
-  
-<script>
-/ FAQ Toggle Logic (Arrows and answers)
+
+  // FAQ Toggle Logic (Arrows and answers)
   document.querySelectorAll('.faq-item').forEach((faq) => {
     const arrow = faq.querySelector('.arrow');
     faq.addEventListener('click', () => {
