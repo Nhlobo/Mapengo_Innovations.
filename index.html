@@ -285,6 +285,7 @@
       </div>
     </div>
   </section>
+
 <!-- Chat Button -->
 <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
@@ -401,7 +402,7 @@
         return pricing.standard;
       } else if (budget > 12000 && budget <= 20000) {
         return pricing.premium;
-      } else if (budget > 10000) {
+      } else if (budget > 20000) {
         return pricing.ecommerce;
       }
     } else if (type === "apps") {
@@ -456,7 +457,8 @@
   document.getElementById('userMessage').addEventListener('keypress', (e) => {
     if (e.key === "Enter") sendMessage();
   });
-      </script>
+
+</script>
 </body>
 </html>
       
