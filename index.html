@@ -379,15 +379,7 @@
         // Simulate typing
         function typeBotMessage() {
           const botMessageTextElement = botMessageElement.querySelector('.message-text');
-          const text = "Thanks! I’ve sent your question. For better improvement of our FAQ section, we’ll review and update our answers regularly.";
-          if (typingMessageIndex < text.length) {
-            botMessageTextElement.innerHTML += text.charAt(typingMessageIndex);
-            typingMessageIndex++;
-            setTimeout(typeBotMessage, typingSpeed);
-          } else {
-            setTimeout(() => {
-              closeChat();
-            }, 5000); // 5 seconds after message appears
+           
           }
         }
         typeBotMessage();
