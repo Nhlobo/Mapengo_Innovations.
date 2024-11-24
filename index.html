@@ -351,7 +351,7 @@
     },
     "privacy_policy": "For details on how we handle your data, please refer to our <a href='/privacy-policy'>Privacy Policy</a>.",
     "terms_of_service": "To understand our terms of working, please visit our <a href='/terms-of-service'>Terms of Service</a>.",
-    "unknown": "I'm not sure I understand your question. Please try rephrasing it or visit our <a href='/contact'>Contact Form</a> to speak with a team member."
+    "unknown": "I'm not sure I understand your question. Could you please clarify? Or you can visit our <a href='/contact'>Contact Form</a> to speak with a team member."
   };
 
   const synonyms = {
@@ -456,22 +456,7 @@
   document.getElementById('userMessage').addEventListener('keypress', (e) => {
     if (e.key === "Enter") sendMessage();
   });
-
-  // FAQ Toggle Logic (Arrows and answers)
-  document.querySelectorAll('.faq-item').forEach((faq) => {
-    const arrow = faq.querySelector('.arrow');
-    faq.addEventListener('click', () => {
-      document.querySelectorAll('.faq-item').forEach((item) => {
-        if (item !== faq) {
-          item.classList.remove('active');
-          item.querySelector('.arrow').classList.remove('rotate');
-        }
-      });
-      faq.classList.toggle('active');
-      arrow.classList.toggle('rotate');
-    });
-  });
-</script>
+      </script>
 </body>
 </html>
       
