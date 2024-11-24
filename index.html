@@ -29,6 +29,7 @@
             overflow-y: auto;
             max-height: 70%;
             margin-bottom: 10px;
+            font-size: 14px;
         }
         .chat-log div {
             padding: 5px;
@@ -45,6 +46,7 @@
             color: white;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .options button:hover {
             background-color: #0056b3;
@@ -70,12 +72,17 @@
             border-radius: 50%;
             font-size: 24px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        #botButton:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-    <div id="chatbox">
+    <div id="chatbox" role="dialog" aria-live="polite">
         <div class="chat-header">
             <img src="tomie-avatar.jpg" alt="Tomie Avatar" id="avatar">
             <div>Tomie</div>
@@ -84,10 +91,10 @@
         <div class="options" id="options"></div>
     </div>
 
-    <button id="botButton">💬</button>
+    <button id="botButton" aria-label="Chat with Tomie">💬</button>
 
     <script>
-        let currentStep = 'start'; // Start from the beginning
+        let currentStep = 'start';
         let timeoutTimer;
 
         const responses = {
@@ -119,7 +126,7 @@
             }
         };
 
-        // Function to display chat message
+        // Display chat message
         function displayChat(message) {
             const chatLog = document.getElementById('chat-log');
             const messageDiv = document.createElement('div');
@@ -128,11 +135,11 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        // Function to display options buttons
+        // Display options buttons
         function displayOptions(options) {
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = "";
-            options.forEach((option, index) => {
+            options.forEach(option => {
                 const button = document.createElement('button');
                 button.textContent = option;
                 button.onclick = () => handleOptionClick(option);
@@ -140,9 +147,8 @@
             });
         }
 
-        // Function to handle option click
+        // Handle option click
         function handleOptionClick(option) {
-            // Determine the next step based on the selected option
             if (option === "Back to Main Menu") {
                 currentStep = 'start';
             } else if (option === "Learn about our Process") {
@@ -154,36 +160,35 @@
             } else if (option === "Contact Us") {
                 currentStep = 'contact';
             }
-            startChat(); // Restart the conversation based on new step
+            startChat();
         }
 
-        // Function to handle budget input for recommendation
+        // Handle budget input
         function handleBudgetInput(input) {
             let message = '';
             const budget = parseInt(input, 10);
 
             if (budget >= 3000 && budget <= 5000) {
-                message = "Based on your budget, we recommend our Starter Website or App Package (R3,000 – R5,000). This includes a custom landing page or basic app functionality, fully responsive.";
+                message = "Based on your budget, we recommend our Starter Website or App Package (R3,000 – R5,000).";
             } else if (budget > 5000 && budget <= 12000) {
-                message = "Based on your budget, we recommend our Standard Website or App Package (R6,000 – R12,000). This includes a custom homepage design, a simple app layout, and more features.";
+                message = "Based on your budget, we recommend our Standard Website or App Package (R6,000 – R12,000).";
             } else if (budget > 12000) {
-                message = "Based on your budget, we recommend our Premium Website or App Package (R12,000 – R20,000). This includes advanced functionality, custom features, and integrations.";
+                message = "Based on your budget, we recommend our Premium Website or App Package (R12,000 – R20,000).";
             } else {
-                message = "It seems your budget is a bit low for our packages, but we can still offer the Starter Package for either a website or app. Would you like to proceed with this?";
+                message = "It seems your budget is a bit low for our packages, but we can still offer the Starter Package for either a website or app.";
             }
 
             displayChat(message);
-            currentStep = 'contact'; // After budget input, go to contact info
+            currentStep = 'contact';
             startChat();
         }
 
-        // Start chatbot conversation based on currentStep
+        // Start the conversation
         function startChat() {
             const currentResponse = responses[currentStep];
             displayChat(currentResponse.message);
             
             if (currentResponse.input) {
-                // Handle input for recommendation
                 displayOptions([]);
                 const inputField = document.createElement('input');
                 inputField.type = 'number';
@@ -195,32 +200,29 @@
             }
         }
 
-        // Open chat when the button is clicked
+        // Toggle chat visibility
         document.getElementById('botButton').onclick = () => {
             const chatbox = document.getElementById('chatbox');
             chatbox.style.display = chatbox.style.display === 'none' || chatbox.style.display === '' ? 'flex' : 'none';
             if (chatbox.style.display === 'flex') {
-                currentStep = 'start'; // Reset chat every time it's opened
+                currentStep = 'start';
                 startChat();
             }
             startTimeout();
         };
 
-        // Close the chat after 1 minute of inactivity
+        // Timeout after 1 minute of inactivity
         function startTimeout() {
             clearTimeout(timeoutTimer);
-            timeoutTimer = setTimeout(() => {
-                closeChat();
-            }, 60000);
+            timeoutTimer = setTimeout(closeChat, 60000);
         }
 
-        // Close the chat
+        // Close chat
         function closeChat() {
             const chatbox = document.getElementById('chatbox');
             chatbox.style.display = 'none';
         }
 
-        // Initial call to open the chat
         startChat();
     </script>
 
