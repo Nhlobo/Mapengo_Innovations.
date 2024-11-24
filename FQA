@@ -286,7 +286,7 @@
     </div>
   </section>
 
-  <!-- Chat Button -->
+<!-- Chat Button -->
 <button class="chat-button" onclick="toggleChatPopup()">💬</button>
 
 <!-- Chat Popup -->
@@ -323,29 +323,9 @@
   }
 
   const responses = {
-    "process": `
-      <strong>Our Process:</strong><br>
-      1. Initial Consultation: Understand your needs.<br>
-      2. Proposal: Provide cost and timeline estimates.<br>
-      3. Agreement & Deposit: 50% payment to start.<br>
-      4. Development: Regular updates shared.<br>
-      5. Testing & Review: Ensure quality and client approval.<br>
-      6. Final Delivery: Upon receiving the final payment.<br>
-      7. Support: Ongoing support offered optionally.
-    `,
-    "pricing_websites": {
-      "minimum": 3000,
-      "basic": "A basic website starts at R3,000 and includes 1-3 pages with a responsive design, ideal for personal use or small projects.",
-      "standard": "A standard website ranges from R6,000 to R12,000 and includes 4-8 pages, suitable for small businesses with features like SEO and social media integration.",
-      "premium": "A premium website costs R12,000 to R20,000 and is tailored for businesses needing advanced features like blogs, product pages, or portfolio sections.",
-      "ecommerce": "E-commerce websites start at R10,000 and go up to R25,000, including online store setup, payment integration, and product pages."
-    },
-    "pricing_apps": {
-      "minimum": 50000,
-      "basic": "A basic app starts at R50,000 for simple features like login and basic UI.",
-      "standard": "A standard app ranges from R75,000 to R120,000 and includes custom designs, APIs, and in-app messaging.",
-      "premium": "Premium apps start at R120,000, designed for advanced functionality like real-time tracking, admin dashboards, and complex integrations."
-    },
+    "process": `...`,  // Keep the content as is
+    "pricing_websites": { ... },
+    "pricing_apps": { ... },
     "privacy_policy": "For details on how we handle your data, please refer to our <a href='/privacy-policy'>Privacy Policy</a>.",
     "terms_of_service": "To understand our terms of working, please visit our <a href='/terms-of-service'>Terms of Service</a>.",
     "unknown": "I'm not sure I understand your question. Please try rephrasing it or visit our <a href='/contact'>Contact Form</a> to speak with a team member."
@@ -421,21 +401,25 @@
     // Display user input
     displayMessage(userInput, 'user');
 
-    // Determine bot response
-    let response = getResponse(userInput);
-    const budgetMatch = userInput.match(/\b\d+\b/);
-    const type = userInput.includes("website") ? "websites" : userInput.includes("app") ? "apps" : null;
+    // Show "bot is thinking" response
+    displayMessage('...Thinking...', 'bot');
+    
+    // Wait 1 second before showing the actual response
+    setTimeout(() => {
+      let response = getResponse(userInput);
+      const budgetMatch = userInput.match(/\b\d+\b/);
+      const type = userInput.includes("website") ? "websites" : userInput.includes("app") ? "apps" : null;
 
-    if (budgetMatch && type) {
-      const budget = parseInt(budgetMatch[0]);
-      response = handleBudgetQuery(budget, type);
-    }
+      if (budgetMatch && type) {
+        const budget = parseInt(budgetMatch[0]);
+        response = handleBudgetQuery(budget, type);
+      }
 
-    // Display bot response
-    displayMessage(response, 'bot');
-
-    // Clear input field
-    document.getElementById('userMessage').value = "";
+      // Remove the "thinking" placeholder and show the response
+      const chatbox = document.getElementById('chatPopup');
+      const lastBotMessage = chatbox.querySelector('.bot-message:last-child');
+      lastBotMessage.innerHTML = response;
+    }, 1000);
   }
 
   // Append messages to chatbox
@@ -449,38 +433,9 @@
   }
 
   // Event listeners for chat input
-  document.getElementById('send-button').addEventListener('click', sendMessage);
   document.getElementById('userMessage').addEventListener('keypress', (e) => {
     if (e.key === "Enter") sendMessage();
   });
-// Display user input and bot response with some delay to simulate thinking
-function sendMessage() {
-  const userInput = document.getElementById('userMessage').value.trim();
-  if (!userInput) return;
-
-  // Display user input
-  displayMessage(userInput, 'user');
-
-  // Show "bot is thinking" response
-  displayMessage('...Thinking...', 'bot');
-  
-  // Wait 1 second before showing the actual response
-  setTimeout(() => {
-    let response = getResponse(userInput);
-    const budgetMatch = userInput.match(/\b\d+\b/);
-    const type = userInput.includes("website") ? "websites" : userInput.includes("app") ? "apps" : null;
-
-    if (budgetMatch && type) {
-      const budget = parseInt(budgetMatch[0]);
-      response = handleBudgetQuery(budget, type);
-    }
-
-    // Remove the "thinking" placeholder and show the response
-    const chatbox = document.getElementById('chatPopup');
-    const lastBotMessage = chatbox.querySelector('.bot-message:last-child');
-    lastBotMessage.innerHTML = response;
-  }, 1000);
-}
 
   // FAQ Toggle Logic (Arrows and answers)
   document.querySelectorAll('.faq-item').forEach((faq) => {
@@ -498,5 +453,5 @@ function sendMessage() {
   });
 </script>
 </body>
-        </html>
+ </html>
         
