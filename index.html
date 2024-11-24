@@ -87,7 +87,7 @@
     <button id="botButton">💬</button>
 
     <script>
-        let currentStep = 0;
+        let currentStep = 'start'; // Start from the beginning
         let timeoutTimer;
 
         const responses = {
@@ -135,26 +135,26 @@
             options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.textContent = option;
-                button.onclick = () => handleOptionClick(index);
+                button.onclick = () => handleOptionClick(option);
                 optionsDiv.appendChild(button);
             });
         }
 
         // Function to handle option click
-        function handleOptionClick(index) {
-            const option = Object.values(responses)[currentStep];
-            const selectedOption = option.options[index];
-
-            if (selectedOption === "Back to Main Menu") {
-                currentStep = 0;
-                startChat();
-            } else if (selectedOption === "Get a Website or App Recommendation") {
+        function handleOptionClick(option) {
+            // Determine the next step based on the selected option
+            if (option === "Back to Main Menu") {
+                currentStep = 'start';
+            } else if (option === "Learn about our Process") {
+                currentStep = 'process';
+            } else if (option === "See our Pricing Packages") {
+                currentStep = 'pricing';
+            } else if (option === "Get a Website or App Recommendation") {
                 currentStep = 'recommend';
-                startChat();
-            } else {
-                currentStep = Object.keys(responses).indexOf(selectedOption.toLowerCase().replace(/\s+/g, ''));
-                startChat();
+            } else if (option === "Contact Us") {
+                currentStep = 'contact';
             }
+            startChat(); // Restart the conversation based on new step
         }
 
         // Function to handle budget input for recommendation
@@ -173,16 +173,17 @@
             }
 
             displayChat(message);
-            currentStep = 'contact';
+            currentStep = 'contact'; // After budget input, go to contact info
             startChat();
         }
 
-        // Start chatbot conversation
+        // Start chatbot conversation based on currentStep
         function startChat() {
-            const currentResponse = responses[Object.keys(responses)[currentStep]];
-
-            if (currentStep === 'recommend') {
-                displayChat(currentResponse.message);
+            const currentResponse = responses[currentStep];
+            displayChat(currentResponse.message);
+            
+            if (currentResponse.input) {
+                // Handle input for recommendation
                 displayOptions([]);
                 const inputField = document.createElement('input');
                 inputField.type = 'number';
@@ -190,17 +191,8 @@
                 inputField.onblur = () => handleBudgetInput(inputField.value);
                 document.getElementById('options').appendChild(inputField);
             } else {
-                displayChat(currentResponse.message);
                 displayOptions(currentResponse.options);
             }
-        }
-
-        // Close chat after 1 minute of inactivity
-        function startTimeout() {
-            clearTimeout(timeoutTimer);
-            timeoutTimer = setTimeout(() => {
-                closeChat();
-            }, 60000);
         }
 
         // Open chat when the button is clicked
@@ -208,11 +200,19 @@
             const chatbox = document.getElementById('chatbox');
             chatbox.style.display = chatbox.style.display === 'none' || chatbox.style.display === '' ? 'flex' : 'none';
             if (chatbox.style.display === 'flex') {
-                currentStep = 0; // Reset chat every time it's opened
+                currentStep = 'start'; // Reset chat every time it's opened
                 startChat();
             }
             startTimeout();
         };
+
+        // Close the chat after 1 minute of inactivity
+        function startTimeout() {
+            clearTimeout(timeoutTimer);
+            timeoutTimer = setTimeout(() => {
+                closeChat();
+            }, 60000);
+        }
 
         // Close the chat
         function closeChat() {
@@ -220,7 +220,9 @@
             chatbox.style.display = 'none';
         }
 
+        // Initial call to open the chat
+        startChat();
     </script>
 
 </body>
-</html>
+    </html>
