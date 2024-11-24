@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Section with Clean Chat</title>
   <style>
-    body {
+ body {
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
@@ -256,7 +256,7 @@
         font-size: 32px;
       }
     }
-  </style>
+</style>
 </head>
 <body>
   <!-- FAQ Section -->
@@ -453,6 +453,34 @@
   document.getElementById('userMessage').addEventListener('keypress', (e) => {
     if (e.key === "Enter") sendMessage();
   });
+// Display user input and bot response with some delay to simulate thinking
+function sendMessage() {
+  const userInput = document.getElementById('userMessage').value.trim();
+  if (!userInput) return;
+
+  // Display user input
+  displayMessage(userInput, 'user');
+
+  // Show "bot is thinking" response
+  displayMessage('...Thinking...', 'bot');
+  
+  // Wait 1 second before showing the actual response
+  setTimeout(() => {
+    let response = getResponse(userInput);
+    const budgetMatch = userInput.match(/\b\d+\b/);
+    const type = userInput.includes("website") ? "websites" : userInput.includes("app") ? "apps" : null;
+
+    if (budgetMatch && type) {
+      const budget = parseInt(budgetMatch[0]);
+      response = handleBudgetQuery(budget, type);
+    }
+
+    // Remove the "thinking" placeholder and show the response
+    const chatbox = document.getElementById('chatPopup');
+    const lastBotMessage = chatbox.querySelector('.bot-message:last-child');
+    lastBotMessage.innerHTML = response;
+  }, 1000);
+}
 
   // FAQ Toggle Logic (Arrows and answers)
   document.querySelectorAll('.faq-item').forEach((faq) => {
