@@ -3,176 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot Tomie - Advanced</title>
+  <title>Tomie Chatbot</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
     }
-    .chat-container {
+    .chatbot {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 350px;
-      background-color: white;
+      width: 320px;
+      background: #f4f4f4;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 10px;
+      padding: 15px;
+      display: none;
     }
     .chat-header {
-      font-weight: bold;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
       text-align: center;
-      background-color: #007bff;
-      color: white;
-      padding: 8px;
-      border-radius: 8px 8px 0 0;
+      font-size: 18px;
     }
-    .chat-box {
-      height: 300px;
+    .chat-body {
+      padding: 10px;
+      max-height: 300px;
       overflow-y: auto;
-      padding: 5px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: #f9f9f9;
     }
-    .input-container {
+    .chat-footer {
+      margin-top: 10px;
       display: flex;
-      margin-top: 10px;
+      justify-content: space-between;
     }
-    input[type="text"] {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      padding: 8px;
+    .chat-footer button {
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
       border: none;
-      background-color: #007bff;
-      color: white;
-      font-size: 14px;
-      border-radius: 4px;
-      margin-left: 5px;
-    }
-    .suggestions {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-    .suggestion-btn {
-      background-color: #007bff;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 12px;
+      border-radius: 5px;
       cursor: pointer;
+    }
+    .chat-footer button:hover {
+      background: #0056b3;
+    }
+    .chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .chat-toggle:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
 
-  <div class="chat-container">
-    <div class="chat-header">Tomie - Your Assistant</div>
-    <div class="chat-box" id="chatBox"></div>
-    <div class="input-container">
-      <input type="text" id="userInput" placeholder="Ask me something..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-    <div class="suggestions" id="suggestions"></div>
+<div class="chatbot" id="chatbot">
+  <div class="chat-header">Tomie - Chatbot</div>
+  <div class="chat-body" id="chatBody">
+    <p>Welcome to Mapengo Innovations! Please select a category:</p>
+    <button onclick="showProcess()">Process</button>
+    <button onclick="showPricing()">Pricing</button>
+    <button onclick="showOptions()">Privacy & Terms</button>
   </div>
+  <div class="chat-footer">
+    <button onclick="goBack()">Back</button>
+    <button onclick="closeChat()">Close</button>
+  </div>
+</div>
 
-  <script>
-    const chatBox = document.getElementById('chatBox');
-    const userInput = document.getElementById('userInput');
-    const suggestions = document.getElementById('suggestions');
+<button class="chat-toggle" onclick="toggleChat()">Chat</button>
 
-    // Store states for user interaction flow
-    let conversationState = "start";
+<script>
+  let chatHistory = [];
 
-    // Append message to chat
-    function appendMessage(text, sender) {
-      const messageDiv = document.createElement('div');
-      messageDiv.textContent = text;
-      messageDiv.style.marginBottom = '10px';
-      messageDiv.style.padding = '8px';
-      messageDiv.style.backgroundColor = sender === 'user' ? '#e6f7ff' : '#f1f1f1';
-      messageDiv.style.borderRadius = '5px';
-      messageDiv.style.wordWrap = 'break-word';
-      if (sender === 'user') {
-        messageDiv.style.textAlign = 'right';
-      }
-      chatBox.appendChild(messageDiv);
-      chatBox.scrollTop = chatBox.scrollHeight;
+  function toggleChat() {
+    const chatbot = document.getElementById('chatbot');
+    chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function closeChat() {
+    document.getElementById('chatbot').style.display = 'none';
+  }
+
+  function goBack() {
+    const chatBody = document.getElementById('chatBody');
+    if (chatHistory.length > 0) {
+      chatBody.innerHTML = chatHistory.pop();
     }
+  }
 
-    // Generate smart response based on user input and conversation state
-    function generateResponse(inputText) {
-      let response = '';
+  function updateChat(content) {
+    const chatBody = document.getElementById('chatBody');
+    chatHistory.push(chatBody.innerHTML);
+    chatBody.innerHTML = content;
+  }
 
-      // Check conversation state
-      if (conversationState === "start") {
-        response = "Hello! How can I assist you today? You can ask about our services like Process, Pricing, Privacy Policy, or Terms.";
-        conversationState = "askForService";
-        showSuggestions(["Process", "Pricing", "Privacy Policy", "Terms of Service"]);
-      } 
-      else if (conversationState === "askForService") {
-        if (inputText.includes('process')) {
-          response = 'We follow a structured process: 1) Initial Consultation, 2) Proposal and Quotation, 3) Agreement and Deposit, 4) Development Phase, 5) Testing and Review, 6) Final Delivery and Payment, 7) Ongoing Support.';
-        } else if (inputText.includes('pricing')) {
-          response = 'Our pricing packages range from R3,000 to R25,000 based on your needs. Let me know if you need details on specific packages.';
-        } else if (inputText.includes('privacy policy')) {
-          response = 'We take privacy seriously. We ensure your data is protected and not shared without your consent. Our policy outlines how we handle your personal information.';
-        } else if (inputText.includes('terms of service')) {
-          response = 'Our Terms of Service cover project agreements, payment terms, intellectual property rights, and more. Let me know if you want specific details.';
-        } else {
-          response = "Sorry, I didn't quite understand that. Please select one of the topics or type your question again.";
-          showSuggestions(["Process", "Pricing", "Privacy Policy", "Terms of Service"]);
-        }
-        conversationState = "waitForDetails";
-      } 
-      else if (conversationState === "waitForDetails") {
-        response = "Is there anything else you'd like to know or any specific detail you'd like me to explain?";
-        conversationState = "askForService";
-      }
+  function showProcess() {
+    updateChat(`
+      <p>Our Process:</p>
+      <ol>
+        <li><strong>Initial Consultation:</strong> Understand client needs and define project scope.</li>
+        <li><strong>Proposal and Quotation:</strong> Provide detailed proposal with costs and timelines.</li>
+        <li><strong>Agreement and Deposit:</strong> Sign an agreement and pay a 50% deposit.</li>
+        <li><strong>Development Phase:</strong> Begin work with regular updates.</li>
+        <li><strong>Testing and Review:</strong> Thorough testing and client feedback.</li>
+        <li><strong>Final Delivery and Payment:</strong> Deliver project upon final payment.</li>
+        <li><strong>Ongoing Support:</strong> Optional support packages for maintenance.</li>
+      </ol>
+      <button onclick="goBack()">Back</button>
+    `);
+  }
 
-      setTimeout(() => {
-        appendMessage(response, 'bot');
-        if (conversationState === "askForService") {
-          showSuggestions(["Process", "Pricing", "Privacy Policy", "Terms of Service"]);
-        }
-      }, 1000);
-    }
+  function showPricing() {
+    updateChat(`
+      <p>Our Pricing:</p>
+      <button onclick="showWebsitePricing()">Websites</button>
+      <button onclick="showAppPricing()">Apps</button>
+    `);
+  }
 
-    // Show suggestion buttons for the user to choose from
-    function showSuggestions(options) {
-      suggestions.innerHTML = '';
-      options.forEach(option => {
-        const button = document.createElement('button');
-        button.classList.add('suggestion-btn');
-        button.textContent = option;
-        button.onclick = () => {
-          userInput.value = option;
-          sendMessage();
-        };
-        suggestions.appendChild(button);
-      });
-    }
+  function showWebsitePricing() {
+    updateChat(`
+      <p>Website Development Packages:</p>
+      <ul>
+        <li><strong>Starter Package:</strong> R3,000 – R5,000 (1-3 pages)</li>
+        <li><strong>Standard Package:</strong> R6,000 – R12,000 (4-8 pages)</li>
+        <li><strong>Premium Package:</strong> R12,000 – R20,000 (8-16 pages)</li>
+        <li><strong>E-commerce Package:</strong> R10,000 – R25,000 (Custom pages)</li>
+      </ul>
+      <button onclick="goBack()">Back</button>
+    `);
+  }
 
-    // Send user message and generate bot response
-    function sendMessage() {
-      const inputText = userInput.value.trim();
-      if (inputText !== '') {
-        appendMessage(inputText, 'user');
-        userInput.value = '';
-        generateResponse(inputText.toLowerCase());
-      }
-    }
-  </script>
+  function showAppPricing() {
+    updateChat(`
+      <p>App Development Pricing:</p>
+      <p>Pricing details are tailored to the specific requirements of your app. Contact us for a custom quotation based on:</p>
+      <ul>
+        <li>Features required</li>
+        <li>Platform (iOS, Android, or both)</li>
+        <li>Complexity and timelines</li>
+      </ul>
+      <button onclick="goBack()">Back</button>
+    `);
+  }
+
+  function showOptions() {
+    updateChat(`
+      <p>Privacy Policy & Terms:</p>
+      <button onclick="showPrivacy()">Privacy Policy</button>
+      <button onclick="showTerms()">Terms of Service</button>
+    `);
+  }
+
+  function showPrivacy() {
+    updateChat(`
+      <p>Privacy Policy:</p>
+      <p>For detailed information, click below:</p>
+      <a href="privacy-policy.html" target="_blank">Privacy Policy Page</a>
+      <button onclick="goBack()">Back</button>
+    `);
+  }
+
+  function showTerms() {
+    updateChat(`
+      <p>Terms of Service:</p>
+      <p>For detailed information, click below:</p>
+      <a href="terms.html" target="_blank">Terms of Service Page</a>
+      <button onclick="goBack()">Back</button>
+    `);
+  }
+</script>
 
 </body>
-</html>
+  </html>
